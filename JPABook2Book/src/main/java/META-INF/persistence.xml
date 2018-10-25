@@ -36,8 +36,8 @@
         <!--  the two lines below will show the SQL statement it is running -->
         <!--  switch them to "true" to see this, helps with debugging-->
 
-      <property name="hibernate.show_sql" value="false" />
-      <property name="hibernate.format_sql" value="false" />
+      <property name="hibernate.show_sql" value="true" />
+      <property name="hibernate.format_sql" value="true" />
 
       <property name="hibernate.dialect"
         value="org.hibernate.dialect.MySQLDialect" />
