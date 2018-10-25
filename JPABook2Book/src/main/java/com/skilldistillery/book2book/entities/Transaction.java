@@ -1,5 +1,7 @@
 package com.skilldistillery.book2book.entities;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,20 +18,23 @@ public class Transaction {
 	@Column(name="borrow_id")
 	private int borrowId;
 	
+	//TODO figure out generated type value for procedurely generated 
+	//date
+	@GeneratedValue
 	@Column(name="start_date")
-	private String startDate;
+	private Date startDate;
 	
 	@Column(name="end_date")
-	private String endDate;
-	
-	
+	private Date endDate;
 	
 	@Column(name="copy_id")
 	private int copyId;
 	
+	//TODO figure out generated type value for procedurely generated 
+	//date
 	@GeneratedValue
 	@Column(name="date_created")
-	private String dateCreated;
+	private Date dateCreated;
 	
 	
 	
@@ -47,16 +52,16 @@ public class Transaction {
 	public void setBorrowId(int borrowId) {
 		this.borrowId = borrowId;
 	}
-	public String getStartDate() {
+	public Date getStartDate() {
 		return startDate;
 	}
-	public void setStartDate(String startDate) {
+	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
-	public String getEndDate() {
+	public Date getEndDate() {
 		return endDate;
 	}
-	public void setEndDate(String endDate) {
+	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
 	public int getCopyId() {
@@ -65,10 +70,10 @@ public class Transaction {
 	public void setCopyId(int copyId) {
 		this.copyId = copyId;
 	}
-	public String getDateCreated() {
+	public Date getDateCreated() {
 		return dateCreated;
 	}
-	public void setDateCreated(String dateCreated) {
+	public void setDateCreated(Date dateCreated) {
 		this.dateCreated = dateCreated;
 	}
 	@Override
@@ -115,7 +120,7 @@ public class Transaction {
 			return false;
 		return true;
 	}
-	public Transaction(int id, int borrowId, String startDate, String endDate, int copyId, String dateCreated) {
+	public Transaction(int id, int borrowId, Date startDate, Date endDate, int copyId, Date dateCreated) {
 		super();
 		this.id = id;
 		this.borrowId = borrowId;
