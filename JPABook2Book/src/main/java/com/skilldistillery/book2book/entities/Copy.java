@@ -1,5 +1,7 @@
 package com.skilldistillery.book2book.entities;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,6 +21,11 @@ public class Copy {
 	private int conditionId;
 	private boolean available;
 	private boolean active;
+	//TODO figure out generated type value for procedurely generated 
+	//date
+	@GeneratedValue
+	@Column(name="date_removed", updatable=false)
+	private Date dateRemoved;
 	
 	public int getId() {
 		return id;
@@ -56,6 +63,12 @@ public class Copy {
 	public void setActive(boolean active) {
 		this.active = active;
 	}
+	public Date getDateRemoved() {
+		return dateRemoved;
+	}
+	public void setDateRemoved(Date dateRemoved) {
+		this.dateRemoved = dateRemoved;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -64,6 +77,7 @@ public class Copy {
 		result = prime * result + (available ? 1231 : 1237);
 		result = prime * result + bookId;
 		result = prime * result + conditionId;
+		result = prime * result + ((dateRemoved == null) ? 0 : dateRemoved.hashCode());
 		result = prime * result + id;
 		result = prime * result + userId;
 		return result;
@@ -85,13 +99,18 @@ public class Copy {
 			return false;
 		if (conditionId != other.conditionId)
 			return false;
+		if (dateRemoved == null) {
+			if (other.dateRemoved != null)
+				return false;
+		} else if (!dateRemoved.equals(other.dateRemoved))
+			return false;
 		if (id != other.id)
 			return false;
 		if (userId != other.userId)
 			return false;
 		return true;
 	}
-	public Copy(int id, int bookId, int userId, int conditionId, boolean available, boolean active) {
+	public Copy(int id, int bookId, int userId, int conditionId, boolean available, boolean active, Date dateRemoved) {
 		super();
 		this.id = id;
 		this.bookId = bookId;
@@ -99,6 +118,7 @@ public class Copy {
 		this.conditionId = conditionId;
 		this.available = available;
 		this.active = active;
+		this.dateRemoved = dateRemoved;
 	}
 	public Copy() {
 		super();
@@ -106,7 +126,7 @@ public class Copy {
 	@Override
 	public String toString() {
 		return "Copy [id=" + id + ", bookId=" + bookId + ", userId=" + userId + ", conditionId=" + conditionId
-				+ ", available=" + available + ", active=" + active + "]";
+				+ ", available=" + available + ", active=" + active + ", dateRemoved=" + dateRemoved + "]";
 	}
 	
 	

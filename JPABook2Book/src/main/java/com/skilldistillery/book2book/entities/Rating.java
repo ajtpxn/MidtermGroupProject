@@ -21,6 +21,7 @@ public class Rating {
 	//TODO figure out generated type value for procedurely generated 
 	//date
 	@GeneratedValue
+	@Column(name="date_created", updatable=false)
 	private Date dateCreated;
 	
 	public int getId() {
