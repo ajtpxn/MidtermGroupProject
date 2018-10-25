@@ -7,6 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 public class Rating {
@@ -18,9 +22,8 @@ public class Rating {
 	@Column(name="book_id")
 	private int bookId;
 	private String rating;
-	//TODO figure out generated type value for procedurely generated 
-	//date
-	@GeneratedValue
+	@Temporal(TemporalType.TIMESTAMP)
+	@CreationTimestamp
 	@Column(name="date_created", updatable=false)
 	private Date dateCreated;
 	
