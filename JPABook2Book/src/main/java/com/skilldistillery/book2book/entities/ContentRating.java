@@ -1,10 +1,12 @@
 package com.skilldistillery.book2book.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 
 @Entity
 public class ContentRating {
 	private int id;
+	@Column(name="name")
 	private String contentName;
 	
 	public int getId() {
