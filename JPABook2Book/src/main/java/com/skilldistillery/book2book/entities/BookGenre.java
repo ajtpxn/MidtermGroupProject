@@ -1,10 +1,14 @@
 package com.skilldistillery.book2book.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 
 @Entity
 public class BookGenre {
+	
+	@Column(name="book_id")
 	private int bookId;
+	@Column(name="genre_id")
 	private int genreId;
 	
 	public int getBookId() {
