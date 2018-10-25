@@ -13,19 +13,22 @@ public class Transaction {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
+	
 	@Column(name="borrow_id")
 	private int borrowId;
 	
+	
 	@Column(name="start_date")
 	private String startDate;
+	
 	
 	@Column(name="end_date")
 	private String endDate;
 	
 	
-	
 	@Column(name="copy_id")
 	private int copyId;
+	
 	
 	@GeneratedValue
 	@Column(name="date_created")

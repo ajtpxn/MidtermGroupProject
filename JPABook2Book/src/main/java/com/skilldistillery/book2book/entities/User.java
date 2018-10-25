@@ -1,20 +1,44 @@
 package com.skilldistillery.book2book.entities;
 
+import java.util.Date;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 public class User {
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
+	
+	@Column(name="first_name")
 	private String firstName;
+	
+	@Column(name="last_name")
 	private String lastName;
+	
+	@Column(name="user_name")
 	private String userName;
+	
 	private String password;
+	
 	private boolean active;
+	
+	@GeneratedValue                   //Don't forget to finish this annotation
+	@Column(name="date_created")
+	private Date dateCreated;
+	
+	
+	
+	public Date getDateCreated() {
+		return dateCreated;
+	}
 	public int getId() {
 		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
 	}
 	public String getFirstName() {
 		return firstName;
@@ -50,12 +74,7 @@ public class User {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + (active ? 1231 : 1237);
-		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + id;
-		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
-		result = prime * result + ((password == null) ? 0 : password.hashCode());
-		result = prime * result + ((userName == null) ? 0 : userName.hashCode());
 		return result;
 	}
 	@Override
@@ -67,34 +86,20 @@ public class User {
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
-		if (active != other.active)
-			return false;
-		if (firstName == null) {
-			if (other.firstName != null)
-				return false;
-		} else if (!firstName.equals(other.firstName))
-			return false;
 		if (id != other.id)
-			return false;
-		if (lastName == null) {
-			if (other.lastName != null)
-				return false;
-		} else if (!lastName.equals(other.lastName))
-			return false;
-		if (password == null) {
-			if (other.password != null)
-				return false;
-		} else if (!password.equals(other.password))
-			return false;
-		if (userName == null) {
-			if (other.userName != null)
-				return false;
-		} else if (!userName.equals(other.userName))
 			return false;
 		return true;
 	}
-	
-	public User(int id, String firstName, String lastName, String userName, String password, boolean active) {
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("User id: ").append(id).append(" firstName: ").append(firstName).append(" lastName: ")
+				.append(lastName).append(" userName: ").append(userName).append(" password: ").append(password)
+				.append(" active: ").append(active).append(" dateCreated: ").append(dateCreated);
+		return builder.toString();
+	}
+	public User(int id, String firstName, String lastName, String userName, String password, boolean active,
+			Date dateCreated) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
@@ -102,16 +107,11 @@ public class User {
 		this.userName = userName;
 		this.password = password;
 		this.active = active;
+		this.dateCreated = dateCreated;
 	}
 	
 	public User() {
 		super();
 	}
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", userName=" + userName
-				+ ", password=" + password + ", active=" + active + "]";
-	}
-	
 	
 }
