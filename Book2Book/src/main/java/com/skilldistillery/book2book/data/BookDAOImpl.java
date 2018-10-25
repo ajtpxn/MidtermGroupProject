@@ -1,5 +1,8 @@
 package com.skilldistillery.book2book.data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -7,7 +10,7 @@ import javax.persistence.Persistence;
 import org.springframework.stereotype.Repository;
 
 import com.skilldistillery.book2book.entities.Book;
-import com.skilldistillery.book2book.entities.Copy;
+
 
 
 @Repository
@@ -39,9 +42,19 @@ public class BookDAOImpl implements BookDAO {
 		em.close();
 	}
 	
+	
+	@Override
+	public List<Book> searchForBook(int author, String description, String title, String search) {
+		em = emf.createEntityManager();
+		List<Book> bookList = new ArrayList<>();
+		em.getTransaction().begin();
+		String query = "select b from Book b where b.title like :search";
+		em.createQuery(query).setParameter("search", search).getResultList();
+		em.getTransaction().commit();
+		em.close();
+		return bookList;
+	}
 
-	
-	
 	
 
 }
