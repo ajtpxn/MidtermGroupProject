@@ -1,15 +1,25 @@
 package com.skilldistillery.book2book.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 public class Copy {
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
+	@Column(name="book_id")
 	private int bookId;
+	@Column(name="user_id")
 	private int userId;
+	@Column(name="condition_id")
 	private int conditionId;
 	private boolean available;
 	private boolean active;
+	
 	public int getId() {
 		return id;
 	}

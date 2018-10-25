@@ -1,14 +1,27 @@
 package com.skilldistillery.book2book.entities;
 
+import java.util.Date;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 public class Rating {
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
+	@Column(name="user_id")
 	private int userId;
+	@Column(name="book_id")
 	private int bookId;
 	private String rating;
-	private String dateCreated;
+	//TODO figure out generated type value for procedurely generated 
+	//date
+	@GeneratedValue
+	private Date dateCreated;
 	
 	public int getId() {
 		return id;
@@ -34,10 +47,10 @@ public class Rating {
 	public void setRating(String rating) {
 		this.rating = rating;
 	}
-	public String getDateCreated() {
+	public Date getDateCreated() {
 		return dateCreated;
 	}
-	public void setDateCreated(String dateCreated) {
+	public void setDateCreated(Date dateCreated) {
 		this.dateCreated = dateCreated;
 	}
 	@Override
@@ -78,7 +91,7 @@ public class Rating {
 			return false;
 		return true;
 	}
-	public Rating(int id, int userId, int bookId, String rating, String dateCreated) {
+	public Rating(int id, int userId, int bookId, String rating, Date dateCreated) {
 		super();
 		this.id = id;
 		this.userId = userId;
