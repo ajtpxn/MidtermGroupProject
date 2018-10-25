@@ -19,12 +19,8 @@ public class Transaction {
 	@Column(name="borrow_id")
 	private int borrowId;
 	
-	//TODO figure out generated type value for procedurely generated 
-	//date
-	@GeneratedValue
 	@Column(name="start_date")
 	private Date startDate;
-	
 	
 	@Column(name="end_date")
 	private Date endDate;
@@ -35,8 +31,8 @@ public class Transaction {
 	
 	//TODO figure out generated type value for procedurely generated 
 	//date
-	@GeneratedValue
-	@Column(name="date_created")
+	//@GeneratedValue(strategy=GenerationType.)
+	@Column(name="date_created", updatable=false)
 	private Date dateCreated;
 	
 	
