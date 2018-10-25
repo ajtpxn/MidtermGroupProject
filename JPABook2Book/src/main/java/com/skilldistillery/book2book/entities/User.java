@@ -29,7 +29,7 @@ public class User {
 	private boolean active;
 	
 	@GeneratedValue                   //Don't forget to finish this annotation
-	@Column(name="date_created")
+	@Column(name="date_created", updatable=false)
 	private Date dateCreated;
 	
 	

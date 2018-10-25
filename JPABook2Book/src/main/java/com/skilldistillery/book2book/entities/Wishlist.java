@@ -16,7 +16,6 @@ public class Wishlist {
 	@Column(name="book_id")
 	private int bookId;
 	
-	
 	public int getUserId() {
 		return id;
 	}
