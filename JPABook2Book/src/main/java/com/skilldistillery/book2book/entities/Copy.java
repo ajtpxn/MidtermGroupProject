@@ -7,6 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 public class Copy {
@@ -21,9 +25,8 @@ public class Copy {
 	private int conditionId;
 	private boolean available;
 	private boolean active;
-	//TODO figure out generated type value for procedurely generated 
-	//date
-	@GeneratedValue
+	@Temporal(TemporalType.TIMESTAMP)
+	@CreationTimestamp
 	@Column(name="date_removed", updatable=false)
 	private Date dateRemoved;
 	
