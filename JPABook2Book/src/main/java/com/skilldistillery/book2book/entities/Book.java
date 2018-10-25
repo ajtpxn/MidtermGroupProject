@@ -1,15 +1,24 @@
 package com.skilldistillery.book2book.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 public class Book {
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	private String title;
+	@Column(name="author_id")
 	private int authorId;
 	private String description;
+	@Column(name="content_rating")
 	private int contentRatingId;
-	private int genreId;
+	private int isbn;
+	
 	public int getId() {
 		return id;
 	}
@@ -40,11 +49,11 @@ public class Book {
 	public void setContentRatingId(int contentRatingId) {
 		this.contentRatingId = contentRatingId;
 	}
-	public int getGenreId() {
-		return genreId;
+	public int getIsbn() {
+		return isbn;
 	}
-	public void setGenreId(int genreId) {
-		this.genreId = genreId;
+	public void setIsbn(int isbn) {
+		this.isbn = isbn;
 	}
 	@Override
 	public int hashCode() {
@@ -53,7 +62,7 @@ public class Book {
 		result = prime * result + authorId;
 		result = prime * result + contentRatingId;
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
-		result = prime * result + genreId;
+		result = prime * result + isbn;
 		result = prime * result + id;
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		return result;
@@ -76,7 +85,7 @@ public class Book {
 				return false;
 		} else if (!description.equals(other.description))
 			return false;
-		if (genreId != other.genreId)
+		if (isbn != other.isbn)
 			return false;
 		if (id != other.id)
 			return false;
@@ -87,14 +96,14 @@ public class Book {
 			return false;
 		return true;
 	}
-	public Book(int id, String title, int authorId, String description, int contentRatingId, int genreId) {
+	public Book(int id, String title, int authorId, String description, int contentRatingId, int isbn) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.authorId = authorId;
 		this.description = description;
 		this.contentRatingId = contentRatingId;
-		this.genreId = genreId;
+		this.isbn = isbn;
 	}
 	public Book() {
 		super();
@@ -102,7 +111,7 @@ public class Book {
 	@Override
 	public String toString() {
 		return "Book [id=" + id + ", title=" + title + ", authorId=" + authorId + ", description=" + description
-				+ ", contentRatingId=" + contentRatingId + ", genreId=" + genreId + "]";
+				+ ", contentRatingId=" + contentRatingId + ", isbn=" + isbn + "]";
 	}
 	
 }
