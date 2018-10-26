@@ -151,7 +151,7 @@ public class Copy {
 	}
 
 
-	public Copy(int id, Book book, User user, int conditionId, boolean available, boolean active, Date dateRemoved) {
+	public Copy(int id, Book book, User user, int conditionId, boolean available, boolean active, Date dateRemoved, Date dateAdded) {
 
 		super();
 		this.id = id;

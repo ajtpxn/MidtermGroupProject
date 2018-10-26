@@ -3,9 +3,7 @@ package com.skilldistillery.book2book.data;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -19,6 +17,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.skilldistillery.book2book.entities.Copy;
+import com.skilldistillery.book2book.entities.User;
 
 public class CopyDAOTest {
 	static CopyDAO dao;
@@ -46,32 +45,31 @@ public class CopyDAOTest {
 	
 	@Test
 	public void test_Copy_Add() throws ParseException {
-		
+		User user = new User();
 		Copy copy = new Copy();
 		copy.setAvailable(true);
-		copy.setUserId(1);
-		copy.setBookId(3);
+		copy.setUser(user);
 		copy.setActive(true);
 		copy.setConditionId(1);
 		dao.addCopy(copy);
 		System.out.println(copy);
 		Copy returnedCopy = em.find(Copy.class, copy.getId());
-		assertEquals(1, returnedCopy.getUserId());
+		assertEquals(1, returnedCopy.getUser());
 
 	}
 	
-	@Test
-	 void test_Copy_Update() {
-		List<Copy> copyList = new ArrayList<Copy>();
-		Copy editedCopy = em.find(Copy.class, 1);
-		editedCopy.setConditionId(2);
-		dao.editCopy(2, 1);
-		copyList = dao.searchForCopy(1);
-		int actual;
-		actual = copyList.get(0).getConditionId();
-		System.out.println(actual);
-		assertEquals(2, actual);
-	}
+//	@Test
+//	 void test_Copy_Update() {
+//		List<Copy> copyList = new ArrayList<Copy>();
+//		Copy editedCopy = em.find(Copy.class, 1);
+//		editedCopy.setConditionId(2);
+//		dao.editCopy(2, 1);
+//		copyList = dao.searchForCopy(1);
+//		int actual;
+//		actual = copyList.get(0).getConditionId();
+//		System.out.println(actual);
+//		assertEquals(2, actual);
+//	}
 //
 //	private boolean test_Copy_Delete() {
 //		ActorDAO actorDAO = new ActorDAOImpl();
