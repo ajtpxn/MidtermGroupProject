@@ -1,33 +1,70 @@
 package com.skilldistillery.book2book.data;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 import com.skilldistillery.book2book.entities.Transaction;
 
 public class TransactionDAOImpl implements TransactionDAO {
 
+	private EntityManagerFactory emf;
+	private EntityManager em;
+
+	public TransactionDAOImpl() {
+		emf = Persistence.createEntityManagerFactory("Book2Book");
+	}
+
+	@Override
+	public Transaction makeTransaction(Transaction t) {
+		em = emf.createEntityManager();
+		em.getTransaction().begin();
+		em.persist(t);
+		em.flush();
+		em.getTransaction().commit();
+		em.close();
+		return t;
+	}
+
 	@Override
 	public Transaction getTransactionById(int id) {
-		// TODO Auto-generated method stub
+		em = emf.createEntityManager();
+		em.getTransaction().begin();
+		Transaction t = em.find(Transaction.class, id);
+		return t;
+	}
+
+	@Override
+	public List<Object[]> getTransactionsByBorrowerId(int id) {
+		em = emf.createEntityManager();
+		em.getTransaction().begin();
+		String query = "SELECT t FROM transaction t WHERE t.borrow_id = :id";
+		List<Object[]> result = em.createQuery("query", Object[].class)
+								  .setParameter("id", id)
+								  .getResultList();
+		
+		return result;
+	}
+
+	@Override
+	public List<Object[]> getTransactionsByLenderId(int id) {
+		// requires a join
 		return null;
 	}
 
 	@Override
-	public List<Transaction> getTransactionsByBorrowerId(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Transaction> getTransactionsByLenderId(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Transaction> getTransactionsByCopyId(int id) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Object[]> getTransactionsByCopyId(int id) {
+		em = emf.createEntityManager();
+		em.getTransaction().begin();
+		String query = "SELECT t FROM transaction t WHERE t.copy_id = :id";
+		List<Object[]> result = em.createQuery("query", Object[].class)
+								  .setParameter("id", id)
+								  .getResultList();
+		
+		return result;
 	}
 
 }
