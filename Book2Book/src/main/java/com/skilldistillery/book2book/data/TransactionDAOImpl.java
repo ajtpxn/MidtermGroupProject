@@ -39,29 +39,29 @@ public class TransactionDAOImpl implements TransactionDAO {
 	}
 
 	@Override
-	public List<Object[]> getTransactionsByBorrowerId(int id) {
+	public List<Transaction> getTransactionsByBorrowerId(int id) {
 		em = emf.createEntityManager();
 		em.getTransaction().begin();
 		String query = "SELECT t FROM transaction t WHERE t.borrow_id = :id";
-		List<Object[]> result = em.createQuery("query", Object[].class)
-								  .setParameter("id", id)
-								  .getResultList();
+		List<Transaction> result = em.createQuery("query", Transaction.class)
+								     .setParameter("id", id)
+								     .getResultList();
 		
 		return result;
 	}
 
 	@Override
-	public List<Object[]> getTransactionsByLenderId(int id) {
+	public List<Transaction> getTransactionsByLenderId(int id) {
 		// requires a join
 		return null;
 	}
 
 	@Override
-	public List<Object[]> getTransactionsByCopyId(int id) {
+	public List<Transaction> getTransactionsByCopyId(int id) {
 		em = emf.createEntityManager();
 		em.getTransaction().begin();
 		String query = "SELECT t FROM transaction t WHERE t.copy_id = :id";
-		List<Object[]> result = em.createQuery("query", Object[].class)
+		List<Transaction> result = em.createQuery("query", Transaction.class)
 								  .setParameter("id", id)
 								  .getResultList();
 		
