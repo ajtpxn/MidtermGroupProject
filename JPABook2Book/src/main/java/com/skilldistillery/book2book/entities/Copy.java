@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -27,8 +29,13 @@ public class Copy {
 	private boolean active;
 	@Temporal(TemporalType.TIMESTAMP)
 	@CreationTimestamp
+	@Column(name="date_added", updatable=false)
+	private Date dateAdded;
+	@Temporal(TemporalType.TIMESTAMP)
+	@CreationTimestamp
 	@Column(name="date_removed", updatable=false)
 	private Date dateRemoved;
+	
 	
 	public int getId() {
 		return id;
@@ -66,6 +73,12 @@ public class Copy {
 	public void setActive(boolean active) {
 		this.active = active;
 	}
+	public Date getDateAdded() {
+		return dateAdded;
+	}
+	public void setDateAdded(Date dateAdded) {
+		this.dateAdded = dateAdded;
+	}
 	public Date getDateRemoved() {
 		return dateRemoved;
 	}
@@ -80,6 +93,7 @@ public class Copy {
 		result = prime * result + (available ? 1231 : 1237);
 		result = prime * result + bookId;
 		result = prime * result + conditionId;
+		result = prime * result + ((dateAdded == null) ? 0 : dateAdded.hashCode());
 		result = prime * result + ((dateRemoved == null) ? 0 : dateRemoved.hashCode());
 		result = prime * result + id;
 		result = prime * result + userId;
@@ -102,6 +116,11 @@ public class Copy {
 			return false;
 		if (conditionId != other.conditionId)
 			return false;
+		if (dateAdded == null) {
+			if (other.dateAdded != null)
+				return false;
+		} else if (!dateAdded.equals(other.dateAdded))
+			return false;
 		if (dateRemoved == null) {
 			if (other.dateRemoved != null)
 				return false;
@@ -113,7 +132,9 @@ public class Copy {
 			return false;
 		return true;
 	}
-	public Copy(int id, int bookId, int userId, int conditionId, boolean available, boolean active, Date dateRemoved) {
+	
+	public Copy(int id, int bookId, int userId, int conditionId, boolean available, boolean active, Date dateAdded,
+			Date dateRemoved) {
 		super();
 		this.id = id;
 		this.bookId = bookId;
@@ -121,6 +142,7 @@ public class Copy {
 		this.conditionId = conditionId;
 		this.available = available;
 		this.active = active;
+		this.dateAdded = dateAdded;
 		this.dateRemoved = dateRemoved;
 	}
 	public Copy() {
@@ -129,7 +151,8 @@ public class Copy {
 	@Override
 	public String toString() {
 		return "Copy [id=" + id + ", bookId=" + bookId + ", userId=" + userId + ", conditionId=" + conditionId
-				+ ", available=" + available + ", active=" + active + ", dateRemoved=" + dateRemoved + "]";
+				+ ", available=" + available + ", active=" + active + ", dateAdded=" + dateAdded + ", dateRemoved="
+				+ dateRemoved + "]";
 	}
 	
 	

@@ -1,14 +1,14 @@
 package com.skilldistillery.book2book.entities;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Condition {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+//	@GeneratedValue(strategy=GenerationType.IDENTITY)
+//	@OneToMany(mappedBy="conditionId")
 	private int id;
 	private String condition;
 	
