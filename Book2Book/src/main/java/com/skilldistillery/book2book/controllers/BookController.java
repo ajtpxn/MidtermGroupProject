@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.skilldistillery.book2book.data.BookDAO;
@@ -26,7 +27,7 @@ public class BookController {
 	private UserDAO ud;
 
 	//ADD NEW BOOK TO DB
-	@RequestMapping(path="XXX", method= RequestMethod.POST)
+	@RequestMapping(path="add.do", method= RequestMethod.POST)
 	public String addNewBook(Book book ) {
 		
 				bd.addBook(book);
@@ -37,16 +38,19 @@ public class BookController {
 	public ModelAndView addedBook () {
 		ModelAndView mv = new ModelAndView();
 		
-		mv.setViewName("XXX");
+		mv.setViewName("book.jsp");
 		
 		return mv;
 	}
 	
 	//EDIT BOOK
-	@RequestMapping(path="XXXX", method = RequestMethod.POST)
-	public String editBook(Book updatedBook, int oldBookId) {
+	@RequestMapping(path="editbook.do", method = RequestMethod.POST)
+	public String editBook(Book updatedBook, @RequestParam("id")int id) {
+		int oldBookId = updatedBook.getId();
+		System.out.println(oldBookId);
 		
-		bd.editBook(updatedBook, oldBookId);
+		System.out.println("ID passed by request" + id);
+		bd.editBook(updatedBook, id);
 		
 		return "redirect:editBook.do";
 	}
@@ -54,25 +58,61 @@ public class BookController {
 	public ModelAndView editedBook () {
 		ModelAndView mv = new ModelAndView();
 		
-		mv.setViewName("XXX");
+		mv.setViewName("book.jsp");
 		
 		return mv;
 		
 	}
 	
 	//SEACH FOR BOOK 
-	
+	@RequestMapping(path="searchbook.do", method=RequestMethod.GET)
 	public ModelAndView findBookByKeyword(String keyword) {
 		ModelAndView mv = new ModelAndView();
 		
-		List<Book> books = bd.searchForBook(keyword);
+		List<Book> books = bd.searchForBookbyKeyword(keyword);
 		
 		mv.addObject("books",books);
-		mv.setViewName("XXXXX");
+		mv.setViewName("/WEB-INF/bookList.jsp");
+		
+		return mv;
+	}
+	//BACK TO HOME BUTTON
+	@RequestMapping(path="home.do", method=RequestMethod.GET)
+	public String returnHome() {
+		return "book.jsp";
+	}
+	//SEARCH BOOK BY TITLE MOVE TO EDIT PAGE
+	@RequestMapping(path="editbook.do", method=RequestMethod.GET)
+	public ModelAndView findBookByName(String title) {
+		ModelAndView mv = new ModelAndView();
+		
+		Book book = bd.searchForBookByTitle(title);
+		mv.addObject("book", book);
+		mv.setViewName("/WEB-INF/bookedit.jsp");
+	
 		
 		return mv;
 	}
 	
-	
-	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
