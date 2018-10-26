@@ -1,6 +1,7 @@
 package com.skilldistillery.book2book.data;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.persistence.EntityManager;
@@ -22,6 +23,9 @@ public class UserDAOimpl implements UserDAO {
 	private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("Book2Book");
 	@PersistenceContext
 	private EntityManager em;
+	
+	//Map for login - getUserByUserNameAndPassword
+	private Map<Integer, User> users;
 
 	// CREATE NEW USER
 	@Override
@@ -125,6 +129,22 @@ public class UserDAOimpl implements UserDAO {
 		em.close();
 
 		return user;
+	}
+	
+	
+	// used for login
+	@Override
+	public User getUserByCredentials(String userName, String password) {
+	  User returnUser = null;
+	  Set<Integer> keys = users.keySet();
+	  for (Integer key : keys) {
+	    User localUser = users.get(key);
+	    if(localUser.getUserName().equals(userName) && localUser.getPassword().equals(password)) {
+	      returnUser = localUser;
+	      break;
+	    }
+	  }
+	  return returnUser;
 	}
 }
 	

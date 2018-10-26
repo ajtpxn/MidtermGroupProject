@@ -52,7 +52,7 @@ public class UserController {
 			return mv;
 		}
 		String password = formData.getPassword();
-		User inDAO = userDAO.getUserByCredentials(formData.getUserName(), password)
+		User inDAO = userDAO.getUserByCredentials(formData.getUserName(), password);
 		
 		User user = new User();
 		mv.addObject("user", user);
