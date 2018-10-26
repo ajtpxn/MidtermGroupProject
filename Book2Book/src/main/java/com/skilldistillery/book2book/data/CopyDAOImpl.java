@@ -29,11 +29,13 @@ public class CopyDAOImpl implements CopyDAO {
 	
 	
 	@Override
-	public void editCopy(int conditionId, int id) {
+	public void editCopy(Copy copy, int id) {
 		em = emf.createEntityManager();
 		em.getTransaction().begin();
 		Copy updatedCopy = em.find(Copy.class, id);
-		updatedCopy.setConditionId(conditionId);
+		updatedCopy.setConditionId(copy.getConditionId());
+		updatedCopy.setAvailable(copy.isAvailable());
+		updatedCopy.setActive(copy.isActive());
 		em.getTransaction().commit();
 		em.flush();
 		em.close();
@@ -52,13 +54,41 @@ public class CopyDAOImpl implements CopyDAO {
 
 
 	@Override
-	public List<Copy> searchForCopy(int id) {
+	public List<Copy> listCopies(int id) {
 		em = emf.createEntityManager();
 		List<Copy> copyList = new ArrayList<>();
 		em.getTransaction().begin();
 		String query = "select c from Copy c where concat(c.id, c.available, c.date_added, c.date_removed, c.user_id, c.book_id, c.active) like :search";
 		
 		copyList = em.createQuery(query, Copy.class).setParameter("id", "%"+id+"%").getResultList();
+		em.getTransaction().commit();
+		em.close();
+		return copyList;
+	}
+	
+	@Override
+	public List<Copy> listBookCopies(int bookId){
+		em = emf.createEntityManager();
+		List<Copy> copyList = new ArrayList<>();
+		em.getTransaction().begin();
+		String query = "SELECT c FROM Copy c WHERE bookId = :bookId";
+		copyList = em.createQuery(query, Copy.class)
+				.setParameter("id", bookId)
+				.getResultList();
+		em.getTransaction().commit();
+		em.close();
+		return copyList;
+	}
+	
+	@Override
+	public List<Copy> listUserCopies(int userId){
+		em = emf.createEntityManager();
+		List<Copy> copyList = new ArrayList<>();
+		em.getTransaction().begin();
+		String query = "SELECT c FROM Copy c WHERE userId = :userId";
+		copyList = em.createQuery(query, Copy.class)
+				.setParameter("id", userId)
+				.getResultList();
 		em.getTransaction().commit();
 		em.close();
 		return copyList;
