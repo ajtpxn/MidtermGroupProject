@@ -84,11 +84,11 @@ public class Copy {
 		this.dateRemoved = dateRemoved;
 	}
 	
-	public User getUsers() {
+	public User getUser() {
 		return user;
 	}
 
-	public void setUsers(User users) {
+	public void setUser(User users) {
 		this.user = users;
 	}
 
@@ -168,7 +168,6 @@ public class Copy {
 	public Copy() {
 		super();
 	}
-	
 	
 	//TO STRING
 	@Override

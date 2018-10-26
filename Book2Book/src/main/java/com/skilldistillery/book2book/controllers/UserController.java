@@ -1,6 +1,13 @@
 package com.skilldistillery.book2book.controllers;
 
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.skilldistillery.book2book.data.UserDAO;
@@ -8,22 +15,46 @@ import com.skilldistillery.book2book.data.UserDAOimpl;
 import com.skilldistillery.book2book.entities.User;
 
 @Controller
+@SessionAttributes("userStatus")
 public class UserController {
 	
-	private static UserDAO userDAO = new UserDAOimpl();
+	@Autowired
+	private static UserDAO userDAO;
+	
+//	@Autowired
+//	private MessageHasher hasher;
 	
 	
 	public void addUser(User user) {
+		userDAO = new UserDAOimpl();
 		ModelAndView mv = new ModelAndView();
 		userDAO.creatUser(user);
+		userDAO = null;
 		mv.addObject(user);
 	}
 	
-	public void userIsLoggedIn(User user) {
+	@RequestMapping(path="status.do")
+	@ModelAttribute("userStatus")
+	public boolean userIsLoggedIn(HttpSession session) {
+		boolean status = false;
+		User user = (User) session.getAttribute("USER");
+		if (user != null) {
+			status = true;
+		}
+		return status;
+	}
+	
+	@RequestMapping(path="login.do", method=RequestMethod.POST)
+	public ModelAndView logIn(HttpSession session) {
 		ModelAndView mv = new ModelAndView();
+		if(userIsLoggedIn(session)) {
+			
+		}
+		return mv;
+	}
+	
+	public void logOut() {
 		
-		userDAO.creatUser(user);
-		mv.addObject(user);
 	}
 
 }
