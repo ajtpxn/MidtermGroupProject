@@ -49,9 +49,9 @@ public class User {
 	@OneToMany
 	private List<Transaction> transactions;
 	
-	@ManyToOne
-	@JoinColumn(name="borrow_id")
-	private User borrower;
+//	@ManyToOne
+//	@JoinColumn(name="borrow_id")
+//	private User borrower;
 	
 	
 	public Date getDateCreated() {

@@ -1,5 +1,7 @@
 package com.skilldistillery.book2book.data;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -25,7 +27,6 @@ public class UserDAOimpl implements UserDAO {
 	private EntityManager em;
 	
 	//Map for login - getUserByUserNameAndPassword
-	private Map<Integer, User> users;
 
 	// CREATE NEW USER
 	@Override
@@ -135,16 +136,24 @@ public class UserDAOimpl implements UserDAO {
 	// GET USER BY USERNAME AND PASSWORD
 	@Override
 	public User getUserByCredentials(String userName, String password) {
-	  User returnUser = null;
-	  Set<Integer> keys = users.keySet();
-	  for (Integer key : keys) {
-	    User localUser = users.get(key);
-	    if(localUser.getUserName().equals(userName) && localUser.getPassword().equals(password)) {
-	      returnUser = localUser;
-	      break;
-	    }
-	  }
-	  return returnUser;
+		em = emf.createEntityManager();
+		List<User> userList = new ArrayList<User>();
+		userList = em.createQuery("SELECT u FROM User u", User.class).getResultList();
+		System.out.println(userList);
+		User returnUser = null;
+		for (User user : userList) {
+			if (user.getUserName().equals(userName) && user.getPassword().equals(password)) {
+				System.out.println(user);
+				returnUser = user;
+				break;
+			}
+			else {
+				System.out.println("Not found");
+				
+			}
+		}
+		em.close();
+		return returnUser;
 	}
 }
 	

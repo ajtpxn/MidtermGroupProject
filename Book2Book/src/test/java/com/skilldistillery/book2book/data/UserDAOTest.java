@@ -43,7 +43,7 @@ class UserDAOTest {
 		em.close();
 		
 	}
-	
+	/*
 	//TEST SEARCH USER BY ID
 	@Test
 	@DisplayName("find user by id")
@@ -124,8 +124,17 @@ class UserDAOTest {
 	}
 	
 	
+	*/
 	
 	
+	@Test
+	@DisplayName("Test get user by Credentials")
+	void test5() {
+		User user = ud.getUserByCredentials("usermcuserface", "imauser");
+		String name = user.getLastName();
+		System.out.println(name);
+		assertEquals("McUserface", name);
+	}
 	
 	
 	

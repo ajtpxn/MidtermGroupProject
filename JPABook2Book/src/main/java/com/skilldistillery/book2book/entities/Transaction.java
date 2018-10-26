@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -41,18 +42,19 @@ public class Transaction {
 	@Column(name="date_created", updatable=false)
 	private Date dateCreated;
 	
-	@OneToMany(mappedBy="borrower")
-	private List<User> borrowers;
+	@ManyToOne
+	@JoinColumn(name="borrow_id")
+	private User borrower;
 	
 	
 	
 	
 	
-	public List<User> getBorrowers() {
-		return borrowers;
+	public User getBorrowers() {
+		return borrower;
 	}
-	public void setBorrowers(List<User> borrowers) {
-		this.borrowers = borrowers;
+	public void setBorrowers(User borrower) {
+		this.borrower = borrower;
 	}
 	public int getId() {
 		return id;
@@ -90,17 +92,17 @@ public class Transaction {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Transaction id: ").append(id).append(" startDate: ").append(startDate).append(" endDate: ")
 				.append(endDate).append(" copyId: ").append(copyId).append(" dateCreated: ").append(dateCreated)
-				.append(" borrowers: ").append(borrowers);
+				.append(" borrower: ").append(borrower);
 		return builder.toString();
 	}
-	public Transaction(int id, Date startDate, Date endDate, int copyId, Date dateCreated, List<User> borrowers) {
+	public Transaction(int id, Date startDate, Date endDate, int copyId, Date dateCreated, User borrower) {
 		super();
 		this.id = id;
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.copyId = copyId;
 		this.dateCreated = dateCreated;
-		this.borrowers = borrowers;
+		this.borrower = borrower;
 	}
 	public Transaction() {
 		super();

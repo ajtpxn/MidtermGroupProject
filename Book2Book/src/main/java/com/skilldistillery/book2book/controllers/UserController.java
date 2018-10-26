@@ -22,9 +22,10 @@ public class UserController {
 	private static UserDAO userDAO;
 	
 	@RequestMapping(path="index.do")
-	public void index() {
+	public ModelAndView index() {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("index.jsp");
+		return mv;
 	}
 	
 	public void addUser(User user) {
@@ -46,32 +47,62 @@ public class UserController {
 		return status;
 	}
 	
-	@RequestMapping(path="login.do"/*, method=RequestMethod.POST*/)
-	public ModelAndView logIn(/*User formData, HttpSession session*/) {
+	@RequestMapping(path="login.do", method=RequestMethod.GET)
+	public ModelAndView loginFromHome(HttpSession session) {
+	    ModelAndView mv = new ModelAndView();
+	    
+	    if (userIsLoggedIn(session)) {
+	    	mv.setViewName("index.do");
+	    	return mv;
+	    }
+	    
+	    User user = new User();
+	    mv.addObject("user", user);
+	    
+	    mv.setViewName("login.jsp");
+	    
+	    return mv;
+	}
+	
+	@RequestMapping(path="login.do", method=RequestMethod.POST)
+	public ModelAndView logIn() {
 		ModelAndView mv = new ModelAndView();
 		
+		userDAO = new UserDAOimpl();
 		
-//		if(userIsLoggedIn(session)) {
-//			mv.setViewName("index.do");
-//			return mv;
-//		}
-//		String password = formData.getPassword();
-//		User inDAO = userDAO.getUserByCredentials(formData.getUserName(), password);
-//		
-//		if (inDAO != null) { // successful login
-//			session.setAttribute("USER", inDAO);
-//			mv.setViewName("account.do");
-//		}
-//		else {  // fail to login
-//			mv.addObject("fail", true);
-//			mv.setViewName("login.do");
-//		}
-//		
-//		User user = new User();
-//		mv.addObject("user", user);
 		
-		mv.setViewName("account.jsp");
+		/*if(userIsLoggedIn(session)) {
+			mv.setViewName("index.do");
+			return mv;
+		}
+		User inDAO = userDAO.getUserByCredentials("usermcuserface", "imauser");
 		
+		if (inDAO != null) { // successful login
+			session.setAttribute("USER", inDAO);
+			mv.setViewName("account.do");
+		}
+		else {  // fail to login
+			mv.addObject("fail", true);
+			mv.setViewName("login.do");
+		}
+		
+		User user = new User();
+		mv.addObject("user", user);*/
+		
+		
+		
+		
+		
+		User validUser = userDAO.getUserByCredentials("usermcuserface", "imauser");
+		
+		if (validUser != null) {
+			mv.setViewName("success.jsp");
+		}
+		else {
+			mv.setViewName("fail.jsp");
+		}
+		
+		userDAO = null;
 		return mv;
 	}
 	
