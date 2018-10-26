@@ -7,22 +7,8 @@
 <title>Home</title>
 </head>
 <body>
-<%--Edit the file nav.jsp to change nav links --%>
-<%@ include file="nav.jsp" %>
+
+
 <h2>Welcome to the site</h2>
-
-<p>
-<a href="book.jsp">book</a>
-</p>
-
-<p>
-<a href="copy.jsp">copy</a>
-</p>
-
-<p>
-<a href="transaction.jsp">transaction</a>
-</p>
-
-
 </body>
 </html>
