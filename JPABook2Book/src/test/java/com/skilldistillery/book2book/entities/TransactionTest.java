@@ -39,7 +39,7 @@ class TransactionTest {
 	}
 
 	@Test
-	@DisplayName("testing link between transaction adn DB")
+	@DisplayName("testing link between transaction and DB")
 	void test() {
 		//Need to add data to test
 		

@@ -73,7 +73,7 @@ public class TransactionDAOImpl implements TransactionDAO {
 		em = emf.createEntityManager();
 		em.getTransaction().begin();
 		Transaction managedTransaction = em.find(Transaction.class, "id");
-		managedTransaction.setBorrowId(updated.getBorrowId());
+		managedTransaction.setBorrowers(updated.getBorrowers());
 		managedTransaction.setCopyId(updated.getCopyId());
 		managedTransaction.setDateCreated(updated.getDateCreated());
 		managedTransaction.setEndDate(updated.getDateCreated());
