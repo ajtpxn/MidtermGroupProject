@@ -23,9 +23,7 @@ public class Copy {
 	@ManyToOne
 	@JoinColumn(name="book_id")
 	private Book book;
-	
-//	@Column(name="user_id")
-//	private int userId;
+
 	@Column(name="condition_id")
 	private int conditionId;
 	private boolean available;
@@ -55,12 +53,6 @@ public class Copy {
 	public void setBookId(Book book) {
 		this.book= book;
 	}
-//	public int getUserId() {
-//		return userId;
-//	}
-//	public void setUserId(int userId) {
-//		this.userId = userId;
-//	}
 	public int getConditionId() {
 		return conditionId;
 	}
@@ -92,11 +84,11 @@ public class Copy {
 		this.dateRemoved = dateRemoved;
 	}
 	
-	public User getUsers() {
+	public User getUser() {
 		return user;
 	}
 
-	public void setUsers(User users) {
+	public void setUser(User users) {
 		this.user = users;
 	}
 
@@ -176,7 +168,6 @@ public class Copy {
 	public Copy() {
 		super();
 	}
-	
 	
 	//TO STRING
 	@Override
