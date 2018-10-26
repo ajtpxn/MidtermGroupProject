@@ -43,69 +43,73 @@ class UserDAOTest {
 		em.close();
 		
 	}
-//	
-//	@Test
-//	@DisplayName("find user by id")
-//	void test0() {
-//		User user = ud.findUser(1);
-//		
-//		assertEquals("User", user.getFirstName());
-//	}
-//	
+	
+	//TEST SEARCH USER BY ID
+	@Test
+	@DisplayName("find user by id")
+	void test0() {
+		User user = ud.findUser(1);
+		
+		assertEquals("User", user.getFirstName());
+	}
+	
 
 	//TEST CREATING NEW USER
-//	@Test
-//	@DisplayName("Test crerate user adds useer to data base")
-//	void test() {
-//		User newUser = new User();
-//		newUser.setFirstName("kyle");
-//		newUser.setLastName("paladini");
-//		newUser.setUserName("kpaladini");
-//		newUser.setPassword("password");
-//		newUser.setActive(true);
-//		
-//		ud.creatUser(newUser);
-//		
-//		int id = newUser.getId();
-//		User inDBUser = em.find(User.class, id);
-//		assertEquals("kyle", inDBUser.getFirstName());
-//		
-//	}
+	@Test
+	@DisplayName("Test crerate user adds useer to data base")
+	void test() {
+		User newUser = new User();
+		newUser.setFirstName("kyle");
+		newUser.setLastName("paladini");
+		newUser.setUserName("kpaladini");
+		newUser.setPassword("password");
+		newUser.setActive(true);
+		
+		ud.creatUser(newUser);
+		
+		int id = newUser.getId();
+		User inDBUser = em.find(User.class, id);
+		assertEquals("kyle", inDBUser.getFirstName());
+		
+	}
 	
 	//TEST UPDATE USER
-//	@Test
-//	@DisplayName("Test edit update user in data base")
-//	void test2() {
-//		
-//		User oldUser = em.find(User.class, 2);
-//		
-//		User updatedUser = new User();
-//		updatedUser.setFirstName("changed");
-//		updatedUser.setLastName("paladini");
-//		updatedUser.setUserName("kpaladini");
-//		updatedUser.setPassword("password");
-//		updatedUser.setActive(true);
-//		
-//		ud.updateUser(2, updatedUser);
-//		
-//		assertEquals("changed", oldUser.getFirstName());
-//		
-//	}
-//	@Test
-//	@DisplayName("Test delete user in data base")
-//	void test3() {
-//		
-//		User user = em.find(User.class, 4);
-//		
-//		boolean deleted = ud.deleteUser(user.getId());
-//		
-//		
-//		assertTrue(deleted);
-//		assertFalse(user.isActive());
-//		
-//		
-//		
-//	}
+	@Test
+	@DisplayName("Test edit update user in data base")
+	void test2() {
+		
+		User oldUser = em.find(User.class, 2);
+		
+		User updatedUser = new User();
+		updatedUser.setFirstName("changed");
+		updatedUser.setLastName("paladini");
+		updatedUser.setUserName("kpaladini");
+		updatedUser.setPassword("password");
+		updatedUser.setActive(true);
+		
+		ud.updateUser(2, updatedUser);
+		
+		assertEquals("changed", oldUser.getFirstName());
+		
+	}
+	//TEST DEACTIVATE USER BY ID
+	@Test
+	@DisplayName("Test delete user in data base")
+	void test3() {
+		
+		User user = em.find(User.class, 4);
+		
+		boolean deleted = ud.deleteUser(user.getId());
+		
+		
+		assertTrue(deleted);
+		assertFalse(user.isActive());
+		
+		
+		
+	}
+	
+	//TEST USER HAS A LIST OF COPIES
 	@Test
 	@DisplayName("Test get list of users copies")
 	void test4() {
@@ -118,6 +122,9 @@ class UserDAOTest {
 		assertEquals("The Very Hungry Caterpillar", userCopies.get(0).getBook().getTitle());
 		
 	}
+	
+	
+	
 	
 	
 	
