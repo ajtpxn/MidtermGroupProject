@@ -46,30 +46,30 @@ class BookDAOImplTest {
 //		assertEquals("Harry Potter and the Prisoner of Azkaban", actual);
 //	}
 	
-	@Test
-	@DisplayName("Test addBook in BookDAO")
-	void test02() {
-		Book book = new Book();
-		Author author = new Author();
-		author.setFirstName("Testauthor2");
-		author.setLastName("McAuthorface2");
-		book.setAuthor(author);
-		book.setContentRatingId(1);
-		book.setDescription("Test Description 2");
-		book.setTitle("Title2");
-		System.out.println(book);
-		dao.addBook(book);
-		String actual = null;
-		List<Book> bookList = dao.searchForBook("test");
-		if (bookList != null) {
-			actual = bookList.get(0).getTitle();
-		}
-		else {
-			actual = "Error: bookList is null";
-		}
-		System.out.println(actual);
-		assertEquals("Test Book Title", actual);
-	}
+//	@Test
+//	@DisplayName("Test addBook in BookDAO")
+//	void test02() {
+//		Book book = new Book();
+//		Author author = new Author();
+//		author.setFirstName("Testauthor2");
+//		author.setLastName("McAuthorface2");
+//		book.setAuthor(author);
+//		book.setContentRatingId(1);
+//		book.setDescription("Test Description 2");
+//		book.setTitle("Title2");
+//		System.out.println(book);
+//		dao.addBook(book);
+//		String actual = null;
+//		//List<Book> bookList = dao.searchForBook("test");
+//		if (bookList != null) {
+//			actual = bookList.get(0).getTitle();
+//		}
+//		else {
+//			actual = "Error: bookList is null";
+//		}
+//		System.out.println(actual);
+//		assertEquals("Test Book Title", actual);
+//	}
 	
 //	@Test
 //	@DisplayName("Test editBook in BookDAO")

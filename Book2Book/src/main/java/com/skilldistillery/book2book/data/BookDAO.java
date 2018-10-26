@@ -9,8 +9,11 @@ public interface BookDAO {
 
 	void addBook(Book book);
 
-	List<Book> searchForBook(String search);
+	List<Book> searchForBookbyKeyword(String search);
 
 	void editBook(Book bookWithNewValues, int idOfBookToBeEdited);
+	
+	public Book searchForBookByTitle( String title);
+	
 
 }
