@@ -9,6 +9,7 @@ import javax.persistence.Persistence;
 
 import org.springframework.stereotype.Repository;
 
+import com.skilldistillery.book2book.entities.Author;
 import com.skilldistillery.book2book.entities.Book;
 
 
@@ -30,11 +31,11 @@ public class BookDAOImpl implements BookDAO {
 	
 	
 	@Override
-	public void editBook(int authorId, int contentRatingId, String description, String title, int id) {
+	public void editBook(Author author, int contentRatingId, String description, String title, int id) {
 		em = emf.createEntityManager();
 		em.getTransaction().begin();
 		Book updatedBook = em.find(Book.class, id);
-		updatedBook.setAuthorId(authorId);
+		updatedBook.setAuthor(author);
 		updatedBook.setContentRatingId(contentRatingId);
 		updatedBook.setDescription(description);
 		updatedBook.setTitle(title);
@@ -44,12 +45,13 @@ public class BookDAOImpl implements BookDAO {
 	
 	
 	@Override
-	public List<Book> searchForBook(int author, String description, String title, String search) {
+	public List<Book> searchForBook(String search) {
 		em = emf.createEntityManager();
 		List<Book> bookList = new ArrayList<>();
 		em.getTransaction().begin();
-		String query = "select b from Book b where b.title like :search";
-		em.createQuery(query).setParameter("search", search).getResultList();
+		String query = "select b from Book b where concat(b.title, b.description, b.author.firstName, b.author.lastName) like :search";
+		
+		bookList = em.createQuery(query, Book.class).setParameter("search", "%"+search+"%").getResultList();
 		em.getTransaction().commit();
 		em.close();
 		return bookList;

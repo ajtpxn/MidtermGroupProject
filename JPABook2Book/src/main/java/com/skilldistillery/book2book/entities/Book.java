@@ -5,6 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Book {
@@ -12,12 +15,12 @@ public class Book {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	private String title;
-	@Column(name="author_id")
-	private int authorId;
+	@ManyToOne
+	@JoinColumn(name="author_id")
+	private Author author;
 	private String description;
 	@Column(name="content_rating")
 	private int contentRatingId;
-	private int isbn;
 	
 	public int getId() {
 		return id;
@@ -31,12 +34,6 @@ public class Book {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public int getAuthorId() {
-		return authorId;
-	}
-	public void setAuthorId(int authorId) {
-		this.authorId = authorId;
-	}
 	public String getDescription() {
 		return description;
 	}
@@ -49,20 +46,19 @@ public class Book {
 	public void setContentRatingId(int contentRatingId) {
 		this.contentRatingId = contentRatingId;
 	}
-	public int getIsbn() {
-		return isbn;
+	public Author getAuthor() {
+		return author;
 	}
-	public void setIsbn(int isbn) {
-		this.isbn = isbn;
+	public void setAuthor(Author author) {
+		this.author = author;
 	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + authorId;
+		result = prime * result + ((author == null) ? 0 : author.hashCode());
 		result = prime * result + contentRatingId;
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
-		result = prime * result + isbn;
 		result = prime * result + id;
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		return result;
@@ -76,7 +72,10 @@ public class Book {
 		if (getClass() != obj.getClass())
 			return false;
 		Book other = (Book) obj;
-		if (authorId != other.authorId)
+		if (author == null) {
+			if (other.author != null)
+				return false;
+		} else if (!author.equals(other.author))
 			return false;
 		if (contentRatingId != other.contentRatingId)
 			return false;
@@ -84,8 +83,6 @@ public class Book {
 			if (other.description != null)
 				return false;
 		} else if (!description.equals(other.description))
-			return false;
-		if (isbn != other.isbn)
 			return false;
 		if (id != other.id)
 			return false;
@@ -96,22 +93,25 @@ public class Book {
 			return false;
 		return true;
 	}
-	public Book(int id, String title, int authorId, String description, int contentRatingId, int isbn) {
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Book id: ").append(id).append(" title: ").append(title).append(" author: ").append(author)
+				.append(" description: ").append(description).append(" contentRatingId: ").append(contentRatingId);
+		return builder.toString();
+	}
+	public Book(int id, String title, Author author, String description, int contentRatingId) {
 		super();
 		this.id = id;
 		this.title = title;
-		this.authorId = authorId;
+		this.author = author;
 		this.description = description;
 		this.contentRatingId = contentRatingId;
-		this.isbn = isbn;
 	}
 	public Book() {
 		super();
 	}
-	@Override
-	public String toString() {
-		return "Book [id=" + id + ", title=" + title + ", authorId=" + authorId + ", description=" + description
-				+ ", contentRatingId=" + contentRatingId + ", isbn=" + isbn + "]";
-	}
+	
+	
 	
 }
