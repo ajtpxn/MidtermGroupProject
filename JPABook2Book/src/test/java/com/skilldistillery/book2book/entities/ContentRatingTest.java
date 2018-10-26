@@ -1,7 +1,6 @@
 package com.skilldistillery.book2book.entities;
 
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -14,7 +13,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class BookTest {
+class ContentRatingTest {
 	private  static EntityManagerFactory emf;
 	private  EntityManager em;
 
@@ -39,11 +38,13 @@ class BookTest {
 		
 	}
 
+
 	@Test
-	@DisplayName("test book is linked to ")
+	@DisplayName("test link with content rating and DB")
 	void test() {
-		Book book = em.find(Book.class, 1);
-		assertEquals("The Very Hungry Caterpillar", book.getTitle() );
+		//ISSUE NEED TO FIX
+		ContentRating cr = em.find(ContentRating.class, 1);
+		assertEquals("Kids", cr.getContentName());
 	}
 
 }
