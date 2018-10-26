@@ -132,7 +132,7 @@ public class UserDAOimpl implements UserDAO {
 	}
 	
 	
-	// used for login
+	// GET USER BY USERNAME AND PASSWORD
 	@Override
 	public User getUserByCredentials(String userName, String password) {
 	  User returnUser = null;

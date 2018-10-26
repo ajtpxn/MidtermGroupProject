@@ -14,5 +14,4 @@ public interface UserDAO {
 	public User findUser( int id);
 	public List<Transaction> listAllTransactionsByUserId( int userId);
 	public User getUserByCredentials(String userName, String password);
-
 }
