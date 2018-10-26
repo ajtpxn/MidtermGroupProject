@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -17,10 +19,13 @@ public class Copy {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
-	@Column(name="book_id")
-	private int bookId;
-	@Column(name="user_id")
-	private int userId;
+	
+	@ManyToOne
+	@JoinColumn(name="book_id")
+	private Book book;
+	
+//	@Column(name="user_id")
+//	private int userId;
 	@Column(name="condition_id")
 	private int conditionId;
 	private boolean available;
@@ -30,24 +35,30 @@ public class Copy {
 	@Column(name="date_removed", updatable=false)
 	private Date dateRemoved;
 	
+	@ManyToOne
+	@JoinColumn(name="user_id")
+	private User user;
+	
+	
+	
+	//GETTERS AND SETTERS
+	
 	public int getId() {
 		return id;
 	}
-	public void setId(int id) {
-		this.id = id;
+	
+	public Book getBook() {
+		return book;
 	}
-	public int getBookId() {
-		return bookId;
+	public void setBookId(Book book) {
+		this.book= book;
 	}
-	public void setBookId(int bookId) {
-		this.bookId = bookId;
-	}
-	public int getUserId() {
-		return userId;
-	}
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
+//	public int getUserId() {
+//		return userId;
+//	}
+//	public void setUserId(int userId) {
+//		this.userId = userId;
+//	}
 	public int getConditionId() {
 		return conditionId;
 	}
@@ -72,19 +83,28 @@ public class Copy {
 	public void setDateRemoved(Date dateRemoved) {
 		this.dateRemoved = dateRemoved;
 	}
+	
+	public User getUsers() {
+		return user;
+	}
+
+	public void setUsers(User users) {
+		this.user = users;
+	}
+
+	public void setBook(Book book) {
+		this.book = book;
+	}
+
+	//HASH CODE
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + (active ? 1231 : 1237);
-		result = prime * result + (available ? 1231 : 1237);
-		result = prime * result + bookId;
-		result = prime * result + conditionId;
-		result = prime * result + ((dateRemoved == null) ? 0 : dateRemoved.hashCode());
 		result = prime * result + id;
-		result = prime * result + userId;
 		return result;
 	}
+	//EQUALS
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -94,41 +114,35 @@ public class Copy {
 		if (getClass() != obj.getClass())
 			return false;
 		Copy other = (Copy) obj;
-		if (active != other.active)
-			return false;
-		if (available != other.available)
-			return false;
-		if (bookId != other.bookId)
-			return false;
-		if (conditionId != other.conditionId)
-			return false;
-		if (dateRemoved == null) {
-			if (other.dateRemoved != null)
-				return false;
-		} else if (!dateRemoved.equals(other.dateRemoved))
-			return false;
 		if (id != other.id)
 			return false;
-		if (userId != other.userId)
-			return false;
 		return true;
+		
 	}
-	public Copy(int id, int bookId, int userId, int conditionId, boolean available, boolean active, Date dateRemoved) {
+	
+	
+	//FIELD CONSTRUCTOR
+	public Copy(int id, Book book, User user, int conditionId, boolean available, boolean active, Date dateRemoved) {
 		super();
 		this.id = id;
-		this.bookId = bookId;
-		this.userId = userId;
+		this.book = book;
+		this.user = user;
 		this.conditionId = conditionId;
 		this.available = available;
 		this.active = active;
 		this.dateRemoved = dateRemoved;
 	}
+	
+	//NO ARG
 	public Copy() {
 		super();
 	}
+	
+	
+	//TO STRING
 	@Override
 	public String toString() {
-		return "Copy [id=" + id + ", bookId=" + bookId + ", userId=" + userId + ", conditionId=" + conditionId
+		return "Copy [id=" + id + ", book=" + book.getTitle() + ", userID=" + user.getId() + ", conditionId=" + conditionId
 				+ ", available=" + available + ", active=" + active + ", dateRemoved=" + dateRemoved + "]";
 	}
 	
