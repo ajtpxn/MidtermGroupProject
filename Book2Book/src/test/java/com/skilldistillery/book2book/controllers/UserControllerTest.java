@@ -50,15 +50,15 @@ class UserControllerTest {
 		
 		user.setActive(true);
 		user.setFirstName("James");
-		user.setFirstName("Franco");
+		user.setLastName("Franco");
 		user.setPassword("alkejnvielskjoviwje");
 		user.setUserName("jamesfranco@franco.net");
 		
 		userContoller.addUser(user);
 		
+		actual = userDAO.findUser(6).getFirstName();
 		
-		
-		assertEquals("success", actual);
+		assertEquals("James", actual);
 	}
 
 }
