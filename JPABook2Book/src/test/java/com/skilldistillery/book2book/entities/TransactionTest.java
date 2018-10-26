@@ -1,5 +1,7 @@
 package com.skilldistillery.book2book.entities;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -41,7 +43,9 @@ class TransactionTest {
 	void test() {
 		//Need to add data to test
 		
-		Transaction t = em.find(Transaction.class, 1);
+		Transaction t = em.find(Transaction.class, 2);
+		int actual = t.getId();
+		assertEquals(2, actual);
 	}
 
 }

@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -23,8 +24,6 @@ public class Transaction {
 	private int id;
 	
 	
-	@Column(name="borrow_id")
-	private int borrowId;
 	
 	@Column(name="start_date")
 	private Date startDate;
@@ -40,26 +39,26 @@ public class Transaction {
 	@Column(name="date_created", updatable=false)
 	private Date dateCreated;
 	
-	@ManyToOne
-	@JoinColumn(name="copy_id")
-	private List<User> users;
+	@OneToMany(mappedBy="borrower")
+	private List<User> borrowers;
 	
 	
 	
 	
 	
+	public List<User> getBorrowers() {
+		return borrowers;
+	}
+	public void setBorrowers(List<User> borrowers) {
+		this.borrowers = borrowers;
+	}
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getBorrowId() {
-		return borrowId;
-	}
-	public void setBorrowId(int borrowId) {
-		this.borrowId = borrowId;
-	}
+
 	public Date getStartDate() {
 		return startDate;
 	}
@@ -85,66 +84,27 @@ public class Transaction {
 		this.dateCreated = dateCreated;
 	}
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + borrowId;
-		result = prime * result + copyId;
-		result = prime * result + ((dateCreated == null) ? 0 : dateCreated.hashCode());
-		result = prime * result + ((endDate == null) ? 0 : endDate.hashCode());
-		result = prime * result + id;
-		result = prime * result + ((startDate == null) ? 0 : startDate.hashCode());
-		return result;
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Transaction id: ").append(id).append(" startDate: ").append(startDate).append(" endDate: ")
+				.append(endDate).append(" copyId: ").append(copyId).append(" dateCreated: ").append(dateCreated)
+				.append(" borrowers: ").append(borrowers);
+		return builder.toString();
 	}
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Transaction other = (Transaction) obj;
-		if (borrowId != other.borrowId)
-			return false;
-		if (copyId != other.copyId)
-			return false;
-		if (dateCreated == null) {
-			if (other.dateCreated != null)
-				return false;
-		} else if (!dateCreated.equals(other.dateCreated))
-			return false;
-		if (endDate == null) {
-			if (other.endDate != null)
-				return false;
-		} else if (!endDate.equals(other.endDate))
-			return false;
-		if (id != other.id)
-			return false;
-		if (startDate == null) {
-			if (other.startDate != null)
-				return false;
-		} else if (!startDate.equals(other.startDate))
-			return false;
-		return true;
-	}
-	public Transaction(int id, int borrowId, Date startDate, Date endDate, int copyId, Date dateCreated) {
+	public Transaction(int id, Date startDate, Date endDate, int copyId, Date dateCreated, List<User> borrowers) {
 		super();
 		this.id = id;
-		this.borrowId = borrowId;
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.copyId = copyId;
 		this.dateCreated = dateCreated;
+		this.borrowers = borrowers;
 	}
 	public Transaction() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
-	@Override
-	public String toString() {
-		return "Transaction [id=" + id + ", borrowId=" + borrowId + ", startDate=" + startDate + ", endDate=" + endDate
-				+ ", copyId=" + copyId + ", dateCreated=" + dateCreated + "]";
-	}
-	
+
+
 	
 }

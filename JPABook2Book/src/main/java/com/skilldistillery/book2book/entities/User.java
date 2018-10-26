@@ -8,7 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -46,6 +48,10 @@ public class User {
 	
 	@OneToMany
 	private List<Transaction> transactions;
+	
+	@ManyToOne
+	@JoinColumn(name="borrow_id")
+	private User borrower;
 	
 	
 	public Date getDateCreated() {

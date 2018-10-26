@@ -21,6 +21,12 @@ public class UserController {
 	@Autowired
 	private static UserDAO userDAO;
 	
+	@RequestMapping(path="index.do")
+	public void index() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("index.jsp");
+	}
+	
 	public void addUser(User user) {
 		userDAO = new UserDAOimpl();
 		ModelAndView mv = new ModelAndView();
