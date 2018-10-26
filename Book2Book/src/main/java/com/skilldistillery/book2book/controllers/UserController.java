@@ -21,10 +21,6 @@ public class UserController {
 	@Autowired
 	private static UserDAO userDAO;
 	
-//	@Autowired
-//	private MessageHasher hasher;
-	
-	
 	public void addUser(User user) {
 		userDAO = new UserDAOimpl();
 		ModelAndView mv = new ModelAndView();
@@ -48,16 +44,25 @@ public class UserController {
 	public ModelAndView logIn(User formData, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		if(userIsLoggedIn(session)) {
-			mv.setViewName("redirect:index.do");
+			mv.setViewName("index.do");
 			return mv;
 		}
 		String password = formData.getPassword();
 		User inDAO = userDAO.getUserByCredentials(formData.getUserName(), password);
 		
+		if (inDAO != null) { // successful login
+			session.setAttribute("USER", inDAO);
+			mv.setViewName("account.do");
+		}
+		else {  // fail to login
+			mv.addObject("fail", true);
+			mv.setViewName("login.do");
+		}
+		
 		User user = new User();
 		mv.addObject("user", user);
 		
-		mv.setViewName("login");
+		mv.setViewName("login.do");
 		return mv;
 	}
 	
