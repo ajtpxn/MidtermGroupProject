@@ -25,6 +25,7 @@ public class BookDAOImpl implements BookDAO {
 		em = emf.createEntityManager();
 		em.getTransaction().begin();
 		em.persist(book);
+		em.flush();
 		em.getTransaction().commit();
 		em.close();
 	}
