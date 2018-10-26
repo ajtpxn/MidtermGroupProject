@@ -70,8 +70,8 @@ CREATE TABLE IF NOT EXISTS `book` (
   `content_rating` INT NOT NULL,
   `isbn` INT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_book_author1_idx` (`author_id` ASC),
-  INDEX `fk_book_content_rating1_idx` (`content_rating` ASC),
+  INDEX `fk_book_author1_idx` (`author_id` ASC) ,
+  INDEX `fk_book_content_rating1_idx` (`content_rating` ASC) ,
   CONSTRAINT `fk_book_author1`
     FOREIGN KEY (`author_id`)
     REFERENCES `author` (`id`)
@@ -93,8 +93,8 @@ DROP TABLE IF EXISTS `wishlist` ;
 CREATE TABLE IF NOT EXISTS `wishlist` (
   `user_id` INT NOT NULL,
   `book_id` INT NOT NULL,
-  INDEX `fk_wishlist_transaction_idx` (`user_id` ASC),
-  INDEX `fk_wishlist_book1_idx` (`book_id` ASC),
+  INDEX `fk_wishlist_transaction_idx` (`user_id` ASC) ,
+  INDEX `fk_wishlist_book1_idx` (`book_id` ASC) ,
   PRIMARY KEY (`user_id`, `book_id`),
   CONSTRAINT `fk_wishlist_transaction`
     FOREIGN KEY (`user_id`)
@@ -136,8 +136,8 @@ CREATE TABLE IF NOT EXISTS `copy` (
   `active` TINYINT NOT NULL,
   `condition_id` INT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_copy_user1_idx` (`user_id` ASC),
-  INDEX `fk_copy_book1_idx` (`book_id` ASC),
+  INDEX `fk_copy_user1_idx` (`user_id` ASC) ,
+  INDEX `fk_copy_book1_idx` (`book_id` ASC) ,
   INDEX `fk_copy_condition1_idx` (`condition_id` ASC),
   CONSTRAINT `fk_copy_user1`
     FOREIGN KEY (`user_id`)
@@ -152,8 +152,7 @@ CREATE TABLE IF NOT EXISTS `copy` (
   CONSTRAINT `fk_copy_condition1`
     FOREIGN KEY (`condition_id`)
     REFERENCES `condition` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    )
 ENGINE = InnoDB;
 
 
@@ -170,8 +169,8 @@ CREATE TABLE IF NOT EXISTS `transaction` (
   `borrow_id` INT NOT NULL,
   `copy_id` INT NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_transaction_user2_idx` (`borrow_id` ASC),
-  INDEX `fk_transaction_copy1_idx` (`copy_id` ASC),
+  INDEX `fk_transaction_user2_idx` (`borrow_id` ASC) ,
+  INDEX `fk_transaction_copy1_idx` (`copy_id` ASC) ,
   CONSTRAINT `fk_transaction_user2`
     FOREIGN KEY (`borrow_id`)
     REFERENCES `user` (`id`)
@@ -206,8 +205,8 @@ CREATE TABLE IF NOT EXISTS `book_genre` (
   `genre_id` INT NOT NULL,
   `book_id` INT NOT NULL,
   PRIMARY KEY (`genre_id`, `book_id`),
-  INDEX `fk_genre_has_book_book1_idx` (`book_id` ASC),
-  INDEX `fk_genre_has_book_genre1_idx` (`genre_id` ASC),
+  INDEX `fk_genre_has_book_book1_idx` (`book_id` ASC) ,
+  INDEX `fk_genre_has_book_genre1_idx` (`genre_id` ASC) ,
   CONSTRAINT `fk_genre_has_book_genre1`
     FOREIGN KEY (`genre_id`)
     REFERENCES `genre` (`id`)
@@ -233,8 +232,8 @@ CREATE TABLE IF NOT EXISTS `book_rating` (
   `book_id` INT NOT NULL,
   `user_id` INT NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_book_rating_book1_idx` (`book_id` ASC),
-  INDEX `fk_book_rating_user1_idx` (`user_id` ASC),
+  INDEX `fk_book_rating_book1_idx` (`book_id` ASC) ,
+  INDEX `fk_book_rating_user1_idx` (`user_id` ASC) ,
   CONSTRAINT `fk_book_rating_book1`
     FOREIGN KEY (`book_id`)
     REFERENCES `book` (`id`)
@@ -278,6 +277,7 @@ INSERT INTO `author` (`id`, `first_name`, `last_name`) VALUES (2, 'J.K. ', 'Rowl
 INSERT INTO `author` (`id`, `first_name`, `last_name`) VALUES (3, 'Kurt', 'Vonnegut');
 INSERT INTO `author` (`id`, `first_name`, `last_name`) VALUES (4, 'Robert K.', 'Massie');
 INSERT INTO `author` (`id`, `first_name`, `last_name`) VALUES (5, 'Edward', 'Gibbon');
+INSERT INTO `author` (`id`, `first_name`, `last_name`) VALUES (6, 'Bret Easton', 'Ellis');
 
 COMMIT;
 
@@ -305,6 +305,17 @@ INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`,
 INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`) VALUES (3, 'Slaughterhouse-Five', 'A man becomes unstuck in time and must live with the knowledge of his fate. ', 3, 3, NULL);
 INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`) VALUES (4, 'Catherine the Great: Portrait of a Woman', 'Autobiography of the former Empress of Russia.', 4, 3, NULL);
 INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`) VALUES (5, 'The History of the Decline and Fall of the Roman Empire', 'see title', 5, 3, NULL);
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`) VALUES (6, 'American Psycho', 'A wealthy yuppie goes on a bloody rampage in this critique of high society.', 6, 4, NULL);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `wishlist`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `bookdb`;
+INSERT INTO `wishlist` (`user_id`, `book_id`) VALUES (, DEFAULT);
 
 COMMIT;
 
@@ -315,6 +326,10 @@ COMMIT;
 START TRANSACTION;
 USE `bookdb`;
 INSERT INTO `condition` (`id`, `name`) VALUES (1, 'Brand New');
+INSERT INTO `condition` (`id`, `name`) VALUES (2, 'Well Kept');
+INSERT INTO `condition` (`id`, `name`) VALUES (3, 'Used');
+INSERT INTO `condition` (`id`, `name`) VALUES (4, 'Worn');
+INSERT INTO `condition` (`id`, `name`) VALUES (5, 'Last Legs');
 
 COMMIT;
 
@@ -324,7 +339,17 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `bookdb`;
-INSERT INTO `copy` (`id`, `available`, `date_added`, `date_removed`, `user_id`, `book_id`, `active`, `condition_id`) VALUES (1, 1, NULL, NULL, 1, 1, 1, 1);
+INSERT INTO `copy` (`id`, `available`, `date_added`, `date_removed`, `user_id`, `book_id`, `active`, `condition_id`) VALUES (1, 1, '01-01-2018', NULL, 1, 1, 1, 1);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `transaction`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `bookdb`;
+INSERT INTO `transaction` (`id`, `start_date`, `end_date`, `date_created`, `borrow_id`, `copy_id`) VALUES (1, '01-01-2017', '01-08-1017', '29-12-2016', 1, 4);
 
 COMMIT;
 
@@ -349,5 +374,15 @@ COMMIT;
 START TRANSACTION;
 USE `bookdb`;
 INSERT INTO `book_genre` (`genre_id`, `book_id`) VALUES (1, 1);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `book_rating`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `bookdb`;
+INSERT INTO `book_rating` (`id`, `rating`, `date_created`, `book_id`, `user_id`) VALUES (5, '5', '01-02-2017', 5, 2);
 
 COMMIT;

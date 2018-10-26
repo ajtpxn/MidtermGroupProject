@@ -30,6 +30,10 @@ public class Copy {
 	private boolean active;
 	@Temporal(TemporalType.TIMESTAMP)
 	@CreationTimestamp
+	@Column(name="date_added", updatable=false)
+	private Date dateAdded;
+	@Temporal(TemporalType.TIMESTAMP)
+	@CreationTimestamp
 	@Column(name="date_removed", updatable=false)
 	private Date dateRemoved;
 	
@@ -37,10 +41,8 @@ public class Copy {
 	@JoinColumn(name="user_id")
 	private User user;
 	
-	
-	
 	//GETTERS AND SETTERS
-	
+
 	public int getId() {
 		return id;
 	}
@@ -69,6 +71,12 @@ public class Copy {
 	public void setActive(boolean active) {
 		this.active = active;
 	}
+	public Date getDateAdded() {
+		return dateAdded;
+	}
+	public void setDateAdded(Date dateAdded) {
+		this.dateAdded = dateAdded;
+	}
 	public Date getDateRemoved() {
 		return dateRemoved;
 	}
@@ -88,15 +96,20 @@ public class Copy {
 		this.book = book;
 	}
 
-	//HASH CODE
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + (active ? 1231 : 1237);
+		result = prime * result + (available ? 1231 : 1237);
+		result = prime * result + ((book == null) ? 0 : book.hashCode());
+		result = prime * result + conditionId;
+		result = prime * result + ((dateAdded == null) ? 0 : dateAdded.hashCode());
+		result = prime * result + ((dateRemoved == null) ? 0 : dateRemoved.hashCode());
 		result = prime * result + id;
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		return result;
 	}
-	//EQUALS
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -106,15 +119,40 @@ public class Copy {
 		if (getClass() != obj.getClass())
 			return false;
 		Copy other = (Copy) obj;
+		if (active != other.active)
+			return false;
+		if (available != other.available)
+			return false;
+		if (book == null) {
+			if (other.book != null)
+				return false;
+		} else if (!book.equals(other.book))
+			return false;
+		if (conditionId != other.conditionId)
+			return false;
+		if (dateAdded == null) {
+			if (other.dateAdded != null)
+				return false;
+		} else if (!dateAdded.equals(other.dateAdded))
+			return false;
+		if (dateRemoved == null) {
+			if (other.dateRemoved != null)
+				return false;
+		} else if (!dateRemoved.equals(other.dateRemoved))
+			return false;
 		if (id != other.id)
 			return false;
+		if (user == null) {
+			if (other.user != null)
+				return false;
+		} else if (!user.equals(other.user))
+			return false;
 		return true;
-		
 	}
-	
-	
-	//FIELD CONSTRUCTOR
+
+
 	public Copy(int id, Book book, User user, int conditionId, boolean available, boolean active, Date dateRemoved) {
+
 		super();
 		this.id = id;
 		this.book = book;
@@ -122,6 +160,7 @@ public class Copy {
 		this.conditionId = conditionId;
 		this.available = available;
 		this.active = active;
+		this.dateAdded = dateAdded;
 		this.dateRemoved = dateRemoved;
 	}
 	
@@ -134,8 +173,9 @@ public class Copy {
 	//TO STRING
 	@Override
 	public String toString() {
-		return "Copy [id=" + id + ", book=" + book.getTitle() + ", userID=" + user.getId() + ", conditionId=" + conditionId
-				+ ", available=" + available + ", active=" + active + ", dateRemoved=" + dateRemoved + "]";
+		return "Copy [id=" + id + ", book=" + book + ", conditionId=" + conditionId + ", available=" + available
+				+ ", active=" + active + ", dateAdded=" + dateAdded + ", dateRemoved=" + dateRemoved + ", user=" + user
+				+ "]";
 	}
 	
 	
