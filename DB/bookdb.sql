@@ -110,11 +110,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `condition`
+-- Table `book_condition`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `condition` ;
+DROP TABLE IF EXISTS `book_condition` ;
 
-CREATE TABLE IF NOT EXISTS `condition` (
+CREATE TABLE IF NOT EXISTS `book_condition` (
   `id` INT NOT NULL,
   `name` VARCHAR(45) NULL,
   PRIMARY KEY (`id`))
@@ -151,18 +151,18 @@ CREATE TABLE IF NOT EXISTS `copy` (
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_copy_condition1`
     FOREIGN KEY (`condition_id`)
-    REFERENCES `condition` (`id`)
+    REFERENCES `book_condition` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `transaction`
+-- Table `book_transaction`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `transaction` ;
+DROP TABLE IF EXISTS `book_transaction` ;
 
-CREATE TABLE IF NOT EXISTS `transaction` (
+CREATE TABLE IF NOT EXISTS `book_transaction` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `start_date` DATETIME NOT NULL,
   `end_date` DATETIME NOT NULL,
@@ -314,15 +314,15 @@ COMMIT;
 
 
 -- -----------------------------------------------------
--- Data for table `condition`
+-- Data for table `book_condition`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `bookdb`;
-INSERT INTO `condition` (`id`, `name`) VALUES (1, 'Brand New');
-INSERT INTO `condition` (`id`, `name`) VALUES (2, 'Well Kept');
-INSERT INTO `condition` (`id`, `name`) VALUES (3, 'Used');
-INSERT INTO `condition` (`id`, `name`) VALUES (4, 'Worn');
-INSERT INTO `condition` (`id`, `name`) VALUES (5, 'Last Legs');
+INSERT INTO `book_condition` (`id`, `name`) VALUES (1, 'Brand New');
+INSERT INTO `book_condition` (`id`, `name`) VALUES (2, 'Well Kept');
+INSERT INTO `book_condition` (`id`, `name`) VALUES (3, 'Used');
+INSERT INTO `book_condition` (`id`, `name`) VALUES (4, 'Worn');
+INSERT INTO `book_condition` (`id`, `name`) VALUES (5, 'Last Legs');
 
 COMMIT;
 
@@ -341,13 +341,13 @@ COMMIT;
 
 
 -- -----------------------------------------------------
--- Data for table `transaction`
+-- Data for table `book_transaction`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `bookdb`;
-INSERT INTO `transaction` (`id`, `start_date`, `end_date`, `date_created`, `borrow_id`, `copy_id`) VALUES (1, '2011-01-01 00:00:00', '2011-01-07 00:00:00', '2010-12-25 00:00:00', 3, 2);
-INSERT INTO `transaction` (`id`, `start_date`, `end_date`, `date_created`, `borrow_id`, `copy_id`) VALUES (2, '2011-07-30 03:07:20', '2011-09-20 18:30:19', '2007-04-30 01:02:03', 1, 2);
-INSERT INTO `transaction` (`id`, `start_date`, `end_date`, `date_created`, `borrow_id`, `copy_id`) VALUES (3, '2018-10-25 05:20:13', '2018-11-11 11:11:11', '2018-10-01 04:03:02', 2, 3);
+INSERT INTO `book_transaction` (`id`, `start_date`, `end_date`, `date_created`, `borrow_id`, `copy_id`) VALUES (1, '2011-01-01 00:00:00', '2011-01-07 00:00:00', '2010-12-25 00:00:00', 3, 2);
+INSERT INTO `book_transaction` (`id`, `start_date`, `end_date`, `date_created`, `borrow_id`, `copy_id`) VALUES (2, '2011-07-30 03:07:20', '2011-09-20 18:30:19', '2007-04-30 01:02:03', 1, 2);
+INSERT INTO `book_transaction` (`id`, `start_date`, `end_date`, `date_created`, `borrow_id`, `copy_id`) VALUES (3, '2018-10-25 05:20:13', '2018-11-11 11:11:11', '2018-10-01 04:03:02', 2, 3);
 
 COMMIT;
 
