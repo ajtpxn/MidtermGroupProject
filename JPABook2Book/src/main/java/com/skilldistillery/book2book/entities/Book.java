@@ -22,8 +22,9 @@ public class Book {
 	private Author author;
 	
 	private String description;
+	
 	@Column(name="content_rating")
-	private int contentRatingId;
+	private Integer contentRatingId;
 	
 	public int getId() {
 		return id;

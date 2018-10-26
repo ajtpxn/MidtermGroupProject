@@ -72,9 +72,8 @@ public class Author {
 			return false;
 		return true;
 	}
-	public Author(int id, String firstName, String lastName) {
-		super();
-		this.id = id;
+	public Author( String firstName, String lastName) {
+		
 		this.firstName = firstName;
 		this.lastName = lastName;
 	}
