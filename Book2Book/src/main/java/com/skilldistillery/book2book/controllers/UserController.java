@@ -62,7 +62,6 @@ public class UserController {
 		User user = new User();
 		mv.addObject("user", user);
 		
-		mv.setViewName("login.do");
 		return mv;
 	}
 	
