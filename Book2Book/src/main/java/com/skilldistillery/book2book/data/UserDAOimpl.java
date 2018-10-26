@@ -1,6 +1,5 @@
 package com.skilldistillery.book2book.data;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -11,8 +10,8 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Component;
 
-import com.skilldistillery.book2book.entities.Book;
 import com.skilldistillery.book2book.entities.Copy;
+import com.skilldistillery.book2book.entities.Transaction;
 import com.skilldistillery.book2book.entities.User;
 
 @Transactional
@@ -77,20 +76,14 @@ public class UserDAOimpl implements UserDAO {
 			return false;
 		}
 
-		// LIST
-		// SQL SELECT STATMENT
-//		select book.title from book
-//		 join copy on copy.book_id = book.id
-//		 join user on copy.user_id = user.id
-//		where user.id = 1;
-		
+		// LIST ALL COPIES BY USER ID
 	}
 
 	@Override
 	public List<Copy> listAllUserBooks(int userId) {
 		em = emf.createEntityManager();
 
-		String queryStr = "SELECT c FROM Copy c  JOIN FETCH c.book where  c.user.id = :id";
+		String queryStr = "SELECT c FROM Copy c  JOIN FETCH c.book WHERE  c.user.id = :id";
 
 		List<Copy> userBookList = em.createQuery(queryStr, Copy.class).setParameter("id", userId).getResultList();
 		
@@ -100,9 +93,27 @@ public class UserDAOimpl implements UserDAO {
 
 			return userBookList;
 		}
+	
+//	select * from transaction 
+//	join copy on copy.id = transaction.copy_id
+//	join user on copy.user_id = user.id
+//	where user.id = 1;
+//	//LIST ALL TRANSACTION BY USER ID
+	public List<Transaction> listAllTransactionsByUserId( int userId){
+		
+		em = emf.createEntityManager();
+		
+		//String queryStr = "SELECT trans FROM Transaction trans JOIN FETCH trans."
+		
+		
+		
+		
+		return null;
+		
+	}
 
 	
-
+// FIND USER BY ID
 	@Override
 	public User findUser(int id) {
 		em = emf.createEntityManager();

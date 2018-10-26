@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -43,14 +44,9 @@ public class User {
 	@OneToMany(mappedBy="user")
 	private List<Copy> userCopies;
 	
+	@OneToMany
+	private List<Transaction> transactions;
 	
-	
-	
-//	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
-//	@JoinTable(name="film_actor",
-//	joinColumns=@JoinColumn(name="actor_id"),
-//	inverseJoinColumns=@JoinColumn(name="film_id"))
-//	private List<Film> films;
 	
 	public Date getDateCreated() {
 		return dateCreated;
