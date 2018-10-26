@@ -15,6 +15,8 @@ import com.skilldistillery.book2book.entities.User;
 
 class UserControllerTest {
 	
+	
+	
 	static UserController userContoller;
 	
 	static UserDAO userDAO;
@@ -56,7 +58,7 @@ class UserControllerTest {
 		
 		
 		
-		assertEquals("fail", actual);
+		assertEquals("success", actual);
 	}
 
 }

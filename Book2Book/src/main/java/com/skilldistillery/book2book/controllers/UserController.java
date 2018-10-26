@@ -1,6 +1,7 @@
 package com.skilldistillery.book2book.controllers;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.skilldistillery.book2book.data.UserDAO;
 import com.skilldistillery.book2book.data.UserDAOimpl;
@@ -11,7 +12,12 @@ public class UserController {
 	static UserDAO userDAO = new UserDAOimpl();
 	
 	public void addUser(User user) {
+		ModelAndView mv = new ModelAndView();
 		userDAO.creatUser(user);
+		mv.addObject(user);
+	}
+	
+	public void userIsLoggedIn(User user) {
 		
 	}
 
