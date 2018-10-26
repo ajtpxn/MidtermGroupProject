@@ -8,6 +8,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import com.skilldistillery.book2book.entities.Transaction;
+import com.skilldistillery.book2book.entities.User;
 
 public class TransactionDAOImpl implements TransactionDAO {
 
@@ -65,6 +66,19 @@ public class TransactionDAOImpl implements TransactionDAO {
 								  .getResultList();
 		
 		return result;
+	}
+
+	@Override
+	public Transaction updateTransaction(int id, Transaction updated) {
+		em = emf.createEntityManager();
+		em.getTransaction().begin();
+		Transaction managedTransaction = em.find(Transaction.class, "id");
+		managedTransaction.setBorrowId(updated.getBorrowId());
+		managedTransaction.setCopyId(updated.getCopyId());
+		managedTransaction.setDateCreated(updated.getDateCreated());
+		managedTransaction.setEndDate(updated.getDateCreated());
+		managedTransaction.setStartDate(updated.getStartDate());
+		return managedTransaction;
 	}
 
 }
