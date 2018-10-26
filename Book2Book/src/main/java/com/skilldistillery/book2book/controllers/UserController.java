@@ -46,27 +46,31 @@ public class UserController {
 		return status;
 	}
 	
-	@RequestMapping(path="login.do", method=RequestMethod.POST)
-	public ModelAndView logIn(User formData, HttpSession session) {
+	@RequestMapping(path="login.do"/*, method=RequestMethod.POST*/)
+	public ModelAndView logIn(/*User formData, HttpSession session*/) {
 		ModelAndView mv = new ModelAndView();
-		if(userIsLoggedIn(session)) {
-			mv.setViewName("index.do");
-			return mv;
-		}
-		String password = formData.getPassword();
-		User inDAO = userDAO.getUserByCredentials(formData.getUserName(), password);
 		
-		if (inDAO != null) { // successful login
-			session.setAttribute("USER", inDAO);
-			mv.setViewName("account.do");
-		}
-		else {  // fail to login
-			mv.addObject("fail", true);
-			mv.setViewName("login.do");
-		}
 		
-		User user = new User();
-		mv.addObject("user", user);
+//		if(userIsLoggedIn(session)) {
+//			mv.setViewName("index.do");
+//			return mv;
+//		}
+//		String password = formData.getPassword();
+//		User inDAO = userDAO.getUserByCredentials(formData.getUserName(), password);
+//		
+//		if (inDAO != null) { // successful login
+//			session.setAttribute("USER", inDAO);
+//			mv.setViewName("account.do");
+//		}
+//		else {  // fail to login
+//			mv.addObject("fail", true);
+//			mv.setViewName("login.do");
+//		}
+//		
+//		User user = new User();
+//		mv.addObject("user", user);
+		
+		mv.setViewName("account.jsp");
 		
 		return mv;
 	}

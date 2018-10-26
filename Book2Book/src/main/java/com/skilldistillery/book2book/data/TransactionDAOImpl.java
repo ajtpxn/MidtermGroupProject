@@ -1,15 +1,16 @@
 package com.skilldistillery.book2book.data;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import com.skilldistillery.book2book.entities.Transaction;
-import com.skilldistillery.book2book.entities.User;
+import org.springframework.stereotype.Repository;
 
+import com.skilldistillery.book2book.entities.Transaction;
+
+@Repository
 public class TransactionDAOImpl implements TransactionDAO {
 
 	private EntityManagerFactory emf;

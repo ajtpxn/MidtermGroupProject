@@ -3,8 +3,10 @@ package com.skilldistillery.book2book.entities;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="copy_condition")
 public class Condition {
 	@Id
 //	@GeneratedValue(strategy=GenerationType.IDENTITY)
