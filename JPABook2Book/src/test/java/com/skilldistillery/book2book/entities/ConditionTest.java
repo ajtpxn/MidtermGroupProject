@@ -42,7 +42,8 @@ class ConditionTest {
 	@Test
 	@DisplayName("link condition to DB")
 	void test() {
-		//FILL IN TEST
+		Condition c = em.find(Condition.class, 1);
+		assertEquals("Brand New", c.getCondition());
 	}
 
 }
