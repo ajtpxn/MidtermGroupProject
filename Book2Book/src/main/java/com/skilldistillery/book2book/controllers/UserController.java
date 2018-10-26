@@ -9,7 +9,9 @@ import com.skilldistillery.book2book.entities.User;
 
 @Controller
 public class UserController {
-	static UserDAO userDAO = new UserDAOimpl();
+	
+	private static UserDAO userDAO = new UserDAOimpl();
+	
 	
 	public void addUser(User user) {
 		ModelAndView mv = new ModelAndView();
@@ -18,7 +20,10 @@ public class UserController {
 	}
 	
 	public void userIsLoggedIn(User user) {
+		ModelAndView mv = new ModelAndView();
 		
+		userDAO.creatUser(user);
+		mv.addObject(user);
 	}
 
 }
