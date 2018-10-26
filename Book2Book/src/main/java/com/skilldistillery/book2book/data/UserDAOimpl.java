@@ -1,6 +1,5 @@
 package com.skilldistillery.book2book.data;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -11,7 +10,6 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Component;
 
-import com.skilldistillery.book2book.entities.Book;
 import com.skilldistillery.book2book.entities.Copy;
 import com.skilldistillery.book2book.entities.User;
 
@@ -77,12 +75,7 @@ public class UserDAOimpl implements UserDAO {
 			return false;
 		}
 
-		// LIST
-		// SQL SELECT STATMENT
-//		select book.title from book
-//		 join copy on copy.book_id = book.id
-//		 join user on copy.user_id = user.id
-//		where user.id = 1;
+		// LIST ALL COPIES BY USER ID
 		
 	}
 
@@ -102,7 +95,7 @@ public class UserDAOimpl implements UserDAO {
 		}
 
 	
-
+// FIND USER BY ID
 	@Override
 	public User findUser(int id) {
 		em = emf.createEntityManager();
