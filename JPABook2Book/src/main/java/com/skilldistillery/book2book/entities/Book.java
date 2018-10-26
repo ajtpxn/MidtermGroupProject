@@ -16,9 +16,11 @@ public class Book {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	private String title;
+	
 	@ManyToOne(cascade=CascadeType.PERSIST)
 	@JoinColumn(name="author_id")
 	private Author author;
+	
 	private String description;
 	@Column(name="content_rating")
 	private int contentRatingId;

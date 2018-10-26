@@ -32,14 +32,14 @@ public class BookDAOImpl implements BookDAO {
 	
 	
 	@Override
-	public void editBook(Author author, int contentRatingId, String description, String title, int id) {
+	public void editBook(Book bookWithNewValues, int idOfBookToBeEdited) {
 		em = emf.createEntityManager();
 		em.getTransaction().begin();
-		Book updatedBook = em.find(Book.class, id);
-		updatedBook.setAuthor(author);
-		updatedBook.setContentRatingId(contentRatingId);
-		updatedBook.setDescription(description);
-		updatedBook.setTitle(title);
+		Book updatedBook = em.find(Book.class, idOfBookToBeEdited);
+		updatedBook.setAuthor(bookWithNewValues.getAuthor());
+		updatedBook.setContentRatingId(bookWithNewValues.getContentRatingId());
+		updatedBook.setDescription(bookWithNewValues.getDescription());
+		updatedBook.setTitle(bookWithNewValues.getTitle());
 		em.getTransaction().commit();
 		em.close();
 	}
