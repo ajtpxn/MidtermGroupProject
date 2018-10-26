@@ -45,11 +45,19 @@ public class UserController {
 	}
 	
 	@RequestMapping(path="login.do", method=RequestMethod.POST)
-	public ModelAndView logIn(HttpSession session) {
+	public ModelAndView logIn(User formData, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		if(userIsLoggedIn(session)) {
-			
+			mv.setViewName("redirect:index.do");
+			return mv;
 		}
+		String password = formData.getPassword();
+		User inDAO = userDAO.getUserByCredentials(formData.getUserName(), password)
+		
+		User user = new User();
+		mv.addObject("user", user);
+		
+		mv.setViewName("login");
 		return mv;
 	}
 	
