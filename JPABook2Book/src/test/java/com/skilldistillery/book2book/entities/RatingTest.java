@@ -13,7 +13,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class ContentRatingTest {
+class RatingTest {
+
 	private  static EntityManagerFactory emf;
 	private  EntityManager em;
 
@@ -38,12 +39,12 @@ class ContentRatingTest {
 		
 	}
 
-
 	@Test
-	@DisplayName("test link with content rating and DB")
+	@DisplayName("testing link between transaction adn DB")
 	void test() {
-		ContentRating cr = em.find(ContentRating.class, 1);
-		assertEquals("Kids", cr.getContentName());
+		//Need to add data to test
+		
+		Rating r = em.find(Rating.class, 1);
 	}
 
 }

@@ -1,7 +1,5 @@
 package com.skilldistillery.book2book.entities;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -13,7 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class ContentRatingTest {
+class TransactionTest {
 	private  static EntityManagerFactory emf;
 	private  EntityManager em;
 
@@ -38,12 +36,12 @@ class ContentRatingTest {
 		
 	}
 
-
 	@Test
-	@DisplayName("test link with content rating and DB")
+	@DisplayName("testing link between transaction adn DB")
 	void test() {
-		ContentRating cr = em.find(ContentRating.class, 1);
-		assertEquals("Kids", cr.getContentName());
+		//Need to add data to test
+		
+		Transaction t = em.find(Transaction.class, 1);
 	}
 
 }
