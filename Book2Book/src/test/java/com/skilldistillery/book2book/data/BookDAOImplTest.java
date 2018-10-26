@@ -53,7 +53,6 @@ class BookDAOImplTest {
 		Author author = new Author();
 		author.setFirstName("Testauthor");
 		author.setLastName("McAuthorface");
-		
 		book.setAuthor(author);
 		book.setContentRatingId(1);
 		book.setDescription("Test Description");
@@ -64,7 +63,7 @@ class BookDAOImplTest {
 		List<Book> bookList = dao.searchForBook("test");
 		actual = bookList.get(0).getTitle();
 		System.out.println(actual);
-		assertEquals("Harry Potter and the Prisoner of Azkaban", actual);
+		assertEquals("Test Book Title", actual);
 	}
 	
 //	@Test
