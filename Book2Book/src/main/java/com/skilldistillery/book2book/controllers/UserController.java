@@ -29,13 +29,26 @@ public class UserController {
 		return mv;
 	}
 	
-	public void addUser(User user) {
-		System.out.println("addUser");
+	@RequestMapping(path="addUser.do")
+	public ModelAndView addUser() {
+		System.out.println("Add User");
+		ModelAndView mv = new ModelAndView();
+		User user = new User();
+		mv.addObject(user);
+		mv.setViewName("addUser.jsp");
+		return mv;
+	}
+	
+	@RequestMapping(path="returnUser.do", method=RequestMethod.POST)
+	public ModelAndView returnUser(User user) {
+		System.out.println("Return User");
 		userDAO = new UserDAOimpl();
 		ModelAndView mv = new ModelAndView();
 		userDAO.creatUser(user);
 		userDAO = null;
 		mv.addObject(user);
+		mv.setViewName("success.jsp");
+		return mv;
 	}
 	
 	@RequestMapping(path="status.do")

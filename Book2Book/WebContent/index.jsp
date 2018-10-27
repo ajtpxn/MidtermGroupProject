@@ -12,6 +12,10 @@
 <h2>Welcome to the site</h2>
 
 <p>
+<a href="addUser.do">add user</a>
+</p>
+
+<p>
 <a href="book.jsp">book</a>
 </p>
 
