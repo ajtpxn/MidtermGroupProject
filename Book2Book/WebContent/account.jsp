@@ -25,13 +25,17 @@
 <form action="getbooks.do" method="GET">
 <input type="submit" name="seeBook" value="See All Book" >
 </form>
+<p>
 Copies:
-
+</p>
 <c:forEach items="${copies}" var="copy"> 
-
+<p>
 Copy:
+</p>
 
+<p>
 ${copy}
+</p>
 
 </c:forEach>
 
