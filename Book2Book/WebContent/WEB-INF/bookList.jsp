@@ -12,10 +12,15 @@
 <body>
 
 <c:forEach items="${books}" var="book">
-	Title: ${book.title }<br>
-	<p> Author: ${book.author.firstName}  
-	 ${book.author.lastName}</p>
-	 <p>---------------------------------------</p>
+	Title: ${book.title }
+	${book.id}
+	<form action="copy.do" method="POST">
+	<input type="text" value="${book}" name="book">
+	<input type="text" value="${user}" name="user">
+<input type="submit" value="Add Book to List" class="btn btn-primary btn-lg">
+</form>
+	
+	 
 	</c:forEach>
 	
 <form action="home.do" method="GET">

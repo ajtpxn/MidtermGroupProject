@@ -2,14 +2,18 @@ package com.skilldistillery.book2book.controllers;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.skilldistillery.book2book.data.CopyDAO;
 import com.skilldistillery.book2book.entities.Copy;
+import com.skilldistillery.book2book.entities.User;
 
 @Controller
 public class CopyController {
@@ -18,19 +22,25 @@ public class CopyController {
 	private CopyDAO cDAO;
 
 	// Add a new copy to a user's library(tentative name)
-	@RequestMapping(path = "copy.jsp", method = RequestMethod.POST)
-	public String addNewCopy(Copy copy) {
+	@RequestMapping(path = "copy.do", method = RequestMethod.POST)
+	public String addNewCopy(Copy copy, HttpSession session) {
 
+		
+		User user = (User) session.getAttribute("USER");
+		
+		System.out.println(user);
 		cDAO.addCopy(copy);
 
 		return "redirect:addcopy.do";
 	}
 
 	@RequestMapping(path = "addcopy.do", method = RequestMethod.GET)
-	public ModelAndView addedCopy() {
+	public ModelAndView addedCopy( @RequestParam("copy.user.id")int userId) {
 		ModelAndView mv = new ModelAndView();
-
-		mv.setViewName("copy.jsp");
+		List<Copy> copies = cDAO.listUserCopies(userId);
+		
+		mv.addObject("copies", copies);
+		mv.setViewName("account.jsp");
 
 		return mv;
 	}
@@ -81,12 +91,10 @@ public class CopyController {
 		return mv;
 	}
 	// return a list of copies from a user
-	public ModelAndView getUserCopies() {
-		ModelAndView mv = new ModelAndView();
-		List<Copy> copies = cDAO.listUserCopies(1);
-		mv.addObject("copies", copies);
-		mv.setViewName("copy.jsp");
-		return mv;
+	public List<Copy> getUserCopies(int userId) {
+		List<Copy> copies = cDAO.listUserCopies(userId);
+		
+		return copies;
 	}
 	
 	
