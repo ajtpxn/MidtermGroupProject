@@ -62,6 +62,15 @@ public class CopyController {
 		mv.setViewName("copy.jsp");
 		return mv;
 	}
+	
+	// return a list of all copies
+	public ModelAndView getListCopies() {
+		ModelAndView mv = new ModelAndView();
+		List<Copy> copies = cDAO.listCopies();
+		mv.addObject("copies", copies);
+		mv.setViewName("copytest.jsp");
+		return mv;
+	}
 
 	// return a list of copies of a particular book
 	public ModelAndView getBookCopies() {

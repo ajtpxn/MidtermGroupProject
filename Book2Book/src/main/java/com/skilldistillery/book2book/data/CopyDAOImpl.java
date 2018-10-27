@@ -54,13 +54,12 @@ public class CopyDAOImpl implements CopyDAO {
 
 
 	@Override
-	public List<Copy> listCopies(int id) {
+	public List<Copy> listCopies() {
 		em = emf.createEntityManager();
 		List<Copy> copyList = new ArrayList<>();
 		em.getTransaction().begin();
-		String query = "select c from Copy c where concat(c.id, c.available, c.date_added, c.date_removed, c.user_id, c.book_id, c.active) like :search";
-		
-		copyList = em.createQuery(query, Copy.class).setParameter("id", "%"+id+"%").getResultList();
+		String query = "select c from Copy c ";
+		copyList = em.createQuery(query, Copy.class).getResultList();
 		em.getTransaction().commit();
 		em.close();
 		return copyList;
