@@ -7,12 +7,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Home</title>
+<title>Book</title>
 </head>
 <body>
+<%@ include file="nav.jsp"%>
 
-
-	<h2>Welcome to the site</h2>
+	<h2>Book</h2>
 
 
 	<h3>Add a new Book</h3>

@@ -9,6 +9,7 @@
 <title>Home</title>
 </head>
 <body>
+<%@ include file="nav.jsp"%>
 
 	<h2>Transaction Details</h2>
 
