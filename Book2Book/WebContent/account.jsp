@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,7 +15,7 @@
 
 
 
-<h2>Your Details</h2>
+<h2>Your Detail</h2>
 <ul>
 	<li><c:out value="${sessionScope.USER.userName }"/></li>
 	<li><c:out value="${USER.firstName }"/></li>
@@ -24,9 +26,13 @@
 <input type="submit" name="seeBook" value="See All Book" >
 </form>
 
+Copies:
+
 <c:forEach items="${copies}" var="copy"> 
 
-${copy.book.title}
+Copy:
+
+
 
 </c:forEach>
 

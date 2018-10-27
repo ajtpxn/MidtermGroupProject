@@ -9,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
+import javax.swing.plaf.synth.SynthSeparatorUI;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
@@ -92,6 +93,8 @@ public class CopyDAOImpl implements CopyDAO {
 		String query = "SELECT c FROM Copy c";
 		copyList = em.createQuery(query, Copy.class).getResultList();
 		em.close();
+		System.out.println("About to return");
+		System.out.println(copyList);
 		return copyList;
 	}
 	

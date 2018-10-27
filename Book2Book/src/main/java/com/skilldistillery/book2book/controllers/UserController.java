@@ -131,8 +131,11 @@ public class UserController {
 			  int userId = user.getId();
 			  System.out.println("User Id: " + userId);
 			  List<Copy> copies = copyDAO.listUserCopies(userId);
+			  System.out.println("back from copies");
+			  System.out.println(copies);
 			  mv.addObject(copies);
 			  mv.setViewName("account.jsp");
+			  System.out.println("copies added to mv and account.jsp set");
 			  return mv;
 		  }
 		  else {
