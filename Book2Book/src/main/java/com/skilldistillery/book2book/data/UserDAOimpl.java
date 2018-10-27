@@ -140,7 +140,6 @@ public class UserDAOimpl implements UserDAO {
 		List<User> userList = new ArrayList<User>();
 		String query = "SELECT u FROM User u";
 		userList = em.createQuery(query, User.class).getResultList();
-		System.out.println(userList);
 		User returnUser = null;
 		for (User user : userList) {
 			if (user.getUserName().equals(userName) && user.getPassword().equals(password)) {

@@ -18,7 +18,7 @@
 <c:when test="${fail}">Login Failed</c:when>
 </c:choose>
 
-<form action="login.do" method="post">
+<form action="login.do" method="post" modelAttribute="user">
 
 
 <label for="userName">Username: </label>

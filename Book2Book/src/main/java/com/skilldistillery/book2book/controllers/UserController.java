@@ -55,35 +55,35 @@ public class UserController {
 	public ModelAndView loginFromHome(HttpSession session) {
 		System.out.println("loginFromHome");
 	    ModelAndView mv = new ModelAndView();
-	    
 	    if (userIsLoggedIn(session)) {
 	    	mv.setViewName("index.do");
 	    	return mv;
 	    }
-	    
 	    User user = new User();
 	    mv.addObject("user", user);
-	    
 	    mv.setViewName("login.jsp");
-	    
 	    return mv;
 	}
 	
 	@RequestMapping(path="login.do", method=RequestMethod.POST)
-	public ModelAndView logIn(HttpSession session) {
+	public ModelAndView logIn(User formUser, HttpSession session) {
 		System.out.println("logIn");
 		ModelAndView mv = new ModelAndView();
 		userDAO = new UserDAOimpl();
 		if(userIsLoggedIn(session)) {
-			System.out.println("User is logged in******");
-			mv.setViewName("fail.jsp");
+			System.out.println("*****sessionPositive******");
+			mv.setViewName("index.do");
 			return mv;
 		}
-		User validUser = userDAO.getUserByCredentials("usermcuserface", "imauser");
+		String username = formUser.getUserName();
+		String password = formUser.getPassword();
+		System.out.println("formUser.getUserName(): "+formUser.getUserName());
+		System.out.println("formUser.getPassword(): "+formUser.getPassword());
+		User validUser = userDAO.getUserByCredentials(username, password);
 		
 		if (validUser != null) {
 			session.setAttribute("USER", validUser);
-			mv.setViewName("success.jsp");
+			mv.setViewName("account.jsp");
 		}
 		else {
 			mv.setViewName("fail.jsp");
@@ -91,9 +91,24 @@ public class UserController {
 		userDAO = null;
 		return mv;
 	}
-	public void logOut() {
+	
+	@RequestMapping(path="logout.do")
+	public String logOut(HttpSession session) {
 		System.out.println("logOut");
+		session.invalidate();
+		return "index.do";
 		
 	}
+	
+	  @RequestMapping(path="account.do")
+	  public String accountIndex(HttpSession session) {
+		  System.out.println("account page");
+	    if(userIsLoggedIn(session)) {
+	      return "account.jsp";
+	    }
+	    else {
+	      return "login.do";
+	    }
+	  }
 
 }
