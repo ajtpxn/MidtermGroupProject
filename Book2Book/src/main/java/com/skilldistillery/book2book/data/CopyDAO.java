@@ -12,7 +12,7 @@ public interface CopyDAO {
 
 	void editCopy(Copy copy, int id);
 	
-	List<Copy> listCopies(int id);
+	List<Copy> listCopies();
 
 	void deleteCopy(int id);
 	
