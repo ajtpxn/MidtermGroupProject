@@ -1,5 +1,7 @@
 package com.skilldistillery.book2book.controllers;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +12,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.skilldistillery.book2book.data.CopyDAO;
+import com.skilldistillery.book2book.data.CopyDAOImpl;
 import com.skilldistillery.book2book.data.UserDAO;
 import com.skilldistillery.book2book.data.UserDAOimpl;
+import com.skilldistillery.book2book.entities.Copy;
 import com.skilldistillery.book2book.entities.User;
 
 @Controller
@@ -20,6 +25,9 @@ public class UserController {
 	
 	@Autowired
 	private static UserDAO userDAO;
+	
+	@Autowired
+	private static CopyDAO copyDAO;
 	
 	@RequestMapping(path="index.do")
 	public ModelAndView index() {
@@ -114,14 +122,23 @@ public class UserController {
 	}
 	
 	  @RequestMapping(path="account.do")
-	  public String accountIndex(HttpSession session) {
+	  public ModelAndView accountIndex(HttpSession session) {
+		  copyDAO = new CopyDAOImpl();
 		  System.out.println("account page");
-	    if(userIsLoggedIn(session)) {
-	      return "account.jsp";
-	    }
-	    else {
-	      return "login.do";
-	    }
+		  ModelAndView mv = new ModelAndView();
+		  if(userIsLoggedIn(session)) {
+			  User user = (User) session.getAttribute("USER");
+			  int userId = user.getId();
+			  System.out.println("User Id: " + userId);
+			  List<Copy> copies = copyDAO.listUserCopies(userId);
+			  mv.addObject(copies);
+			  mv.setViewName("account.jsp");
+			  return mv;
+		  }
+		  else {
+			  mv.setViewName("login.do");
+			  return mv;
+		  }
 	  }
 
 }

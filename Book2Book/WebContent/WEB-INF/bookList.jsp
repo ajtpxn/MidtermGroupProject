@@ -14,9 +14,9 @@
 <c:forEach items="${books}" var="book">
 	Title: ${book.title }
 	${book.id}
-	<form action="copy.do" method="POST">
-	<input type="text" value="${book}" name="book">
-	<input type="text" value="${user}" name="user">
+	<form action="copy.do" method="POST" modelAttribute="book">
+	<input type="hidden" value="${book.id}" name="bookId">
+	<%-- <input type="hidden" value="${user.id}" name="userId"> --%>
 <input type="submit" value="Add Book to List" class="btn btn-primary btn-lg">
 </form>
 	

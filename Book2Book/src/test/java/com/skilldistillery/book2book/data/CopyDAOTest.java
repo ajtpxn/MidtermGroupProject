@@ -14,6 +14,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import com.skilldistillery.book2book.entities.Copy;
@@ -43,20 +44,20 @@ public class CopyDAOTest {
 		em.close();
 	}
 	
-	@Test
-	public void test_Copy_Add() throws ParseException {
-		User user = new User();
-		Copy copy = new Copy();
-		copy.setAvailable(true);
-		copy.setUser(user);
-		copy.setActive(true);
-		copy.setConditionId(1);
-		dao.addCopy(copy);
-		System.out.println(copy);
-		Copy returnedCopy = em.find(Copy.class, copy.getId());
-		assertEquals(1, returnedCopy.getUser());
-
-	}
+//	@Test
+//	public void test_Copy_Add() throws ParseException {
+//		User user = new User();
+//		Copy copy = new Copy();
+//		copy.setAvailable(true);
+//		copy.setUser(user);
+//		copy.setActive(true);
+//		copy.setConditionId(1);
+//		dao.addCopy(copy);
+//		System.out.println(copy);
+//		Copy returnedCopy = em.find(Copy.class, copy.getId());
+//		assertEquals(1, returnedCopy.getUser());
+//
+//	}
 	
 //	@Test
 //	 void test_Copy_Update() {
@@ -79,4 +80,17 @@ public class CopyDAOTest {
 //		System.out.println(actorDAO.destroy(id));
 //		return true;
 //	}
+	
+	@Test
+	@DisplayName("Test user dao listUserCopies")
+	void test02() {
+		List<Copy> copies = dao.listUserCopies(11);
+		System.out.println(copies);
+		int actual = copies.get(0).getConditionId();
+		assertEquals(1, actual);
+	}
+	
+	
+	
+	
 }

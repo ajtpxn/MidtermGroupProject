@@ -50,9 +50,6 @@ public class Copy {
 	public Book getBook() {
 		return book;
 	}
-	public void setBookId(Book book) {
-		this.book= book;
-	}
 	public int getConditionId() {
 		return conditionId;
 	}

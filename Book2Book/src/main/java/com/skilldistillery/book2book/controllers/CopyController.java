@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.skilldistillery.book2book.data.BookDAO;
 import com.skilldistillery.book2book.data.CopyDAO;
+import com.skilldistillery.book2book.entities.Book;
 import com.skilldistillery.book2book.entities.Copy;
 import com.skilldistillery.book2book.entities.User;
 
@@ -20,30 +22,39 @@ public class CopyController {
 
 	@Autowired
 	private CopyDAO cDAO;
+	
+	@Autowired
+	private BookDAO bDAO;
 
 	// Add a new copy to a user's library(tentative name)
 	@RequestMapping(path = "copy.do", method = RequestMethod.POST)
-	public String addNewCopy(Copy copy, HttpSession session) {
-
+	public String addNewCopy(@RequestParam("bookId")int bookId, HttpSession session) {
 		
+		Book book = bDAO.getBookById(bookId);
 		User user = (User) session.getAttribute("USER");
-		
-		System.out.println(user);
+		System.out.println("form book: " + book);
+		System.out.println("form user: " + user);
+		Copy copy = new Copy();
+		copy.setActive(true);
+		copy.setAvailable(true);
+		copy.setBook(book);
+		copy.setUser(user);
+		copy.setConditionId(1);
+		System.out.println(copy);
 		cDAO.addCopy(copy);
 
-		return "redirect:addcopy.do";
+		return "redirect:account.do";
 	}
 
-	@RequestMapping(path = "addcopy.do", method = RequestMethod.GET)
-	public ModelAndView addedCopy( @RequestParam("copy.user.id")int userId) {
-		ModelAndView mv = new ModelAndView();
-		List<Copy> copies = cDAO.listUserCopies(userId);
-		
-		mv.addObject("copies", copies);
-		mv.setViewName("account.jsp");
-
-		return mv;
-	}
+//	@RequestMapping(path = "addcopy.do", method = RequestMethod.GET)
+//	public ModelAndView addedCopy(HttpSession session) {
+//		ModelAndView mv = new ModelAndView();
+//		User user = (User) session.getAttribute("USER");
+//		List<Copy> copies = cDAO.listUserCopies(user.getId());
+//		mv.addObject("copies", copies);
+//		mv.setViewName("account.jsp");
+//		return mv;
+//	}
 
 	// edit a user's copy
 	@RequestMapping(path = "editCopy.do", method = RequestMethod.POST)
@@ -89,12 +100,6 @@ public class CopyController {
 		mv.addObject("copies", copies);
 		mv.setViewName("copy.jsp");
 		return mv;
-	}
-	// return a list of copies from a user
-	public List<Copy> getUserCopies(int userId) {
-		List<Copy> copies = cDAO.listUserCopies(userId);
-		
-		return copies;
 	}
 	
 	

@@ -83,5 +83,18 @@ public class BookDAOImpl implements BookDAO {
 		
 		
 	}
+	
+	@Override
+	public Book getBookById(int id) {
+		
+		em = emf.createEntityManager();
+		
+		Book book = em.find(Book.class, id);
+		
+		em.close();
+		return book;
+		
+		
+	}
 
 }
