@@ -7,6 +7,7 @@
 <title>Copies</title>
 </head>
 <body>
+<%@ include file="nav.jsp"%>
 	<c:choose>
 		<c:when test="${not empty copy }">
 			<ul>
