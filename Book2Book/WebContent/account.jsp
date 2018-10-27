@@ -11,9 +11,14 @@
 <%@ include file="nav.jsp" %>
 <h2>Account</h2>
 
-<p>
-test
-</p>
+
+
+<h2>Your Details</h2>
+<ul>
+	<li><c:out value="${sessionScope.USER.userName }"/></li>
+	<li><c:out value="${USER.firstName }"/></li>
+	<li><c:out value="${USER.lastName }"/></li>
+</ul>
 
 </body>
 </html>

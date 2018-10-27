@@ -36,13 +36,13 @@ public class CopyController {
 	}
 
 	// edit a user's copy
-	@RequestMapping(path = "copy.jsp", method = RequestMethod.POST)
+	@RequestMapping(path = "editCopy.do", method = RequestMethod.POST)
 	public String editCopy(Copy updatedCopy, int prevCopyId) {
 		cDAO.editCopy(updatedCopy, prevCopyId);
 		return "redirect:editCopy.do";
 	}
 
-	@RequestMapping(path = "editCopy.do", method = RequestMethod.GET)
+	@RequestMapping(path = "editedCopy.do", method = RequestMethod.GET)
 	public ModelAndView editedCopy() {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("copy.jsp");
@@ -50,13 +50,13 @@ public class CopyController {
 	}
 
 	// soft delete a user's copy (flag as active=false)
-	@RequestMapping(path = "copy.jsp", method = RequestMethod.POST)
+	@RequestMapping(path = "deleteCopy.do", method = RequestMethod.POST)
 	public boolean deleteCopy(int id) {
 		cDAO.deleteCopy(id);
 		return false;
 	}
 
-	@RequestMapping(path = "copy.jsp", method = RequestMethod.GET)
+	@RequestMapping(path = "deletedCopy.do", method = RequestMethod.GET)
 	public ModelAndView deletedCopy() {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("copy.jsp");

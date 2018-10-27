@@ -23,91 +23,105 @@ public class UserController {
 	
 	@RequestMapping(path="index.do")
 	public ModelAndView index() {
+		System.out.println("index");
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("index.jsp");
 		return mv;
 	}
 	
-	public void addUser(User user) {
+	@RequestMapping(path="addUser.do")
+	public ModelAndView addUser() {
+		System.out.println("Add User");
+		ModelAndView mv = new ModelAndView();
+		User user = new User();
+		mv.addObject(user);
+		mv.setViewName("addUser.jsp");
+		return mv;
+	}
+	
+	@RequestMapping(path="returnUser.do", method=RequestMethod.POST)
+	public ModelAndView returnUser(User user) {
+		System.out.println("Return User");
 		userDAO = new UserDAOimpl();
 		ModelAndView mv = new ModelAndView();
 		userDAO.creatUser(user);
 		userDAO = null;
 		mv.addObject(user);
+		mv.setViewName("success.jsp");
+		return mv;
 	}
 	
 	@RequestMapping(path="status.do")
 	@ModelAttribute("userStatus")
 	public boolean userIsLoggedIn(HttpSession session) {
+		System.out.println("userIsLoggedIn");
 		boolean status = false;
 		User user = (User) session.getAttribute("USER");
 		if (user != null) {
 			status = true;
 		}
+		System.out.println(status);
 		return status;
 	}
 	
 	@RequestMapping(path="login.do", method=RequestMethod.GET)
 	public ModelAndView loginFromHome(HttpSession session) {
+		System.out.println("loginFromHome");
 	    ModelAndView mv = new ModelAndView();
-	    
 	    if (userIsLoggedIn(session)) {
 	    	mv.setViewName("index.do");
 	    	return mv;
 	    }
-	    
 	    User user = new User();
 	    mv.addObject("user", user);
-	    
 	    mv.setViewName("login.jsp");
-	    
 	    return mv;
 	}
 	
 	@RequestMapping(path="login.do", method=RequestMethod.POST)
-	public ModelAndView logIn() {
+	public ModelAndView logIn(User formUser, HttpSession session) {
+		System.out.println("logIn");
 		ModelAndView mv = new ModelAndView();
-		
 		userDAO = new UserDAOimpl();
-		
-		
-		/*if(userIsLoggedIn(session)) {
+		if(userIsLoggedIn(session)) {
+			System.out.println("*****sessionPositive******");
 			mv.setViewName("index.do");
 			return mv;
 		}
-		User inDAO = userDAO.getUserByCredentials("usermcuserface", "imauser");
-		
-		if (inDAO != null) { // successful login
-			session.setAttribute("USER", inDAO);
-			mv.setViewName("account.do");
-		}
-		else {  // fail to login
-			mv.addObject("fail", true);
-			mv.setViewName("login.do");
-		}
-		
-		User user = new User();
-		mv.addObject("user", user);*/
-		
-		
-		
-		
-		
-		User validUser = userDAO.getUserByCredentials("usermcuserface", "imauser");
+		String username = formUser.getUserName();
+		String password = formUser.getPassword();
+		System.out.println("formUser.getUserName(): "+formUser.getUserName());
+		System.out.println("formUser.getPassword(): "+formUser.getPassword());
+		User validUser = userDAO.getUserByCredentials(username, password);
 		
 		if (validUser != null) {
-			mv.setViewName("success.jsp");
+			session.setAttribute("USER", validUser);
+			mv.setViewName("account.jsp");
 		}
 		else {
 			mv.setViewName("fail.jsp");
 		}
-		
 		userDAO = null;
 		return mv;
 	}
 	
-	public void logOut() {
+	@RequestMapping(path="logout.do")
+	public String logOut(HttpSession session) {
+		System.out.println("logOut");
+		session.invalidate();
+		return "index.do";
 		
 	}
+	
+	  @RequestMapping(path="account.do")
+	  public String accountIndex(HttpSession session) {
+		  System.out.println("account page");
+	    if(userIsLoggedIn(session)) {
+	      return "account.jsp";
+	    }
+	    else {
+	      return "login.do";
+	    }
+	  }
 
 }

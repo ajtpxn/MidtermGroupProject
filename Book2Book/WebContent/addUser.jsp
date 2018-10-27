@@ -5,21 +5,25 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Login</title>
+<title>Add User</title>
 </head>
 <body>
 <%--Edit the file nav.jsp to change nav links --%>
 <%@ include file="nav.jsp" %>
-<h2>Login</h2>
+<h2>Add User</h2>
 
-<c:if test="${fail}">Login Failed</c:if>
+<form action="returnUser.do" method="post" modelAttribute="user">
 
-<c:choose>
-<c:when test="${fail}">Login Failed</c:when>
-</c:choose>
 
-<form action="login.do" method="post" modelAttribute="user">
+<label for="firstName">First Name: </label>
+<input type="text" name="firstName" />
 
+<br>
+
+<label for="lastName">Last Name: </label>
+<input type="text" name="lastName" />
+
+<br>
 
 <label for="userName">Username: </label>
 <input type="text" name="userName" />

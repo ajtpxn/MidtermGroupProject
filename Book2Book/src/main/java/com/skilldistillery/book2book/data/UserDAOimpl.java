@@ -138,8 +138,8 @@ public class UserDAOimpl implements UserDAO {
 	public User getUserByCredentials(String userName, String password) {
 		em = emf.createEntityManager();
 		List<User> userList = new ArrayList<User>();
-		userList = em.createQuery("SELECT u FROM User u", User.class).getResultList();
-		System.out.println(userList);
+		String query = "SELECT u FROM User u";
+		userList = em.createQuery(query, User.class).getResultList();
 		User returnUser = null;
 		for (User user : userList) {
 			if (user.getUserName().equals(userName) && user.getPassword().equals(password)) {

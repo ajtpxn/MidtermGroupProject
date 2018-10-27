@@ -9,10 +9,10 @@
 <body>
 <%--Edit the file nav.jsp to change nav links --%>
 <%@ include file="nav.jsp" %>
-<h2>Success</h2>
+<h2>Success!</h2>
 
 <p>
-test
+Any questions?
 </p>
 
 </body>
