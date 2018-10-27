@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,12 +9,22 @@
 </head>
 <body>
 <%--Edit the file nav.jsp to change nav links --%>
-<%@ include file="nav.jsp" %>
+<nav>
+	
+	<c:choose>
+	
+		<c:when test="${not empty USER }">
+		<a href="account.do">Account</a> |
+		<a href="logout.do">Log Out</a>
+		</c:when>
+		<c:otherwise><a href="login.do">Log In</a> | <a href="addUser.do">Sign Up</a>
+		</c:otherwise>
+		
+	</c:choose>
+</nav>
 <h2>Welcome to the site</h2>
 
-<p>
-<a href="addUser.do">add user</a>
-</p>
+to be deleted
 
 <p>
 <a href="book.jsp">book</a>

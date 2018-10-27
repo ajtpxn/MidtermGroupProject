@@ -2,6 +2,8 @@ package com.skilldistillery.book2book.controllers;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +16,7 @@ import com.skilldistillery.book2book.data.CopyDAO;
 import com.skilldistillery.book2book.data.TransactionDAO;
 import com.skilldistillery.book2book.data.UserDAO;
 import com.skilldistillery.book2book.entities.Book;
+import com.skilldistillery.book2book.entities.User;
 
 @Controller
 public class BookController {
@@ -81,6 +84,8 @@ public class BookController {
 	public String returnHome() {
 		return "book.jsp";
 	}
+	
+	
 	//SEARCH BOOK BY TITLE MOVE TO EDIT PAGE
 	@RequestMapping(path="editbook.do", method=RequestMethod.GET)
 	public ModelAndView findBookByName(String title) {
@@ -89,6 +94,22 @@ public class BookController {
 		Book book = bd.searchForBookByTitle(title);
 		mv.addObject("book", book);
 		mv.setViewName("/WEB-INF/bookedit.jsp");
+	
+		
+		return mv;
+	}
+	
+	//LIST ALL BOOKS 
+	@RequestMapping(path="getbooks.do", method=RequestMethod.GET)
+	public ModelAndView listAllBooks(HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		
+		List<Book> books = bd.listAllBooks();
+		
+		mv.addObject("books", books);
+		User user = (User) session.getAttribute("USER");
+		mv.addObject("user", user);
+		mv.setViewName("/WEB-INF/bookList.jsp");
 	
 		
 		return mv;
