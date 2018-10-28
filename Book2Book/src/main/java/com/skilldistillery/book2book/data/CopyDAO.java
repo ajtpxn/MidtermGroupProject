@@ -20,4 +20,6 @@ public interface CopyDAO {
 	
 	List<Copy> listUserCopies(int userId);
 
+	Copy getCopy(int id);
+
 }

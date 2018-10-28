@@ -1,7 +1,5 @@
 package com.skilldistillery.book2book.data;
 
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.queryParam;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +7,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
-import javax.swing.plaf.synth.SynthSeparatorUI;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
@@ -28,6 +25,16 @@ public class CopyDAOImpl implements CopyDAO {
 	
 	
 	@Override
+	public Copy getCopy(int id) {
+		em = emf.createEntityManager();
+		Copy copy = em.find(Copy.class, id);
+		em.close();
+		return copy;
+	}
+	
+	
+	
+	@Override
 	public void addCopy(Copy copy) {
 		em = emf.createEntityManager();
 		em.getTransaction().begin();
@@ -40,14 +47,15 @@ public class CopyDAOImpl implements CopyDAO {
 	
 	@Override
 	public void editCopy(Copy copy, int id) {
-//		em.getTransaction().begin();
+		em = emf.createEntityManager();
+		em.getTransaction().begin();
 		Copy updatedCopy = em.find(Copy.class, id);
 		updatedCopy.setConditionId(copy.getConditionId());
 		updatedCopy.setAvailable(copy.isAvailable());
 		updatedCopy.setActive(copy.isActive());
-//		em.getTransaction().commit();
 		em.flush();
-//		em.close();
+		em.getTransaction().commit();
+		em.close();
 	}
 	
 	
@@ -64,6 +72,7 @@ public class CopyDAOImpl implements CopyDAO {
 
 	@Override
 	public List<Copy> listCopies() {
+		em = emf.createEntityManager();
 		List<Copy> copyList = new ArrayList<>();
 		em.getTransaction().begin();
 		String query = "select c from Copy c ";
@@ -75,6 +84,7 @@ public class CopyDAOImpl implements CopyDAO {
 	
 	@Override
 	public List<Copy> listBookCopies(int bookId){
+		em = emf.createEntityManager();
 		List<Copy> copyList = new ArrayList<>();
 		em.getTransaction().begin();
 		String query = "SELECT c FROM Copy c WHERE bookId = :bookId";

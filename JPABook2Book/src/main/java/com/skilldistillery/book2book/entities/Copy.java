@@ -16,6 +16,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 public class Copy {
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
@@ -23,9 +24,11 @@ public class Copy {
 	@ManyToOne
 	@JoinColumn(name="book_id")
 	private Book book;
-
+	
 	@Column(name="condition_id")
 	private int conditionId;
+	
+	
 	private boolean available;
 	private boolean active;
 	@Temporal(TemporalType.TIMESTAMP)
@@ -40,57 +43,65 @@ public class Copy {
 	@ManyToOne
 	@JoinColumn(name="user_id")
 	private User user;
-	
-	//GETTERS AND SETTERS
 
-	public int getId() {
-		return id;
-	}
-	
 	public Book getBook() {
 		return book;
-	}
-	public int getConditionId() {
-		return conditionId;
-	}
-	public void setConditionId(int conditionId) {
-		this.conditionId = conditionId;
-	}
-	public boolean isAvailable() {
-		return available;
-	}
-	public void setAvailable(boolean available) {
-		this.available = available;
-	}
-	public boolean isActive() {
-		return active;
-	}
-	public void setActive(boolean active) {
-		this.active = active;
-	}
-	public Date getDateAdded() {
-		return dateAdded;
-	}
-	public void setDateAdded(Date dateAdded) {
-		this.dateAdded = dateAdded;
-	}
-	public Date getDateRemoved() {
-		return dateRemoved;
-	}
-	public void setDateRemoved(Date dateRemoved) {
-		this.dateRemoved = dateRemoved;
-	}
-	
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User users) {
-		this.user = users;
 	}
 
 	public void setBook(Book book) {
 		this.book = book;
+	}
+
+	public int getConditionId() {
+		return conditionId;
+	}
+
+	public void setConditionId(int conditionId) {
+		this.conditionId = conditionId;
+	}
+
+	public boolean isAvailable() {
+		return available;
+	}
+
+	public void setAvailable(boolean available) {
+		this.available = available;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
+	public Date getDateAdded() {
+		return dateAdded;
+	}
+
+	public void setDateAdded(Date dateAdded) {
+		this.dateAdded = dateAdded;
+	}
+
+	public Date getDateRemoved() {
+		return dateRemoved;
+	}
+
+	public void setDateRemoved(Date dateRemoved) {
+		this.dateRemoved = dateRemoved;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public int getId() {
+		return id;
 	}
 
 	@Override
@@ -107,6 +118,7 @@ public class Copy {
 		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -147,32 +159,37 @@ public class Copy {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Copy id: ").append(id).append(" book: ").append(book).append(" conditionId: ")
+				.append(conditionId).append(" available: ").append(available).append(" active: ").append(active)
+				.append(" dateAdded: ").append(dateAdded).append(" dateRemoved: ").append(dateRemoved).append(" user: ")
+				.append(user);
+		return builder.toString();
+	}
 
-	public Copy(int id, Book book, User user, int conditionId, boolean available, boolean active, Date dateRemoved, Date dateAdded) {
-
+	public Copy(int id, Book book, int conditionId, boolean available, boolean active, Date dateAdded, Date dateRemoved,
+			User user) {
 		super();
 		this.id = id;
 		this.book = book;
-		this.user = user;
 		this.conditionId = conditionId;
 		this.available = available;
 		this.active = active;
 		this.dateAdded = dateAdded;
 		this.dateRemoved = dateRemoved;
+		this.user = user;
 	}
-	
-	//NO ARG
+
 	public Copy() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
+
 	
-	//TO STRING
-	@Override
-	public String toString() {
-		return "Copy [id=" + id + ", book=" + book + ", conditionId=" + conditionId + ", available=" + available
-				+ ", active=" + active + ", dateAdded=" + dateAdded + ", dateRemoved=" + dateRemoved + ", user=" + user
-				+ "]";
-	}
 	
+
+
 	
 }

@@ -17,6 +17,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import com.skilldistillery.book2book.entities.Condition;
 import com.skilldistillery.book2book.entities.Copy;
 import com.skilldistillery.book2book.entities.User;
 
@@ -84,10 +85,11 @@ public class CopyDAOTest {
 	@Test
 	@DisplayName("Test user dao listUserCopies")
 	void test02() {
-		List<Copy> copies = dao.listUserCopies(11);
+		List<Copy> copies = dao.listUserCopies(2);
 		System.out.println(copies);
-		int actual = copies.get(0).getConditionId();
-		assertEquals(1, actual);
+		Condition condition = copies.get(0).getCondition();
+		String actual = condition.getName();
+		assertEquals("Used", actual);
 	}
 	
 	

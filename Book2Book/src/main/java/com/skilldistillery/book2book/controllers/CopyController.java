@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.skilldistillery.book2book.data.BookDAO;
 import com.skilldistillery.book2book.data.CopyDAO;
 import com.skilldistillery.book2book.entities.Book;
+import com.skilldistillery.book2book.entities.Condition;
 import com.skilldistillery.book2book.entities.Copy;
 import com.skilldistillery.book2book.entities.User;
 
@@ -32,6 +33,7 @@ public class CopyController {
 		
 		Book book = bDAO.getBookById(bookId);
 		User user = (User) session.getAttribute("USER");
+		Condition condition = new Condition();
 		System.out.println("form book: " + book);
 		System.out.println("form user: " + user);
 		Copy copy = new Copy();
@@ -61,6 +63,15 @@ public class CopyController {
 	public String editCopy(Copy updatedCopy, int prevCopyId) {
 		cDAO.editCopy(updatedCopy, prevCopyId);
 		return "redirect:editCopy.do";
+	}
+	
+	// edit a user's copy
+	@RequestMapping(path = "updateCondition.do", method = RequestMethod.POST)
+	public String updateCondition(@RequestParam("conditionId")int newConditionId, @RequestParam("copyId")int copyId) {
+		Copy newCopy = cDAO.getCopy(copyId);
+		newCopy.setConditionId(newConditionId);
+		cDAO.editCopy(newCopy, copyId);
+		return "success.jsp";
 	}
 
 	@RequestMapping(path = "editedCopy.do", method = RequestMethod.GET)
