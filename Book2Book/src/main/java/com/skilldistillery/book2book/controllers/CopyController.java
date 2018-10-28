@@ -102,5 +102,13 @@ public class CopyController {
 		return mv;
 	}
 	
+	@RequestMapping(path="removeCopy.do", method=RequestMethod.POST)
+	public ModelAndView removeCopyFromUser(HttpSession session, @RequestParam("copyId")int copyId) {
+		ModelAndView mv = new ModelAndView();
+		cDAO.deleteCopy(copyId);
+		mv.setViewName("success.jsp");
+		return mv;
+	}
+	
 	
 }

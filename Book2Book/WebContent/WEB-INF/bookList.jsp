@@ -11,7 +11,11 @@
 </head>
 <body>
 
+<%@ include file="../nav.jsp" %>
+
+
 <c:forEach items="${books}" var="book">
+<br>
 	Title: ${book.title }
 	${book.id}
 	<form action="copy.do" method="POST" modelAttribute="book">
@@ -20,7 +24,6 @@
 <input type="submit" value="Add Book to List" class="btn btn-primary btn-lg">
 </form>
 	
-	 
 	</c:forEach>
 	
 <form action="home.do" method="GET">

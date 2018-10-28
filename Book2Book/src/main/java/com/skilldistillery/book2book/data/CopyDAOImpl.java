@@ -29,11 +29,12 @@ public class CopyDAOImpl implements CopyDAO {
 	
 	@Override
 	public void addCopy(Copy copy) {
-//		em.getTransaction().begin();
+		em = emf.createEntityManager();
+		em.getTransaction().begin();
 		em.persist(copy);
 		em.flush();
-//		em.getTransaction().commit();
-//		em.close();
+		em.getTransaction().commit();
+		em.close();
 	}
 	
 	
@@ -52,6 +53,7 @@ public class CopyDAOImpl implements CopyDAO {
 	
 	@Override
 	public void deleteCopy(int id) {
+		em = emf.createEntityManager();
 		em.getTransaction().begin();
 		Copy updatedCopy = em.find(Copy.class, id);
 		updatedCopy.setActive(false);
@@ -90,8 +92,8 @@ public class CopyDAOImpl implements CopyDAO {
 		System.out.println("listUserCopies");
 		System.out.println("User ID: " + userId);
 		List<Copy> copyList = new ArrayList<>();
-		String query = "SELECT c FROM Copy c";
-		copyList = em.createQuery(query, Copy.class).getResultList();
+		String query = "SELECT c FROM Copy c WHERE c.user.id = :userId AND c.active = true";
+		copyList = em.createQuery(query, Copy.class).setParameter("userId", userId).getResultList();
 		em.close();
 		System.out.println("About to return");
 		System.out.println(copyList);

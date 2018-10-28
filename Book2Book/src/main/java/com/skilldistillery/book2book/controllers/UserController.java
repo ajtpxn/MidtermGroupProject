@@ -104,7 +104,7 @@ public class UserController {
 		
 		if (validUser != null) {
 			session.setAttribute("USER", validUser);
-			mv.setViewName("account.jsp");
+			mv.setViewName("account.do");
 		}
 		else {
 			mv.setViewName("fail.jsp");

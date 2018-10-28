@@ -17,27 +17,35 @@
 
 <h2>Your Detail</h2>
 <ul>
-	<li><c:out value="${sessionScope.USER.userName }"/></li>
-	<li><c:out value="${USER.firstName }"/></li>
-	<li><c:out value="${USER.lastName }"/></li>
+	<li>Name: <c:out value="${USER.firstName }"/> <c:out value="${USER.lastName }"/></li>
+	<li>Username: <c:out value="${sessionScope.USER.userName }"/></li>
 </ul>
-
-<form action="getbooks.do" method="GET">
-<input type="submit" name="seeBook" value="See All Book" >
-</form>
+*****************************************************************<br>
 <p>
-Copies:
+Your Books:
 </p>
 <c:forEach items="${copies}" var="copy"> 
 <p>
-Copy:
+${copy.book.title}
+<br>
+Author: ${copy.book.author.firstName} ${copy.book.author.lastName}
+<br>
+Description ${copy.book.description}
+<br>
+Condition: ${copy.conditionId}
+<form action="removeCopy.do" method="post">
+<input type="hidden" name="copyId" value="${copy.id}">
+<input type="submit" name="removeCopy" value="Remove Book" >
+</form>
 </p>
-
-<p>
-${copy}
-</p>
-
 </c:forEach>
+*****************************************************************<br>
+Add a book to your list:
+<p>
+<form action="getbooks.do" method="GET">
+<input type="submit" name="seeBook" value="See All Book" >
+</form>
+</p>
 
 </body>
 </html>
