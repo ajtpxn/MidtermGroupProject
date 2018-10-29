@@ -171,7 +171,7 @@ public class UserController {
 			  return mv;
 		  }
 		  else {
-			  mv.setViewName("login.do");
+			  mv.setViewName("login");
 			  return mv;
 		  }
 	  }

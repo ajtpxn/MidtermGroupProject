@@ -83,7 +83,7 @@ __________________________________<br>
 	<h4>Transaction List</h4>
 
 	<p>
-	<form action="transaction.do" method="GET">
+	<form action="transaction.do" method="get">
 		 <input type="submit" name="seeTransactions"
 			value="Books I am Borrowing">
 	</form>
