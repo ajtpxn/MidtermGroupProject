@@ -74,7 +74,7 @@ public class TransactionDAOImpl implements TransactionDAO {
 	}
 
 	@Override
-	public User getTransactionByCopyIdAndDate(int id, Date date) {
+	public User getBorrowerByCopyIdAndDate(int id, Date date) {
 		String query = "SELECT t FROM Transaction t WHERE t.copyId = :id AND t.startDate < :date AND t.endDate > :date";
 		List<Transaction> result = em.createQuery(query, Transaction.class).setParameter("id", id)
 				.setParameter("date", date).getResultList();
