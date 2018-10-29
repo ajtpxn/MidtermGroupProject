@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -30,7 +31,7 @@ public class Book {
 	@Column(name="content_rating")
 	private Integer contentRatingId;
 	
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name="book_genre",
 	joinColumns=@JoinColumn(name="book_id"),
 	inverseJoinColumns=@JoinColumn(name="genre_id"))
