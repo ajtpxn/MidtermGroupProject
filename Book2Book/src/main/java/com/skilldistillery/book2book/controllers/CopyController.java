@@ -122,24 +122,24 @@ public class CopyController {
 		return mv;
 	}
 
-
-	@RequestMapping(path = "listAvailableCopy.do", method = RequestMethod.GET)
-	public ModelAndView listAvailableCopy() {
-		List<Copy> allCopies = cDAO.listCopies();
-		List<Copy> availableCopies = new ArrayList<Copy>();
-		System.out.println("blah");
-		for (Copy c : allCopies) {
-			if (c.isAvailable()) {
-				availableCopies.add(c);
-			}
-		}
-		System.out.println("blah blah");
-
-		ModelAndView mv = new ModelAndView();
-		mv.addObject("copies", availableCopies);
-		mv.setViewName("notloggedincopies");
-		return mv;
-	}
+//
+//	@RequestMapping(path = "listAvailableCopy.do", method = RequestMethod.GET)
+//	public ModelAndView listAvailableCopy() {
+//		List<Copy> allCopies = cDAO.listCopies();
+//		List<Copy> availableCopies = new ArrayList<Copy>();
+//		System.out.println("blah");
+//		for (Copy c : allCopies) {
+//			if (c.isAvailable()) {
+//				availableCopies.add(c);
+//			}
+//		}
+//		System.out.println("blah blah");
+//
+//		ModelAndView mv = new ModelAndView();
+//		mv.addObject("copies", availableCopies);
+//		mv.setViewName("notloggedincopies");
+//		return mv;
+//	}
 
 	// FIND ALL AVAILBLE BOOKS TO RENT
 	@RequestMapping(path = "listAvailableCopy.do", method = RequestMethod.GET)
