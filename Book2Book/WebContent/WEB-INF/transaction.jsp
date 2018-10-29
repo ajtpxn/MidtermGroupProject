@@ -43,7 +43,14 @@
 	
 	<c:forEach items="${copies}" var="copy">
 	
-	<c:if test="${transaction.copyId == copy.id}"> ${copy.book.title}</c:if>
+	<c:if test="${transaction.copyId == copy.id}"> 
+	
+	${copy.book.title}
+	
+	
+	
+	
+	</c:if>
 	
 	</c:forEach>
 	

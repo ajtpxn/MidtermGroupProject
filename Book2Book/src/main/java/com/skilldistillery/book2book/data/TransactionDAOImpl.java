@@ -44,10 +44,9 @@ public class TransactionDAOImpl implements TransactionDAO {
 	@Override
 	public List<Transaction> getTransactionsByBorrowerId(int id) {
 		em = emf.createEntityManager();
-		em.getTransaction().begin();
-		String query = "SELECT t FROM Transaction t WHERE t.borrow_id = :id";
+		String query = "SELECT t FROM Transaction t WHERE t.borrower.id = :id";
 		List<Transaction> result = em.createQuery(query, Transaction.class).setParameter("id", id).getResultList();
-
+		System.out.println(result);
 		return result;
 	}
 
