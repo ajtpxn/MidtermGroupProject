@@ -14,7 +14,11 @@
 <strong>Title:</strong> ${copy.book.title} <br>
 <strong>Author:</strong> ${copy.book.author.firstName} ${copy.book.author.lastName}<br>
 <strong>Description:</strong> ${copy.book.description }<br>
-<strong>Genre:</strong> 
+<strong>Genre:</strong>
+<c:forEach items="${copy.book.genres}" var="genre">
+ ${genre.genreName }
+</c:forEach>
+<br>
 <strong>Content Rating: </strong> ${copy.book.contentRatingId}<br>
 <strong>Condition:</strong>  ${copy.conditionId }<br>
 <strong>Lender Name: </strong> ${copy.user.firstName} ${copy.user.lastName}
