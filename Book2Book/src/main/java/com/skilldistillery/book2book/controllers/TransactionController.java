@@ -50,10 +50,11 @@ public class TransactionController {
 			  System.out.println(transactions);
 			  List<Copy> copies = copyDAO.listUserCopies(userId);
 			  System.out.println(copies);
+			  System.out.println(transactions);
 			  mv.addObject("copies", copies);
 			  mv.addObject("transactions", transactions);
-			  mv.setViewName("account");
-			  System.out.println("copies added to mv and account.jsp set");
+			  mv.setViewName("transaction");
+			  System.out.println("transactions and copies added to mv and transaction.jsp set");
 			  return mv;
 		  }
 		  else {
