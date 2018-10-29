@@ -28,13 +28,13 @@ import com.skilldistillery.book2book.entities.User;
 public class UserController {
 	
 	@Autowired
-	private static UserDAO userDAO;
+	private UserDAO userDAO;
 	
 	@Autowired
-	private static CopyDAO copyDAO;
+	private CopyDAO copyDAO;
 	
 	@Autowired
-	private static TransactionDAO transDAO;
+	private TransactionDAO transDAO;
 	
 	@RequestMapping(path="index.do")
 	public ModelAndView index() {
@@ -57,10 +57,10 @@ public class UserController {
 	@RequestMapping(path="returnUser.do", method=RequestMethod.POST)
 	public ModelAndView returnUser(User user) {
 		System.out.println("Return User");
-		userDAO = new UserDAOimpl();
+		//userDAO = new UserDAOimpl();
 		ModelAndView mv = new ModelAndView();
 		userDAO.creatUser(user);
-		userDAO = null;
+		//userDAO = null;
 		mv.addObject(user);
 		mv.setViewName("success");
 		return mv;
@@ -97,7 +97,7 @@ public class UserController {
 	public String logIn(User formUser, HttpSession session) {
 		System.out.println("logIn");
 		//ModelAndView mv = new ModelAndView();
-		userDAO = new UserDAOimpl();
+		//userDAO = new UserDAOimpl();
 		if(userIsLoggedIn(session)) {
 			System.out.println("*****sessionPositive******");
 			//mv.setViewName("index.do");
@@ -140,8 +140,8 @@ public class UserController {
 	
 	  @RequestMapping(path="account.do")
 	  public ModelAndView accountIndex(HttpSession session) {
-		  copyDAO = new CopyDAOImpl();
-		  transDAO = new TransactionDAOImpl();
+		  //copyDAO = new CopyDAOImpl();
+		  //transDAO = new TransactionDAOImpl();
 		  System.out.println("account page");
 		  ModelAndView mv = new ModelAndView();
 		  if(userIsLoggedIn(session)) {
