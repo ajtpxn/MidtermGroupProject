@@ -2,4 +2,11 @@
 
 ## Midterm Group Project, Skill Distillery, Week Nine ##
 
-stubbs
+-- mapping entities
+-- cascading fields
+-- controllers pulling from different DAO
+-- merge conflicts
+-- session through out pages
+-- having two lists but displaying in same controller method
+-- pair programming
+-- 
