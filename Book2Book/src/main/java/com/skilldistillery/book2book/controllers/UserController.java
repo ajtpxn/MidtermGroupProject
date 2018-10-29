@@ -114,7 +114,7 @@ public class UserController {
 		if (validUser != null) {
 			session.setAttribute("USER", validUser);
 			//mv.setViewName("account.do");
-			return "redirect:account.do";
+			return "redirect:index.do";
 		}
 		else {
 			return "redirect:fail.do";
