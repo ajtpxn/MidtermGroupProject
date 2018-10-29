@@ -31,7 +31,7 @@ to be deleted
 </form>
 
 	<p>
-	<form action="transaction.do" method="get">
+	<form action="transaction.do" method="GET">
 		 <input type="submit" name="seeTransactions"
 			value="Books I am Borrowing">
 	</form>

@@ -36,8 +36,6 @@ public class TransactionController {
 	
 	@RequestMapping(path="transaction.do", method=RequestMethod.GET)
 	  public ModelAndView accountIndex(HttpSession session) {
-		  copyDAO = new CopyDAOImpl();
-		  transDAO = new TransactionDAOImpl();
 		  System.out.println("transaction page");
 		  ModelAndView mv = new ModelAndView();
 		  UserController uc = new UserController();
@@ -48,8 +46,9 @@ public class TransactionController {
 			  System.out.println("User Id: " + userId);
 			  List<Transaction> transactions = transDAO.getTransactionsByBorrowerId(userId);
 			  System.out.println("back from transactions");
-			  System.out.println(transactions);
-			  List<Copy> copies = copyDAO.listUserCopies(userId);
+			  System.out.println("transactions: "+transactions);
+			  List<Copy> copies = copyDAO.listCopies();
+			  System.out.println("copies: "+copies);
 			  mv.addObject("copies", copies);
 			  mv.addObject("transactions", transactions);
 			  mv.setViewName("transaction");
