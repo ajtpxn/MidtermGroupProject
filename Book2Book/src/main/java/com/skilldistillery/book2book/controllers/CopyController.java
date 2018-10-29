@@ -1,13 +1,20 @@
 package com.skilldistillery.book2book.controllers;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.helpers.DateTimeDateFormat;
 import org.jboss.logging.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -175,25 +182,42 @@ public class CopyController {
 	
 	//ADD TRANSACTION AND UPDATE USERS COPY.AVAILABLE TO FASLE
 	@RequestMapping(path = "addTransUpdateCopy.do", method = RequestMethod.POST)
-	public String addTransAndUpdateCopyAvailable( Copy copy,Date startDate, Date endDate, HttpSession session) {
+	public String addTransAndUpdateCopyAvailable( @RequestParam(name="copyId") int copyId,@RequestParam(name="startDate") String startDate, 
+			@RequestParam(name="endDate") String endDate, HttpSession session) {
 		
-		System.out.println("8888888888888888888888888" + copy.getBook().getTitle());
-		System.out.println(startDate );
-		System.out.println(endDate);
+		Copy copy = cDAO.getCopy(copyId);
 		
 		User user = (User) session.getAttribute("USER");
+		//PARSES START AND END DATE FROM STRING TO DATE
+		SimpleDateFormat f=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
+		String time = "2018-10-10 12:00:00";
+		Date startD = null;
+		Date endD = null;
+		Date cDate = null;
+		
+		try {
+			startD = f.parse(startDate);
+			endD = f.parse(endDate);
+			cDate = f.parse(time);
+			
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		// CREATES NEW TRANSANACTION
 		Transaction newTrans = new Transaction();
 
 		newTrans.setBorrowers(user);
 		newTrans.setCopyId(copy.getId());
-		newTrans.setStartDate(startDate);
-		newTrans.setStartDate(endDate);
-		
+		newTrans.setStartDate(startD);
+		newTrans.setEndDate(endD);
+		newTrans.setDateCreated(cDate);
 		
 		tDAO.makeTransaction(newTrans);
 		
-		//int copyId = updatedCopy.getId();
-		//cDAO.editCopy(updatedCopy, copyId);
+		//SWITCHES AVAILABLITY TO FALSE
+		copy.setAvailable(false);
+		cDAO.editCopy(copy, copyId);
 		
 		
 		
