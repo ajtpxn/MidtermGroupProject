@@ -37,7 +37,7 @@ public class UserController {
 	public ModelAndView index() {
 		System.out.println("index");
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("index.jsp");
+		mv.setViewName("WEB-INF/index.jsp");
 		return mv;
 	}
 	
