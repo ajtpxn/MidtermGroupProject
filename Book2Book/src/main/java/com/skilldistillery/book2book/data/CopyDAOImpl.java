@@ -120,22 +120,10 @@ public class CopyDAOImpl implements CopyDAO {
 		
 		return availableBooks;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
+	
+	
+	
 	
 
 	

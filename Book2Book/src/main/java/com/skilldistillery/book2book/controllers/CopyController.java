@@ -1,5 +1,6 @@
 package com.skilldistillery.book2book.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -23,14 +24,14 @@ public class CopyController {
 
 	@Autowired
 	private CopyDAO cDAO;
-	
+
 	@Autowired
 	private BookDAO bDAO;
 
 	// Add a new copy to a user's library(tentative name)
 	@RequestMapping(path = "copy.do", method = RequestMethod.POST)
-	public String addNewCopy(@RequestParam("bookId")int bookId, HttpSession session) {
-		
+	public String addNewCopy(@RequestParam("bookId") int bookId, HttpSession session) {
+
 		Book book = bDAO.getBookById(bookId);
 		User user = (User) session.getAttribute("USER");
 		Condition condition = new Condition();
@@ -64,10 +65,10 @@ public class CopyController {
 		cDAO.editCopy(updatedCopy, prevCopyId);
 		return "redirect:editCopy.do";
 	}
-	
+
 	// edit a user's copy
 	@RequestMapping(path = "updateCondition.do", method = RequestMethod.POST)
-	public String updateCondition(@RequestParam("conditionId")int newConditionId, @RequestParam("copyId")int copyId) {
+	public String updateCondition(@RequestParam("conditionId") int newConditionId, @RequestParam("copyId") int copyId) {
 		Copy newCopy = cDAO.getCopy(copyId);
 		newCopy.setConditionId(newConditionId);
 		cDAO.editCopy(newCopy, copyId);
@@ -94,7 +95,7 @@ public class CopyController {
 		mv.setViewName("copy");
 		return mv;
 	}
-	
+
 	// return a list of all copies
 	public ModelAndView getListCopies() {
 		ModelAndView mv = new ModelAndView();
@@ -112,54 +113,58 @@ public class CopyController {
 		mv.setViewName("copy");
 		return mv;
 	}
-	
-	@RequestMapping(path="removeCopy.do", method=RequestMethod.POST)
-	public ModelAndView removeCopyFromUser(HttpSession session, @RequestParam("copyId")int copyId) {
+
+	@RequestMapping(path = "removeCopy.do", method = RequestMethod.POST)
+	public ModelAndView removeCopyFromUser(HttpSession session, @RequestParam("copyId") int copyId) {
 		ModelAndView mv = new ModelAndView();
 		cDAO.deleteCopy(copyId);
 		mv.setViewName("success");
 		return mv;
 	}
-	
-	//FIND ALL AVAILBLE BOOKS TO RENT
-	@RequestMapping(path="listAvailableCopy.do", method=RequestMethod.GET)
-	public ModelAndView findAllAvailableCopiesToRent() {
+
+
+	@RequestMapping(path = "listAvailableCopy.do", method = RequestMethod.GET)
+	public ModelAndView listAvailableCopy() {
+		List<Copy> allCopies = cDAO.listCopies();
+		List<Copy> availableCopies = new ArrayList<Copy>();
+		System.out.println("blah");
+		for (Copy c : allCopies) {
+			if (c.isAvailable()) {
+				availableCopies.add(c);
+			}
+		}
+		System.out.println("blah blah");
+
 		ModelAndView mv = new ModelAndView();
-		
-		List<Copy> allAvailableCopies = cDAO.seeAllAvailableCopies();
-		
-		mv.addObject("availCopies", allAvailableCopies);
-		mv.setViewName("allAvailCopies");
-		
+		mv.addObject("copies", availableCopies);
+		mv.setViewName("notloggedincopies");
 		return mv;
 	}
-	
-	//GET DETAILS ON COPY 
-	@RequestMapping(path="copyDetails.do", method=RequestMethod.GET)
-	public ModelAndView getCopyDetails(@RequestParam("copy.id")int copyId) {
+
+	// FIND ALL AVAILBLE BOOKS TO RENT
+	@RequestMapping(path = "listAvailableCopy.do", method = RequestMethod.GET)
+	public ModelAndView findAllAvailableCopiesToRent() {
 		ModelAndView mv = new ModelAndView();
-		
+
+		List<Copy> allAvailableCopies = cDAO.seeAllAvailableCopies();
+
+		mv.addObject("availCopies", allAvailableCopies);
+		mv.setViewName("allAvailCopies");
+
+		return mv;
+	}
+
+	// GET DETAILS ON COPY
+	@RequestMapping(path = "copyDetails.do", method = RequestMethod.GET)
+	public ModelAndView getCopyDetails(@RequestParam("copy.id") int copyId) {
+		ModelAndView mv = new ModelAndView();
+
 		Copy copyDetails = cDAO.getCopy(copyId);
 		mv.addObject("copy", copyDetails);
 		mv.setViewName("copyDetail");
-		
+
 		return mv;
-		
+
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 }
