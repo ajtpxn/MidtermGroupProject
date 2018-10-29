@@ -1,5 +1,6 @@
 package com.skilldistillery.book2book.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -118,6 +119,24 @@ public class CopyController {
 		ModelAndView mv = new ModelAndView();
 		cDAO.deleteCopy(copyId);
 		mv.setViewName("success");
+		return mv;
+	}
+	
+	@RequestMapping(path = "listAvailableCopy.do", method=RequestMethod.GET)
+	public ModelAndView listAvailableCopy() {
+		List<Copy> allCopies = cDAO.listCopies();
+		List<Copy> availableCopies = new ArrayList<Copy>();
+		System.out.println("blah");
+		for (Copy c : allCopies) {
+			if (c.isAvailable()) {
+				availableCopies.add(c);
+			}
+		}
+		System.out.println("blah blah");
+		
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("copies", availableCopies);
+		mv.setViewName("notloggedincopies");
 		return mv;
 	}
 	
