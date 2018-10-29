@@ -59,5 +59,37 @@ public class TransactionController {
 			  mv.setViewName("login.do");
 			  return mv;
 		  }
-	}	  
+	}
+	
+	
+	
+	@RequestMapping(path="booksLentOut.do", method=RequestMethod.GET)
+	public ModelAndView booksLentOut(HttpSession session) {
+		System.out.println("transaction page");
+		ModelAndView mv = new ModelAndView();
+		UserController uc = new UserController();
+		
+		if(uc.userIsLoggedIn(session)) {
+			User user = (User) session.getAttribute("USER");
+			int userId = user.getId();
+			System.out.println("User Id: " + userId);
+			List<Transaction> transactions = transDAO.getTransactionsByBorrowerId(userId);
+			System.out.println("back from transactions");
+			System.out.println("transactions: "+transactions);
+			List<Copy> copies = copyDAO.listCopies();
+			System.out.println("copies: "+copies);
+			mv.addObject("copies", copies);
+			mv.addObject("transactions", transactions);
+			mv.setViewName("transaction");
+			System.out.println("transactions and copies added to mv and transaction.jsp set");
+			return mv;
+		}
+		else {
+			mv.setViewName("login.do");
+			return mv;
+		}
+	}
+	
+	
+	
 }
