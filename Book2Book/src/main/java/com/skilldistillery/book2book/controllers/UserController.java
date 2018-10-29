@@ -18,6 +18,7 @@ import com.skilldistillery.book2book.data.TransactionDAO;
 import com.skilldistillery.book2book.data.UserDAO;
 import com.skilldistillery.book2book.data.UserDAOimpl;
 import com.skilldistillery.book2book.entities.Copy;
+import com.skilldistillery.book2book.entities.Transaction;
 import com.skilldistillery.book2book.entities.User;
 
 @Controller
@@ -147,6 +148,12 @@ public class UserController {
 			  List<Copy> copies = copyDAO.listUserCopies(userId);
 			  System.out.println("back from copies");
 			  System.out.println(copies);
+			  for (int i = 0; i < copies.size()-1; i++) {
+				  List<Transaction> transactions = transDAO.getTransactionsByCopyId(i);
+				  String transName = "transaction_" + Integer.toString(i);
+				  Transaction t = transactions.get(0);
+				  mv.addObject(transName, t);
+			  }
 			  mv.addObject("copies", copies);
 			  mv.setViewName("account");
 			  System.out.println("copies added to mv and account.jsp set");
