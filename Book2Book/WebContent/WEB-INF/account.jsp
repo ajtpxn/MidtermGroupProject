@@ -88,6 +88,16 @@ __________________________________<br>
 			value="Books I am Borrowing">
 	</form>
 	</p>
+	
+	
+	<p>
+	<form action="editProfile.do" method="get">
+		 <input type="submit" name="editProfile"
+			value="Edit Profile">
+	</form>
+	</p>
+	
+	
 
 
 

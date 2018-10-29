@@ -134,7 +134,7 @@ public class UserController {
 	public String logOut(HttpSession session) {
 		System.out.println("logOut");
 		session.invalidate();
-		return "index.do";
+		return "index";
 		
 	}
 	
@@ -175,5 +175,34 @@ public class UserController {
 			  return mv;
 		  }
 	  }
+	  
+	  
+	  
+	  public String editProfile( HttpSession session) {
+		  
+		  
+		  
+		  
+		  return null;
+	  }
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
 
 }
