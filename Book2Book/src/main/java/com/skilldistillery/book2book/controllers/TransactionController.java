@@ -50,7 +50,6 @@ public class TransactionController {
 			  System.out.println("back from transactions");
 			  System.out.println(transactions);
 			  List<Copy> copies = copyDAO.listUserCopies(userId);
-			  System.out.println(copies);
 			  System.out.println(transactions);
 			  mv.addObject("copies", copies);
 			  mv.addObject("transactions", transactions);
