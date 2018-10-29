@@ -13,5 +13,5 @@ public interface TransactionDAO {
 	public List<Transaction> getTransactionsByBorrowerId(int id);
 	public List<Transaction> getTransactionsByLenderId(int id);
 	public List<Transaction> getTransactionsByCopyId(int id);
-	public User getTransactionByCopyIdAndDate(int id, Date date);
+	public User getTransactionByCopyIdAndDate(int id, Date date);	
 }

@@ -23,5 +23,14 @@
 <strong>Condition:</strong>  ${copy.conditionId }<br>
 <strong>Lender Name: </strong> ${copy.user.firstName} ${copy.user.lastName}
 
+<form action="addTransUpdateCopy.do" method="POST">
+<input type="hidden" value="${copy}" name="copy">
+<label>Start Date:</label><input type="datetime" value="" name="startDate"><br>
+<label>End Date:</label><input type="datetime" value="" name="endDate"><br>
+<input type="submit" value="Borrow" class="btn btn-primary">
+
+
+</form>
+
 </body>
 </html>
