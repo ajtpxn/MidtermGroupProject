@@ -177,8 +177,10 @@ public class UserController {
 	  }
 	  
 	  
-	  
+	  //EDIT USER PROFILE/ACCOUNT INFO
 	  public String editProfile( HttpSession session) {
+		  User user = (User) session.getAttribute("USER");
+		  
 		  
 		  
 		  
@@ -189,6 +191,13 @@ public class UserController {
 	  
 	  
 	  
+	  //REDIRECT TO EDIT PROFILE/ACCOUINT PAGE
+	  @RequestMapping( path="editProfile.do", method=RequestMethod.GET)
+	  public String  moveToEditProfile () {
+		  
+		  return "editAccount";
+		 
+	  }
 	  
 	  
 	  
