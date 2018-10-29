@@ -11,48 +11,24 @@
 <body>
 <%@ include file="nav.jsp"%>
 
-	<h2>Transaction Details</h2>
-
-	
-	<br>
-	Borrowed Books:  
-	<br>
-	<br>
-	
+	<h2>Borrowed Books</h2>
 	
 	<c:forEach items="${transactions}" var="transaction">
-	
-	ID: ${transaction.id}
-	<br>
-	Copy ID: ${transaction.copyId}
-	<br>
-	Start Date: ${transaction.startDate}
-	<br>
-	End Date: ${transaction.endDate}
-	<br>
-	<br>
-	
-	Copies:
 	<c:forEach items="${copies}" var="copy">
-	<br>
-	Copy:
-	<br>
-	Transaction copyID: ${transaction.copyId}
-	<br>
-	Copy ID: ${copy.id}
-	<br>
-
-	<br>
-	Transaction ID: ${copy.id}
-	<br>
-	Copy Book Title: ${copy.book.title} <br>
-	Copy Book Descripton: ${copy.book.description}
-	<br>
-	
-
-	
+	<c:if test="${transaction.copyId==copy.id}">
+	Title: ${copy.book.title} <br>
+	Descripton: ${copy.book.description}<br>
+	Copy Condition ID: ${copy.conditionId}
+	</c:if>
 	</c:forEach>
 	<br>
+	Transaction ID: ${transaction.id} <br>
+	Transaction Copy ID: ${transaction.copyId} <br>
+	Transaction Start Date: ${transaction.startDate} <br>
+	Transaction End Date: ${transaction.endDate} <br>
+	<br>
+	
+	
 	
 	</c:forEach>
 	
