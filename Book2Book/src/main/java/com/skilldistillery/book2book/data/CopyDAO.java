@@ -20,8 +20,6 @@ public interface CopyDAO {
 
 	Copy getCopy(int id);
 	public List<Copy> seeAllAvailableCopies();
-	
 
-	public List<Copy> seeAllAvailableCopies();
 
 }
