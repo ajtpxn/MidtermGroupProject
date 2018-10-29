@@ -1,10 +1,14 @@
 package com.skilldistillery.book2book.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Genre {
@@ -13,6 +17,19 @@ public class Genre {
 	private int id;
 	@Column(name="name")
 	private String genreName;
+	
+	
+	@ManyToMany(mappedBy="genres")
+	private List<Book> books;
+	
+	
+	
+	
+	
+	
+	
+	
+	//GETTERS AND SETTERS
 	
 	public int getId() {
 		return id;
@@ -26,6 +43,39 @@ public class Genre {
 	public void setGenreName(String genreName) {
 		this.genreName = genreName;
 	}
+	
+	public List<Book> getBooks() {
+		return books;
+	}
+	public void setBooks(List<Book> books) {
+		this.books = books;
+	}
+	
+	public void addBook( Book book) {
+		if ( this.books == null) {
+			this.books = new ArrayList<>();
+		}
+		if( !books.contains(book)) {
+			books.add(book);
+			book.addGenre(this);
+		}
+	}
+	
+	public void removeBook( Book genre) {
+		if (this.books != null) {
+			this.books.remove(genre);
+			genre.removeGenre(this);
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	//HASH AND EQUALS
 	@Override
 	public int hashCode() {
 		final int prime = 31;
