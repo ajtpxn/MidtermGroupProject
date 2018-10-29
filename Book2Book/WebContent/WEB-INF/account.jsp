@@ -31,8 +31,10 @@ ${copy.book.title}
 <br>
 Author: ${copy.book.author.firstName} ${copy.book.author.lastName}
 <br>
-Description ${copy.book.description}
-
+Description: ${copy.book.description}
+<br>
+Lent to: ${copy.borrower.firstName} ${copy.borrower.lastName} 
+Return by: ${copy.copy_transaction.endDate}
 <form action="updateCondition.do" method="post" >
 Condition:  
 
