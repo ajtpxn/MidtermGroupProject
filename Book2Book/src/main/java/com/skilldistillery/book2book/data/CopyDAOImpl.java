@@ -109,6 +109,31 @@ public class CopyDAOImpl implements CopyDAO {
 		System.out.println(copyList);
 		return copyList;
 	}
+
+	public List<Copy> seeAllAvailableCopies() {
+		em = emf.createEntityManager();
+		
+		String query = "SELECT c FROM Copy c WHERE c.available = true";
+		List<Copy> availableBooks = em.createQuery(query, Copy.class).getResultList();
+		
+		
+		
+		return availableBooks;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }
 	

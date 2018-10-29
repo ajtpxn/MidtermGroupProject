@@ -1,5 +1,8 @@
 package com.skilldistillery.book2book.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,8 +10,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Book {
@@ -26,8 +30,47 @@ public class Book {
 	@Column(name="content_rating")
 	private Integer contentRatingId;
 	
+	@ManyToMany
+	@JoinTable(name="book_genre",
+	joinColumns=@JoinColumn(name="book_id"),
+	inverseJoinColumns=@JoinColumn(name="genre_id"))
+	private List<Genre> genres;
+	
+	
+	
+	//GETTERS ANDN SETTERS 
+	
+	
 	public int getId() {
 		return id;
+	}
+	public List<Genre> getGenres() {
+		return genres;
+	}
+	public void setGenres(List<Genre> genres) {
+		this.genres = genres;
+	}
+	
+	public void addGenre( Genre genre) {
+		if ( this.genres == null) {
+			this.genres = new ArrayList<>();
+		}
+		if( !genres.contains(genre)) {
+			genres.add(genre);
+			genre.addBook(this);
+		}
+	}
+	
+	public void removeGenre( Genre genre) {
+		if (this.genres != null) {
+			this.genres.remove(genre);
+			genre.removeBook(this);
+		}
+	}
+	
+	
+	public void setContentRatingId(Integer contentRatingId) {
+		this.contentRatingId = contentRatingId;
 	}
 	public String getTitle() {
 		return title;
@@ -53,6 +96,10 @@ public class Book {
 	public void setAuthor(Author author) {
 		this.author = author;
 	}
+	
+	
+	
+	//HASH AND EQUALS
 	@Override
 	public int hashCode() {
 		final int prime = 31;

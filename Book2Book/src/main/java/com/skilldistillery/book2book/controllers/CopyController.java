@@ -121,5 +121,45 @@ public class CopyController {
 		return mv;
 	}
 	
+	//FIND ALL AVAILBLE BOOKS TO RENT
+	@RequestMapping(path="listAvailableCopy.do", method=RequestMethod.GET)
+	public ModelAndView findAllAvailableCopiesToRent() {
+		ModelAndView mv = new ModelAndView();
+		
+		List<Copy> allAvailableCopies = cDAO.seeAllAvailableCopies();
+		
+		mv.addObject("availCopies", allAvailableCopies);
+		mv.setViewName("allAvailCopies");
+		
+		return mv;
+	}
+	
+	//GET DETAILS ON COPY 
+	@RequestMapping(path="copyDetails.do", method=RequestMethod.GET)
+	public ModelAndView getCopyDetails(@RequestParam("copy.id")int copyId) {
+		ModelAndView mv = new ModelAndView();
+		
+		Copy copyDetails = cDAO.getCopy(copyId);
+		mv.addObject("copy", copyDetails);
+		mv.setViewName("copyDetail");
+		
+		return mv;
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }
