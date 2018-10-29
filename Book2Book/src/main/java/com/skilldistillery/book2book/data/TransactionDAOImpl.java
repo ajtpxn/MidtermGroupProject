@@ -1,24 +1,26 @@
 package com.skilldistillery.book2book.data;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.skilldistillery.book2book.entities.Transaction;
+import com.skilldistillery.book2book.entities.User;
 
+@Transactional
 @Repository
 public class TransactionDAOImpl implements TransactionDAO {
 
-	private EntityManagerFactory emf;
+	private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("Book2Book");
+	@PersistenceContext
 	private EntityManager em;
-
-	public TransactionDAOImpl() {
-		emf = Persistence.createEntityManagerFactory("Book2Book");
-	}
 
 	@Override
 	public Transaction makeTransaction(Transaction t) {
@@ -43,11 +45,9 @@ public class TransactionDAOImpl implements TransactionDAO {
 	public List<Transaction> getTransactionsByBorrowerId(int id) {
 		em = emf.createEntityManager();
 		em.getTransaction().begin();
-		String query = "SELECT t FROM transaction t WHERE t.borrow_id = :id";
-		List<Transaction> result = em.createQuery("query", Transaction.class)
-								     .setParameter("id", id)
-								     .getResultList();
-		
+		String query = "SELECT t FROM Transaction t WHERE t.borrow_id = :id";
+		List<Transaction> result = em.createQuery(query, Transaction.class).setParameter("id", id).getResultList();
+
 		return result;
 	}
 
@@ -60,7 +60,7 @@ public class TransactionDAOImpl implements TransactionDAO {
 		em = emf.createEntityManager();
 		String query = "SELECT trans FROM Transaction trans JOIN FETCH trans.copy WHERE  trans.copy.user.id = 2";
 		List<Transaction> lenderTransactions = em.createQuery(query, Transaction.class).getResultList();
-	
+
 		em.close();
 		return lenderTransactions;
 	}
@@ -69,11 +69,9 @@ public class TransactionDAOImpl implements TransactionDAO {
 	public List<Transaction> getTransactionsByCopyId(int id) {
 		em = emf.createEntityManager();
 		em.getTransaction().begin();
-		String query = "SELECT t FROM transaction t WHERE t.copy_id = :id";
-		List<Transaction> result = em.createQuery("query", Transaction.class)
-								  .setParameter("id", id)
-								  .getResultList();
-		
+		String query = "SELECT t FROM Transaction t WHERE t.copyId = :id";
+		List<Transaction> result = em.createQuery(query, Transaction.class).setParameter("id", id).getResultList();
+
 		return result;
 	}
 
@@ -88,6 +86,20 @@ public class TransactionDAOImpl implements TransactionDAO {
 		managedTransaction.setEndDate(updated.getDateCreated());
 		managedTransaction.setStartDate(updated.getStartDate());
 		return managedTransaction;
+	}
+
+	@Override
+	public User getTransactionByCopyIdAndDate(int id, Date date) {
+		em = emf.createEntityManager();
+		em.getTransaction().begin();
+		String query = "SELECT t FROM Transaction t WHERE t.copyId = :id AND t.startDate < :date AND t.endDate > :date";
+		List<Transaction> result = em.createQuery(query, Transaction.class).setParameter("id", id)
+				.setParameter("date", date).getResultList();
+		if (result != null && result.size() > 0) {
+			return result.get(0).getBorrowers();
+		} else {
+			return null;
+		}
 	}
 
 }

@@ -1,5 +1,7 @@
 package com.skilldistillery.book2book.controllers;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -15,10 +17,10 @@ import org.springframework.web.servlet.ModelAndView;
 import com.skilldistillery.book2book.data.CopyDAO;
 import com.skilldistillery.book2book.data.CopyDAOImpl;
 import com.skilldistillery.book2book.data.TransactionDAO;
+import com.skilldistillery.book2book.data.TransactionDAOImpl;
 import com.skilldistillery.book2book.data.UserDAO;
 import com.skilldistillery.book2book.data.UserDAOimpl;
 import com.skilldistillery.book2book.entities.Copy;
-import com.skilldistillery.book2book.entities.Transaction;
 import com.skilldistillery.book2book.entities.User;
 
 @Controller
@@ -139,6 +141,7 @@ public class UserController {
 	  @RequestMapping(path="account.do")
 	  public ModelAndView accountIndex(HttpSession session) {
 		  copyDAO = new CopyDAOImpl();
+		  //transDAO = new TransactionDAOImpl();
 		  System.out.println("account page");
 		  ModelAndView mv = new ModelAndView();
 		  if(userIsLoggedIn(session)) {
@@ -146,15 +149,23 @@ public class UserController {
 			  int userId = user.getId();
 			  System.out.println("User Id: " + userId);
 			  List<Copy> copies = copyDAO.listUserCopies(userId);
+			  List<User> borrowers = new ArrayList<User>();
 			  System.out.println("back from copies");
 			  System.out.println(copies);
-			  for (int i = 0; i < copies.size()-1; i++) {
+			  System.out.println(userDAO);
+			  System.out.println(copyDAO);
+			  System.out.println(transDAO);
+			  for (Copy c : copies) {
+				  borrowers.add(transDAO.getTransactionByCopyIdAndDate(c.getId(), new Date()));
+			  }
+			  /*for (int i = 0; i < copies.size(); i++) {
 				  List<Transaction> transactions = transDAO.getTransactionsByCopyId(i);
 				  String transName = "transaction_" + Integer.toString(i);
 				  Transaction t = transactions.get(0);
 				  mv.addObject(transName, t);
-			  }
+			  } */
 			  mv.addObject("copies", copies);
+			  mv.addObject("borrowers", borrowers);
 			  mv.setViewName("account");
 			  System.out.println("copies added to mv and account.jsp set");
 			  return mv;
