@@ -12,31 +12,14 @@
 <%@ include file="nav.jsp"%>
 
 	<h2>Transaction Details</h2>
-<%-- 
-	<c:choose>
-		<c:when test="${not empty transaction }">
-		<!-- The below is rather ugly and is just for debug
-			 Later it should be organized better with a table or something
-			 It also assumes that transaction, lender, borrower, book, author have all been added as objects -->
-			<ul>
-				<li><em>Creation Date:</em> ${transaction.startDate }</li>
-				<li><em>Start Date:</em> ${transaction.startDate }</li>
-				<li><em>End Date:</em> ${transaction.startDate }</li>
-				<li><em>Lender:</em> <a href="user.jsp">${lender.username }</a></li>
-				<li><em>Borrower:</em> <a href="user.jsp">${borrower.username }</a></li>
-				<li><em>Book:</em> <a href="book.jsp">${book.title }</a></li>
-				<li><em>Author:</em> <a href="author.jsp">${author.name }</a></li>
-				<li><em>Condition:</em> ${condition }</li>
-			</ul>
-		</c:when>
-		<c:otherwise>The transaction could not be found!</c:otherwise>
-	</c:choose>
-	 --%>
+
 	
 	<br>
 	Borrowed Books:  
 	<br>
 	<br>
+	
+	
 	<c:forEach items="${transactions}" var="transaction">
 	
 	ID: ${transaction.id}
@@ -48,8 +31,33 @@
 	End Date: ${transaction.endDate}
 	<br>
 	<br>
+	
+	Copies:
+	<c:forEach items="${copies}" var="copy">
 	<br>
+	Copy:
+	<br>
+	Transaction copyID: ${transaction.copyId}
+	<br>
+	Copy ID: ${copy.id}
+	<br>
+
+	<br>
+	Transaction ID: ${copy.id}
+	<br>
+	Copy Book Title: ${copy.book.title} <br>
+	Copy Book Descripton: ${copy.book.description}
+	<br>
+	
+
+	
 	</c:forEach>
+	<br>
+	
+	</c:forEach>
+	
+	
+
 
 </body>
 </html>
