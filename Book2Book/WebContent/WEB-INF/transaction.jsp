@@ -37,6 +37,13 @@
 	
 	${transaction.id}
 	${transaction.copyId}
+	${transaction.startDate}
+	${transaction.endDate}
+	${transaction.borrower}
+	
+	
+	
+	
 	</c:forEach>
 
 </body>

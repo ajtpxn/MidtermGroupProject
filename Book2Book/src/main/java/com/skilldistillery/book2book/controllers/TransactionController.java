@@ -48,7 +48,7 @@ public class TransactionController {
 			  List<Transaction> transactions = transDAO.getTransactionsByBorrowerId(userId);
 			  System.out.println("back from copies");
 			  System.out.println(transactions);
-			  mv.addObject("transaction", transactions);
+			  mv.addObject("transactions", transactions);
 			  mv.setViewName("account");
 			  System.out.println("copies added to mv and account.jsp set");
 			  return mv;
