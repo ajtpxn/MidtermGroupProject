@@ -41,6 +41,10 @@ to be deleted
 <a href="transaction.jsp">transaction</a>
 </p>
 
+<form action="listAvailableCopy.do" method="GET">
+<input type="submit" value="Search Available Books" class="btn btn-warning btn-lg">
+</form>
+
 
 </body>
 </html>
