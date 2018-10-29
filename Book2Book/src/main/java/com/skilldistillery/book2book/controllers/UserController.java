@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.skilldistillery.book2book.data.CopyDAO;
 import com.skilldistillery.book2book.data.CopyDAOImpl;
+import com.skilldistillery.book2book.data.TransactionDAO;
 import com.skilldistillery.book2book.data.UserDAO;
 import com.skilldistillery.book2book.data.UserDAOimpl;
 import com.skilldistillery.book2book.entities.Copy;
@@ -28,6 +29,9 @@ public class UserController {
 	
 	@Autowired
 	private static CopyDAO copyDAO;
+	
+	@Autowired
+	private static TransactionDAO transDAO;
 	
 	@RequestMapping(path="index.do")
 	public ModelAndView index() {

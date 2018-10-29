@@ -51,10 +51,18 @@ public class TransactionDAOImpl implements TransactionDAO {
 		return result;
 	}
 
+//	select * from copy_transaction 
+//	join copy on copy.id = copy_transaction.copy_id
+//	join user on copy.user_id = user.id
+//	where user.id = 2;
 	@Override
 	public List<Transaction> getTransactionsByLenderId(int id) {
-		// requires a join
-		return null;
+		em = emf.createEntityManager();
+		String query = "SELECT trans FROM Transaction trans JOIN FETCH trans.copy WHERE  trans.copy.user.id = 2";
+		List<Transaction> lenderTransactions = em.createQuery(query, Transaction.class).getResultList();
+	
+		em.close();
+		return lenderTransactions;
 	}
 
 	@Override

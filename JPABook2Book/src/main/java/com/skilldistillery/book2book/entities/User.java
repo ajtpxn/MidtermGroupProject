@@ -46,7 +46,7 @@ public class User {
 	@OneToMany(mappedBy="user")
 	private List<Copy> userCopies;
 	
-	@OneToMany
+	@OneToMany(mappedBy="borrower")
 	private List<Transaction> transactions;
 	
 //	@ManyToOne
