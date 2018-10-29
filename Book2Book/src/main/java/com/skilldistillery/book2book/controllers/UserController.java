@@ -114,10 +114,17 @@ public class UserController {
 			return "redirect:account.do";
 		}
 		else {
-			return "redirect:WEB-INF/fail.jsp";
+			return "redirect:fail.do";
 		}
 		//userDAO = null;
 		//return mv;
+	}
+	
+	@RequestMapping(path = "fail.do", method=RequestMethod.GET)
+	public ModelAndView fail() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("fail");
+		return mv;
 	}
 	
 	@RequestMapping(path="logout.do")
