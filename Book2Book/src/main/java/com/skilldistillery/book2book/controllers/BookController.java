@@ -41,7 +41,7 @@ public class BookController {
 	public ModelAndView addedBook () {
 		ModelAndView mv = new ModelAndView();
 		
-		mv.setViewName("book.jsp");
+		mv.setViewName("book");
 		
 		return mv;
 	}
@@ -61,7 +61,7 @@ public class BookController {
 	public ModelAndView editedBook () {
 		ModelAndView mv = new ModelAndView();
 		
-		mv.setViewName("book.jsp");
+		mv.setViewName("book");
 		
 		return mv;
 		
@@ -75,14 +75,14 @@ public class BookController {
 		List<Book> books = bd.searchForBookbyKeyword(keyword);
 		
 		mv.addObject("books",books);
-		mv.setViewName("/WEB-INF/bookList.jsp");
+		mv.setViewName("bookList");
 		
 		return mv;
 	}
 	//BACK TO HOME BUTTON
 	@RequestMapping(path="home.do", method=RequestMethod.GET)
 	public String returnHome() {
-		return "book.jsp";
+		return "book";
 	}
 	
 	
@@ -93,7 +93,7 @@ public class BookController {
 		
 		Book book = bd.searchForBookByTitle(title);
 		mv.addObject("book", book);
-		mv.setViewName("/WEB-INF/bookedit.jsp");
+		mv.setViewName("bookedit");
 	
 		
 		return mv;
@@ -109,7 +109,7 @@ public class BookController {
 		mv.addObject("books", books);
 		User user = (User) session.getAttribute("USER");
 		mv.addObject("user", user);
-		mv.setViewName("/WEB-INF/bookList.jsp");
+		mv.setViewName("bookList");
 	
 		
 		return mv;

@@ -26,21 +26,6 @@
 
 to be deleted
 
-<p>
-<a href="book.jsp">book</a>
-</p>
-
-<p>
-<a href="copy.jsp">copy</a>
-</p>
-
-<p>
-<a href="copytest.jsp">copytest</a>
-
-<p>
-<a href="transaction.jsp">transaction</a>
-</p>
-
 <form action="listAvailableCopy.do" method="GET">
 <input type="submit" value="Search Available Books" class="btn btn-warning btn-lg">
 </form>

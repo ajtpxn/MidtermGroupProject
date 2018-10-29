@@ -37,7 +37,7 @@ public class UserController {
 	public ModelAndView index() {
 		System.out.println("index");
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("WEB-INF/index.jsp");
+		mv.setViewName("index");
 		return mv;
 	}
 	
@@ -47,7 +47,7 @@ public class UserController {
 		ModelAndView mv = new ModelAndView();
 		User user = new User();
 		mv.addObject(user);
-		mv.setViewName("addUser.jsp");
+		mv.setViewName("addUser");
 		return mv;
 	}
 	
@@ -59,7 +59,7 @@ public class UserController {
 		userDAO.creatUser(user);
 		userDAO = null;
 		mv.addObject(user);
-		mv.setViewName("success.jsp");
+		mv.setViewName("success");
 		return mv;
 	}
 	
@@ -86,19 +86,21 @@ public class UserController {
 	    }
 	    User user = new User();
 	    mv.addObject("user", user);
-	    mv.setViewName("login.jsp");
+	    mv.setViewName("login");
 	    return mv;
 	}
 	
 	@RequestMapping(path="login.do", method=RequestMethod.POST)
-	public ModelAndView logIn(User formUser, HttpSession session) {
+	public String logIn(User formUser, HttpSession session) {
 		System.out.println("logIn");
-		ModelAndView mv = new ModelAndView();
+		//ModelAndView mv = new ModelAndView();
 		userDAO = new UserDAOimpl();
 		if(userIsLoggedIn(session)) {
 			System.out.println("*****sessionPositive******");
-			mv.setViewName("index.do");
-			return mv;
+			//mv.setViewName("index.do");
+			//return mv;
+			return "redirect:index.do";
+			
 		}
 		String username = formUser.getUserName();
 		String password = formUser.getPassword();
@@ -108,13 +110,14 @@ public class UserController {
 		
 		if (validUser != null) {
 			session.setAttribute("USER", validUser);
-			mv.setViewName("account.do");
+			//mv.setViewName("account.do");
+			return "redirect:account.do";
 		}
 		else {
-			mv.setViewName("fail.jsp");
+			return "redirect:WEB-INF/fail.jsp";
 		}
-		userDAO = null;
-		return mv;
+		//userDAO = null;
+		//return mv;
 	}
 	
 	@RequestMapping(path="logout.do")
@@ -138,7 +141,7 @@ public class UserController {
 			  System.out.println("back from copies");
 			  System.out.println(copies);
 			  mv.addObject("copies", copies);
-			  mv.setViewName("account.jsp");
+			  mv.setViewName("account");
 			  System.out.println("copies added to mv and account.jsp set");
 			  return mv;
 		  }

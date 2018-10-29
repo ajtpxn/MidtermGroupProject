@@ -71,13 +71,13 @@ public class CopyController {
 		Copy newCopy = cDAO.getCopy(copyId);
 		newCopy.setConditionId(newConditionId);
 		cDAO.editCopy(newCopy, copyId);
-		return "success.jsp";
+		return "success";
 	}
 
 	@RequestMapping(path = "editedCopy.do", method = RequestMethod.GET)
 	public ModelAndView editedCopy() {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("copy.jsp");
+		mv.setViewName("copy");
 		return mv;
 	}
 
@@ -91,7 +91,7 @@ public class CopyController {
 	@RequestMapping(path = "deletedCopy.do", method = RequestMethod.GET)
 	public ModelAndView deletedCopy() {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("copy.jsp");
+		mv.setViewName("copy");
 		return mv;
 	}
 	
@@ -100,7 +100,7 @@ public class CopyController {
 		ModelAndView mv = new ModelAndView();
 		List<Copy> copies = cDAO.listCopies();
 		mv.addObject("copies", copies);
-		mv.setViewName("copytest.jsp");
+		mv.setViewName("copytest");
 		return mv;
 	}
 
@@ -109,7 +109,7 @@ public class CopyController {
 		ModelAndView mv = new ModelAndView();
 		List<Copy> copies = cDAO.listBookCopies(1);
 		mv.addObject("copies", copies);
-		mv.setViewName("copy.jsp");
+		mv.setViewName("copy");
 		return mv;
 	}
 	
@@ -117,7 +117,7 @@ public class CopyController {
 	public ModelAndView removeCopyFromUser(HttpSession session, @RequestParam("copyId")int copyId) {
 		ModelAndView mv = new ModelAndView();
 		cDAO.deleteCopy(copyId);
-		mv.setViewName("success.jsp");
+		mv.setViewName("success");
 		return mv;
 	}
 	

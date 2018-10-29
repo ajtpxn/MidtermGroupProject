@@ -9,16 +9,26 @@
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
-<!-- Book2Book-servlet.xml -->
-<context:component-scan base-package="com.skilldistillery.book2book.controllers, com.skilldistillery.book2book.data" />
-<mvc:annotation-driven />
-<bean id="myEntityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-  <property name="persistenceUnitName" value="Book2Book" />
-</bean>
+	<!-- Book2Book-servlet.xml -->
+	<context:component-scan
+		base-package="com.skilldistillery.book2book.controllers, com.skilldistillery.book2book.data" />
+	<mvc:annotation-driven />
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+	<bean id="myEntityManagerFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="persistenceUnitName" value="Book2Book" />
+	</bean>
 
-<bean id="myTransactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-   <property name="entityManagerFactory" ref="myEntityManagerFactory" />
-</bean>
-<tx:annotation-driven transaction-manager="myTransactionManager" />
+	<bean id="myTransactionManager"
+		class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory"
+			ref="myEntityManagerFactory" />
+	</bean>
+	<tx:annotation-driven
+		transaction-manager="myTransactionManager" />
 
 </beans>
