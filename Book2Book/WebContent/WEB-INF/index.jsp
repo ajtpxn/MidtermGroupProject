@@ -30,6 +30,13 @@ to be deleted
 <input type="submit" value="Search Available Books" class="btn btn-warning btn-lg">
 </form>
 
+	<p>
+	<form action="transaction.do" method="get">
+		 <input type="submit" name="seeTransactions"
+			value="Books I am Borrowing">
+	</form>
+	</p>
+
 
 </body>
 </html>
