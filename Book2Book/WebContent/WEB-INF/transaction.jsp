@@ -33,7 +33,7 @@
 	</c:choose>
 	<br>
 	Borrowed Books:  
-	<c:forEach items="${transactions}" var="transaction">>
+	<c:forEach items="${transactions}" var="transaction">
 	
 	${transaction.id}
 	${transaction.copyId}
@@ -41,8 +41,11 @@
 	${transaction.endDate}
 	${transaction.borrower}
 	
+	<c:forEach items="${copies}" var="copy">
 	
+	<c:if test="${transaction.copyId == copy.id}"> ${copy.book.title}</c:if>
 	
+	</c:forEach>
 	
 	</c:forEach>
 
