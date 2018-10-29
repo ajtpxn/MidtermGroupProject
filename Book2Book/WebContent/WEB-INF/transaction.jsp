@@ -31,7 +31,13 @@
 		</c:when>
 		<c:otherwise>The transaction could not be found!</c:otherwise>
 	</c:choose>
-
+	<br>
+	Borrowed Books:  
+	<c:forEach items="${transactions}" var="transaction">>
+	
+	${transaction.id}
+	${transaction.copyId}
+	</c:forEach>
 
 </body>
 </html>
