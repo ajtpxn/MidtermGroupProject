@@ -178,24 +178,39 @@ public class UserController {
 	  
 	  
 	  //EDIT USER PROFILE/ACCOUNT INFO
-	  public String editProfile( HttpSession session) {
-		  User user = (User) session.getAttribute("USER");
+	  @RequestMapping(path="editingProfile.do", method=RequestMethod.POST)
+	  public String editProfile( User updatedUser, HttpSession session) {
+		  System.out.println("********************************************");
+		  System.out.println(updatedUser);
+		  System.out.println("********************************************");
+		  User olduser = (User) session.getAttribute("USER");
 		  
+		  userDAO.updateUser(olduser.getId(), updatedUser);
 		  
-		  
-		  
-		  
-		  return null;
+		  return "redirect:edited.do";
 	  }
+	  @RequestMapping(path="edited.do", method=RequestMethod.GET)
+	  public ModelAndView editedProfile() {
+		  ModelAndView mv = new ModelAndView();
+		  
+		  mv.setViewName("success");
+		  return mv;
+	  }
+	  
 	  
 	  
 	  
 	  
 	  //REDIRECT TO EDIT PROFILE/ACCOUINT PAGE
 	  @RequestMapping( path="editProfile.do", method=RequestMethod.GET)
-	  public String  moveToEditProfile () {
+	  public ModelAndView  moveToEditProfile (HttpSession session) {
+		  ModelAndView mv = new ModelAndView();
+		  User user = (User) session.getAttribute("USER");
 		  
-		  return "editAccount";
+		  mv.addObject("user", user);
+		  mv.setViewName("editAccount");
+		  
+		  return mv;
 		 
 	  }
 	  

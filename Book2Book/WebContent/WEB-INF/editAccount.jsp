@@ -10,20 +10,21 @@
 <%@ include file="nav.jsp"%>
 <h1>Edit Profile</h1>
 
-<form action="returnUser.do" method="post" modelAttribute="user">
+<form action="editingProfile.do" method="post" >
 		<label for="firstName">First Name: </label> 
 		<input type="text" name="firstName" value="${user.firstName}"/> 
 		<br>
 		<label for="lastName">Last Name: </label>
-		<input type="text" name="lastName" /> 
+		<input type="text" name="lastName" value="${user.lastName}"/> 
 		<br> 
 		<label for="userName">Username: </label>
-		<input type="text" name="userName" /> 
+		<input type="text" name="userName" value="${user.userName}"/> 
 		<br>
 		<label for="password">Password: </label> 
-		<input type="text" name="password" /> 
+		<input type="text" name="password" value="${user.password}" /> 
+		<br>
 		
-		<input type="submit" value="Add User">
+		<input type="submit" value="Confirm Edit">
 	</form>
 
 
