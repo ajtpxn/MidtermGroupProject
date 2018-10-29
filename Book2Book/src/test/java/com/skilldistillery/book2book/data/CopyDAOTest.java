@@ -82,15 +82,15 @@ public class CopyDAOTest {
 //		return true;
 //	}
 	
-	@Test
-	@DisplayName("Test user dao listUserCopies")
-	void test02() {
-		List<Copy> copies = dao.listUserCopies(2);
-		System.out.println(copies);
-		Condition condition = copies.get(0).getCondition();
-		String actual = condition.getName();
-		assertEquals("Used", actual);
-	}
+//	@Test
+//	@DisplayName("Test user dao listUserCopies")
+//	void test02() {
+//		List<Copy> copies = dao.listUserCopies(2);
+//		System.out.println(copies);
+//		Condition condition = copies.get(0).getCondition();
+//		String actual = condition.getName();
+//		assertEquals("Used", actual);
+//	}
 	
 	
 	
