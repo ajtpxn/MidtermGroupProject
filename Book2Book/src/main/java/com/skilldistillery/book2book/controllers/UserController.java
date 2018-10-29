@@ -141,7 +141,7 @@ public class UserController {
 	  @RequestMapping(path="account.do")
 	  public ModelAndView accountIndex(HttpSession session) {
 		  copyDAO = new CopyDAOImpl();
-		  //transDAO = new TransactionDAOImpl();
+		  transDAO = new TransactionDAOImpl();
 		  System.out.println("account page");
 		  ModelAndView mv = new ModelAndView();
 		  if(userIsLoggedIn(session)) {
