@@ -24,30 +24,22 @@ public class TransactionDAOImpl implements TransactionDAO {
 
 	@Override
 	public Transaction makeTransaction(Transaction t) {
-		em = emf.createEntityManager();
-		em.getTransaction().begin();
 		em.persist(t);
 		em.flush();
-		em.getTransaction().commit();
-		em.close();
 		return t;
 	}
 
 	@Override
 	public Transaction getTransactionById(int id) {
-		em = emf.createEntityManager();
-		em.getTransaction().begin();
 		Transaction t = em.find(Transaction.class, id);
 		return t;
 	}
 
 	@Override
 	public List<Transaction> getTransactionsByBorrowerId(int id) {
-		em = emf.createEntityManager();
 		String query = "SELECT t FROM Transaction t WHERE t.borrower.id = :id";
 		List<Transaction> result = em.createQuery(query, Transaction.class).setParameter("id", id).getResultList();
 		System.out.println(result);
-		em.close();
 		return result;
 	}
 
@@ -57,18 +49,13 @@ public class TransactionDAOImpl implements TransactionDAO {
 //	where user.id = 2;
 	@Override
 	public List<Transaction> getTransactionsByLenderId(int id) {
-		em = emf.createEntityManager();
 		String query = "SELECT trans FROM Transaction trans JOIN FETCH trans.copy WHERE  trans.copy.user.id = 2";
 		List<Transaction> lenderTransactions = em.createQuery(query, Transaction.class).getResultList();
-
-		em.close();
 		return lenderTransactions;
 	}
 
 	@Override
 	public List<Transaction> getTransactionsByCopyId(int id) {
-		em = emf.createEntityManager();
-		em.getTransaction().begin();
 		String query = "SELECT t FROM Transaction t WHERE t.copyId = :id";
 		List<Transaction> result = em.createQuery(query, Transaction.class).setParameter("id", id).getResultList();
 
@@ -77,8 +64,6 @@ public class TransactionDAOImpl implements TransactionDAO {
 
 	@Override
 	public Transaction updateTransaction(int id, Transaction updated) {
-		em = emf.createEntityManager();
-		em.getTransaction().begin();
 		Transaction managedTransaction = em.find(Transaction.class, "id");
 		managedTransaction.setBorrowers(updated.getBorrowers());
 		managedTransaction.setCopyId(updated.getCopyId());
@@ -90,8 +75,6 @@ public class TransactionDAOImpl implements TransactionDAO {
 
 	@Override
 	public User getTransactionByCopyIdAndDate(int id, Date date) {
-		em = emf.createEntityManager();
-		em.getTransaction().begin();
 		String query = "SELECT t FROM Transaction t WHERE t.copyId = :id AND t.startDate < :date AND t.endDate > :date";
 		List<Transaction> result = em.createQuery(query, Transaction.class).setParameter("id", id)
 				.setParameter("date", date).getResultList();

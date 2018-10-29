@@ -31,24 +31,14 @@ public class UserDAOimpl implements UserDAO {
 	// CREATE NEW USER
 	@Override
 	public User creatUser(User user) {
-		em = emf.createEntityManager();
-		em.getTransaction().begin();
-
 		em.persist(user);
 		em.flush();
-
-		em.getTransaction().commit();
-		em.close();
-
 		return user;
 	}
 
 	// UPDATE USER
 	@Override
 	public User updateUser(int id, User updatedUser) {
-		em = emf.createEntityManager();
-		em.getTransaction().begin();
-
 		User managedUser = em.find(User.class, id);
 		managedUser.setFirstName(updatedUser.getFirstName());
 		managedUser.setLastName(updatedUser.getLastName());
@@ -57,28 +47,19 @@ public class UserDAOimpl implements UserDAO {
 		managedUser.setPassword(updatedUser.getPassword());
 		managedUser.setActive(updatedUser.isActive());
 
-		em.getTransaction().commit();
-		em.close();
-
 		return managedUser;
 	}
 
 	// DEACTIVATE USER
 	@Override
 	public boolean deleteUser(int id) {
-		em = emf.createEntityManager();
-		em.getTransaction().begin();
-
 		User deactivateUser = em.find(User.class, id);
 
 		deactivateUser.setActive(false);
 
 		if (deactivateUser.isActive() == false) {
-			em.getTransaction().commit();
-			em.close();
 			return true;
 		} else {
-			em.close();
 			return false;
 		}
 
@@ -87,7 +68,6 @@ public class UserDAOimpl implements UserDAO {
 
 	@Override
 	public List<Copy> listAllUserBooks(int userId) {
-		em = emf.createEntityManager();
 
 		String queryStr = "SELECT c FROM Copy c  JOIN FETCH c.book WHERE  c.user.id = :id";
 
@@ -107,8 +87,6 @@ public class UserDAOimpl implements UserDAO {
 //	//LIST ALL TRANSACTION BY USER ID
 	public List<Transaction> listAllTransactionsByUserId( int userId){
 		
-		em = emf.createEntityManager();
-		
 		//String queryStr = "SELECT trans FROM Transaction trans JOIN FETCH trans."
 		
 		
@@ -122,12 +100,8 @@ public class UserDAOimpl implements UserDAO {
 // FIND USER BY ID
 	@Override
 	public User findUser(int id) {
-		em = emf.createEntityManager();
 
 		User user = em.find(User.class, id);
-		
-		
-		em.close();
 
 		return user;
 	}
@@ -136,7 +110,6 @@ public class UserDAOimpl implements UserDAO {
 	// GET USER BY USERNAME AND PASSWORD
 	@Override
 	public User getUserByCredentials(String userName, String password) {
-		em = emf.createEntityManager();
 		List<User> userList = new ArrayList<User>();
 		String query = "SELECT u FROM User u";
 		userList = em.createQuery(query, User.class).getResultList();
@@ -152,7 +125,6 @@ public class UserDAOimpl implements UserDAO {
 				
 			}
 		}
-		em.close();
 		return returnUser;
 	}
 }
