@@ -12,7 +12,7 @@
 <%@ include file="nav.jsp"%>
 
 	<h2>Transaction Details</h2>
-
+<%-- 
 	<c:choose>
 		<c:when test="${not empty transaction }">
 		<!-- The below is rather ugly and is just for debug
@@ -31,29 +31,24 @@
 		</c:when>
 		<c:otherwise>The transaction could not be found!</c:otherwise>
 	</c:choose>
+	 --%>
+	
 	<br>
 	Borrowed Books:  
+	<br>
+	<br>
 	<c:forEach items="${transactions}" var="transaction">
 	
-	${transaction.id}
-	${transaction.copyId}
-	${transaction.startDate}
-	${transaction.endDate}
-	${transaction.borrower}
-	
-	<c:forEach items="${copies}" var="copy">
-	
-	<c:if test="${transaction.copyId == copy.id}"> 
-	
-	${copy.book.title}
-	
-	
-	
-	
-	</c:if>
-	
-	</c:forEach>
-	
+	ID: ${transaction.id}
+	<br>
+	Copy ID: ${transaction.copyId}
+	<br>
+	Start Date: ${transaction.startDate}
+	<br>
+	End Date: ${transaction.endDate}
+	<br>
+	<br>
+	<br>
 	</c:forEach>
 
 </body>

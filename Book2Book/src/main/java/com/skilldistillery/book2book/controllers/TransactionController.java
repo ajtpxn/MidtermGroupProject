@@ -26,13 +26,13 @@ import com.skilldistillery.book2book.entities.User;
 public class TransactionController {
 	
 	@Autowired
-	private static UserDAO userDAO;
+	private UserDAO userDAO;
 	
 	@Autowired
-	private static CopyDAO copyDAO;
+	private CopyDAO copyDAO;
 	
 	@Autowired
-	private static TransactionDAO transDAO;
+	private TransactionDAO transDAO;
 	
 	@RequestMapping(path="transaction.do", method=RequestMethod.GET)
 	  public ModelAndView accountIndex(HttpSession session) {
