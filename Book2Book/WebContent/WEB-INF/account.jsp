@@ -91,7 +91,7 @@ __________________________________<br>
 	
 	
 	<p>
-	<form action="editProfile.do" method="get">
+	<form action="editProfile.do" method="GET">
 		 <input type="submit" name="editProfile"
 			value="Edit Profile">
 	</form>
