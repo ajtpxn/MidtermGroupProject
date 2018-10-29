@@ -156,7 +156,7 @@ public class UserController {
 			  System.out.println(copyDAO);
 			  System.out.println(transDAO);
 			  for (Copy c : copies) {
-				  borrowers.add(transDAO.getTransactionByCopyIdAndDate(c.getId(), new Date()));
+				  borrowers.add(transDAO.getBorrowerByCopyIdAndDate(c.getId(), new Date()));
 			  }
 			  /*for (int i = 0; i < copies.size(); i++) {
 				  List<Transaction> transactions = transDAO.getTransactionsByCopyId(i);
@@ -168,6 +168,7 @@ public class UserController {
 			  mv.addObject("borrowers", borrowers);
 			  mv.setViewName("account");
 			  System.out.println("copies added to mv and account.jsp set");
+			  System.out.println(borrowers);
 			  return mv;
 		  }
 		  else {
