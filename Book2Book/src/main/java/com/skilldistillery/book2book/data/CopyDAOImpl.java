@@ -79,11 +79,12 @@ public class CopyDAOImpl implements CopyDAO {
 		System.out.println(copyList);
 		return copyList;
 	}
-
+//	select * from copy
+//	where copy.available = true and copy.user_id != 2;
 	@Override
-	public List<Copy> seeAllAvailableCopies() {
-		String query = "SELECT c FROM Copy c WHERE c.available = true";
-		List<Copy> availableBooks = em.createQuery(query, Copy.class).getResultList();
+	public List<Copy> seeAllAvailableCopies(int userId) {
+		String query = "SELECT c FROM Copy c WHERE c.available = true AND c.user.id != :id";
+		List<Copy> availableBooks = em.createQuery(query, Copy.class).setParameter("id", userId).getResultList();
 		return availableBooks;
 	}
 }

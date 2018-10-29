@@ -156,10 +156,12 @@ public class CopyController {
 
 	// FIND ALL AVAILBLE BOOKS TO RENT
 	@RequestMapping(path = "listAvailableCopy.do", method = RequestMethod.GET)
-	public ModelAndView findAllAvailableCopiesToRent() {
+	public ModelAndView findAllAvailableCopiesToRent(HttpSession session) {
 		ModelAndView mv = new ModelAndView();
+		User user = (User) session.getAttribute("USER");
+		
 
-		List<Copy> allAvailableCopies = cDAO.seeAllAvailableCopies();
+		List<Copy> allAvailableCopies = cDAO.seeAllAvailableCopies(user.getId());
 
 		mv.addObject("availCopies", allAvailableCopies);
 		mv.setViewName("allAvailCopies");
