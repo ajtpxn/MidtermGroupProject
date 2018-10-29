@@ -1,10 +1,11 @@
 package com.skilldistillery.book2book.controllers;
 
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.jboss.logging.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,9 +15,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.skilldistillery.book2book.data.BookDAO;
 import com.skilldistillery.book2book.data.CopyDAO;
+import com.skilldistillery.book2book.data.TransactionDAO;
 import com.skilldistillery.book2book.entities.Book;
 import com.skilldistillery.book2book.entities.Condition;
 import com.skilldistillery.book2book.entities.Copy;
+import com.skilldistillery.book2book.entities.Transaction;
 import com.skilldistillery.book2book.entities.User;
 
 @Controller
@@ -27,6 +30,9 @@ public class CopyController {
 
 	@Autowired
 	private BookDAO bDAO;
+	
+	@Autowired
+	private TransactionDAO tDAO;
 
 	// Add a new copy to a user's library(tentative name)
 	@RequestMapping(path = "copy.do", method = RequestMethod.POST)
@@ -166,5 +172,82 @@ public class CopyController {
 		return mv;
 
 	}
+	
+	//ADD TRANSACTION AND UPDATE USERS COPY.AVAILABLE TO FASLE
+	@RequestMapping(path = "addTransUpdateCopy.do", method = RequestMethod.POST)
+	public String addTransAndUpdateCopyAvailable( Copy copy,Date startDate, Date endDate, HttpSession session) {
+		
+		System.out.println("8888888888888888888888888" + copy.getBook().getTitle());
+		System.out.println(startDate );
+		System.out.println(endDate);
+		
+		User user = (User) session.getAttribute("USER");
+		Transaction newTrans = new Transaction();
 
+		newTrans.setBorrowers(user);
+		newTrans.setCopyId(copy.getId());
+		newTrans.setStartDate(startDate);
+		newTrans.setStartDate(endDate);
+		
+		
+		tDAO.makeTransaction(newTrans);
+		
+		//int copyId = updatedCopy.getId();
+		//cDAO.editCopy(updatedCopy, copyId);
+		
+		
+		
+		
+		return "redirect:changedCopyTrans.do";
+	}
+	
+	@RequestMapping(path = "changedCopyTrans.do", method = RequestMethod.GET)
+	public ModelAndView addedTransandUpdatedCopy() {
+		ModelAndView mv = new ModelAndView();
+		
+		
+		mv.setViewName("allAvailCopies");
+		return mv;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
