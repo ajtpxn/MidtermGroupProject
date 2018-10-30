@@ -48,7 +48,7 @@ public class CopyController {
 
 		Book book = bDAO.getBookById(bookId);
 		User user = (User) session.getAttribute("USER");
-		Condition condition = new Condition();
+		Condition condition = cDAO.findConditionbyID(1);
 		System.out.println("form book: " + book);
 		System.out.println("form user: " + user);
 		Copy copy = new Copy();

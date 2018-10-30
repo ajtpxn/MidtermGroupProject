@@ -14,6 +14,7 @@
 </head>
 <body>
 <div class="container">
+<c:forEach items="${books}" var="book">
  
  <h3>Edit the book: ${book.title}</h3>
 	<form action="editbook.do" method="POST">
@@ -25,6 +26,8 @@
 		  <label>Content</label> <input type="text" name="contentRating" value="${book.contentRating}" />
 		   <input type="submit" value="Edit Book" class="btn btn-Dark" />
 	</form>
+	
+	</c:forEach>
  
  
  
