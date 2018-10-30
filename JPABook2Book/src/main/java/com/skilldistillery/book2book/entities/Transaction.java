@@ -47,9 +47,6 @@ public class Transaction {
 	private User borrower;
 	
 	
-	
-	
-	
 	public User getBorrowers() {
 		return borrower;
 	}

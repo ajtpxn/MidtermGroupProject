@@ -32,7 +32,6 @@ public class Copy {
 	@JoinColumn(name="condition_id")
 	private Condition condition;
 	
-	
 	private boolean available;
 	private boolean active;
 	@Temporal(TemporalType.TIMESTAMP)

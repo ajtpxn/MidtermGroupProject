@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+#openbook{
+	position:fixed;
+	z-index:-1;
+	right:7%;
+}
+
+#login{
+	position:absolute;
+	margin-top:15%;
+	margin-left:5%;
+}
+#submit{
+	position:absolute;
+	margin-top:5%;
+	
+}
+#nav{
+	position:relative;
+	margin-top:2%;
+}
