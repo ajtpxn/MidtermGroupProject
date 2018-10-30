@@ -160,6 +160,7 @@ public class CopyController {
 		ModelAndView mv = new ModelAndView();
 		User user = (User) session.getAttribute("USER");
 		System.out.println(user);
+		
 		if (user != null) {
 			List<Copy> allAvailableCopies = cDAO.seeAllAvailableCopies(user.getId());
 			mv.addObject("availCopies", allAvailableCopies);
@@ -167,11 +168,15 @@ public class CopyController {
 			return mv;
 		}
 		else {
-			List<Copy> limitedCopies = cDAO.listLimitedCopies();
-			System.out.println(limitedCopies.size());
-			mv.addObject("availCopies", limitedCopies);
-			mv.setViewName("allAvailCopies");
+			
+			mv.addObject("rejectNotLoggedIn", true);
+			mv.setViewName("addUser");
 			return mv;
+//			List<Copy> limitedCopies = cDAO.listLimitedCopies();
+//			System.out.println(limitedCopies.size());
+//			mv.addObject("availCopies", limitedCopies);
+//			mv.setViewName("login");
+//			return mv;
 		}
 
 	}
@@ -267,6 +272,19 @@ public class CopyController {
 	}
 	
 	
+	
+	//LIST OF AVAILBEL COPIES TO BORROW ON INDEX PAGE
+	@RequestMapping(path = "index.do", method = RequestMethod.GET)
+	public ModelAndView findAllAvailableCopiesForIndex() {
+		ModelAndView mv = new ModelAndView();
+		
+		List<Copy> limitedCopies = cDAO.listLimitedCopies();
+		System.out.println(limitedCopies.size());
+		mv.addObject("availCopies", limitedCopies);
+		mv.setViewName("index");
+		return mv;
+		
+	}
 	
 	
 	

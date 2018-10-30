@@ -1,5 +1,5 @@
 #bookcase{
-	position: fixed;
+	position: absolute;
 	margin-left:-5%;
 	width: 110%;
 	height:80%;
@@ -9,7 +9,7 @@
 }
 
 #title{
-	position:fixed;
+	position:relative;
 	left:30%;
 	margin-top:25%;
 	font-size:60px;
@@ -17,8 +17,21 @@
 	
 }
 #searchbutton{
-	position:fixed;
-	margin-top:45%;
-	left:28%;
+	position:relative;
+	margin-left:5%;
+	margin-top:5%;
+	margin-bottom:5%;
+	
 }
 
+
+#booksavail{
+	position:relative;
+	margin-top:10%;
+	margin-left:5%
+}
+#copies{
+	position:relative;
+	margin-top:2%;
+	margin-left:5%;
+}
