@@ -7,9 +7,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+
 <title>Insert title here</title>
 </head>
 <body>
+
+<div class="container">
+
 <%@ include file="nav.jsp"%>
 <h2>Details on ${copy.book.title}</h2>
 <strong>Title:</strong> ${copy.book.title} <br>
@@ -28,13 +36,15 @@
 
 <form:form action="addTransUpdateCopy.do" method="POST" modelAttribute="copy">
 
+
+
 <input type="hidden" value="${copy.id}" name="copyId">
 <label>Start Date:</label><input type="datetime" value="" name="startDate"><br>
 <label>End Date:</label><input type="datetime" value="" name="endDate"><br>
 <input type="submit" value="Borrow" class="btn btn-primary">
 
 </form:form>
-
+</div>
 
 </body>
 </html>

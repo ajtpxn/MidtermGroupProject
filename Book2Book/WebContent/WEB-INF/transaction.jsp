@@ -6,33 +6,38 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
 <title>Home</title>
 </head>
 <body>
+
+
+<div class="container">
+
+
+
+
 <%@ include file="nav.jsp"%>
 
-	<h2>Borrowed Books</h2>
-	
+	<h2>Books I am Borrowing</h2>
 	<c:forEach items="${transactions}" var="transaction">
+	<hr>
 	<c:forEach items="${copies}" var="copy">
 	<c:if test="${transaction.copyId==copy.id}">
-	Title: ${copy.book.title} <br>
-	Descripton: ${copy.book.description}<br>
+	${copy.book.title} <br>
+	${copy.book.description}<br>
 	Copy Condition ID: ${copy.conditionId}
 	</c:if>
 	</c:forEach>
-	<br>
-	Transaction ID: ${transaction.id} <br>
-	Transaction Copy ID: ${transaction.copyId} <br>
-	Transaction Start Date: ${transaction.startDate} <br>
-	Transaction End Date: ${transaction.endDate} <br>
-	<br>
-	
-	
-	
+	| Start: ${transaction.startDate}
+	| End: ${transaction.endDate} 
 	</c:forEach>
+
 	
 	
+	</div>
 
 
 </body>
