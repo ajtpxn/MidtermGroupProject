@@ -1,5 +1,6 @@
 package com.skilldistillery.book2book.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -37,6 +38,34 @@ public class Condition {
 	public int getId() {
 		return id;
 	}
+	
+	
+
+	public List<Copy> getCopies() {
+		return copies;
+	}
+
+	public void setCopies(List<Copy> copies) {
+		this.copies = copies;
+	}
+	
+	public void addCopy( Copy copy) {
+		if ( this.copies == null) {
+			this.copies = new ArrayList<>();
+		}
+		if( !copies.contains(copy)) {
+			copies.add(copy);
+			
+		}
+	}
+	
+	public void removeCopy( Copy genre) {
+		if (this.copies != null) {
+			this.copies.remove(genre);
+			
+		}
+	}
+	
 
 	@Override
 	public int hashCode() {
