@@ -199,23 +199,38 @@ public class CopyController {
 	
 	//ADD TRANSACTION AND UPDATE USERS COPY.AVAILABLE TO FASLE
 	@RequestMapping(path = "addTransUpdateCopy.do", method = RequestMethod.POST)
-	public String addTransAndUpdateCopyAvailable( @RequestParam(name="copyId") int copyId,@RequestParam(name="startDate") String startDate, 
-			@RequestParam(name="endDate") String endDate, HttpSession session) {
+	public String addTransAndUpdateCopyAvailable( @RequestParam(name="copyId") int copyId,
+			@RequestParam(name="datefilter") String dateRange, HttpSession session) {
+		
+		
 		
 		Copy copy = cDAO.getCopy(copyId);
 		
 		User user = (User) session.getAttribute("USER");
 		//PARSES START AND END DATE FROM STRING TO DATE
-		SimpleDateFormat f=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
-		String time = "2018-10-10 12:00:00";
+		//SimpleDateFormat f=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
+		//String time = "2018-10-10 12:00:00";
+		System.out.println(dateRange);
+		//10/23/2018 - 11/06/2018
+		String[] dateArray= dateRange.split("\\s-\\s");
+		System.out.println(dateArray[0]);
+		System.out.println(dateArray[1]);
+		String sd = dateArray[0];
+		String startDateWithTime = sd.concat(" 10:00:00");
+		String ed = dateArray[1];
+		String endDateWithTime = ed.concat(" 10:00:00");
 		Date startD = null;
+		//Date cDate = null;
 		Date endD = null;
-		Date cDate = null;
-		
+
 		try {
-			startD = f.parse(startDate);
-			endD = f.parse(endDate);
-			cDate = f.parse(time);
+			startD = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").parse(startDateWithTime);
+			endD = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").parse(endDateWithTime);
+			System.out.println(startD);
+			System.out.println(endD);
+//			startD = f.parse(startDate);
+//			endD = f.parse(endDate);
+			//cDate = f.parse(time);
 			
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
@@ -228,7 +243,7 @@ public class CopyController {
 		newTrans.setCopyId(copy.getId());
 		newTrans.setStartDate(startD);
 		newTrans.setEndDate(endD);
-		newTrans.setDateCreated(cDate);
+		//newTrans.setDateCreated(cDate);
 		
 		tDAO.makeTransaction(newTrans);
 		
