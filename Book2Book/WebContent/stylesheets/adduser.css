@@ -1,0 +1,24 @@
+@charset "UTF-8";
+
+#nav{
+	position:absolute;
+	margin-top:2%;
+	
+}
+#text{
+	position:relative;
+	margin-left:5%;
+	margin-top:10%;
+	
+}
+#pic{
+	position:relative;
+	margin-top:10%;
+	
+}
+#title{
+	position:absolute;
+	margin-top:2%;
+	left:15%;
+	
+}
