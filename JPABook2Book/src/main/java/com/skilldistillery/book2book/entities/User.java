@@ -19,77 +19,98 @@ import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 public class User {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
-	@Column(name="first_name")
+
+	@Column(name = "first_name")
 	private String firstName;
-	
-	@Column(name="last_name")
+
+	@Column(name = "last_name")
 	private String lastName;
-	
-	@Column(name="username")
+
+	@Column(name = "username")
 	private String userName;
-	
+
 	private String password;
-	
+
 	private boolean active;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
 	@CreationTimestamp
-	@Column(name="date_created", updatable=false)
+	@Column(name = "date_created", updatable = false)
 	private Date dateCreated;
-	
-	
-	@OneToMany(mappedBy="user")
+
+	@OneToMany(mappedBy = "user")
 	private List<Copy> userCopies;
-	
-	@OneToMany(mappedBy="borrower")
+
+	@OneToMany(mappedBy = "borrower")
 	private List<Transaction> transactions;
-	
+
 //	@ManyToOne
 //	@JoinColumn(name="borrow_id")
 //	private User borrower;
-	
-	
+
+	@Column(name = "image_url")
+	private String imageUrl;
+
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
+
 	public Date getDateCreated() {
 		return dateCreated;
 	}
+
 	public int getId() {
 		return id;
 	}
+
 	public String getFirstName() {
 		return firstName;
 	}
+
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
+
 	public String getLastName() {
 		return lastName;
 	}
+
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+
 	public String getUserName() {
 		return userName;
 	}
+
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
+
 	public String getPassword() {
 		return password;
 	}
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
 	public boolean isActive() {
 		return active;
 	}
+
 	public void setActive(boolean active) {
 		this.active = active;
 	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -97,6 +118,7 @@ public class User {
 		result = prime * result + id;
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -110,6 +132,7 @@ public class User {
 			return false;
 		return true;
 	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -118,6 +141,7 @@ public class User {
 				.append(" active: ").append(active).append(" dateCreated: ").append(dateCreated);
 		return builder.toString();
 	}
+
 	public User(int id, String firstName, String lastName, String userName, String password, boolean active,
 			Date dateCreated) {
 		super();
@@ -129,9 +153,9 @@ public class User {
 		this.active = active;
 		this.dateCreated = dateCreated;
 	}
-	
+
 	public User() {
 		super();
 	}
-	
+
 }

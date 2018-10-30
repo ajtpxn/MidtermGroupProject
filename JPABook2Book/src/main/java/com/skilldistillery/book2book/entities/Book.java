@@ -38,6 +38,20 @@ public class Book {
 	inverseJoinColumns=@JoinColumn(name="genre_id"))
 	private List<Genre> genres;
 	
+	@Column(name = "image_url")
+	private String imageUrl;
+
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
+	
+//	@Column(name="pic_url")
+//	private String picture;
+//	
 	
 	
 	//GETTERS ANDN SETTERS 
