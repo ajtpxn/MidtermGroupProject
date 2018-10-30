@@ -12,25 +12,23 @@
 </head>
 <body>
 <div class="container">
-	<%--Edit the file nav.jsp to change nav links --%>
+
 	<nav>
-
-		<c:choose>
-
-			<c:when test="${not empty USER }">
-				<a href="account.do">Account</a> |
+<c:choose>
+	
+		<c:when test="${not empty USER }">
+		<a href="account.do">Account</a> |
 		<a href="logout.do">Log Out</a>
-			</c:when>
-			<c:otherwise>
-				<a href="login.do">Log In</a> | <a href="addUser.do">Sign Up</a>
-			</c:otherwise>
-
-		</c:choose>
+		</c:when>
+		<c:otherwise><a href="login.do">Log In</a> | <a href="addUser.do">Sign Up</a>
+		</c:otherwise>
+		
+	</c:choose>
 	</nav>
 	<h2>Book2Book</h2>
 
 	
-	<form action="getbooks.do" method="GET">
+	<form action="home.do" method="GET">
 		<input type="submit" name="seeBook"
 			value="Add a book you own to your profile" class="btn btn-primary btn-lg" >
 	</form>

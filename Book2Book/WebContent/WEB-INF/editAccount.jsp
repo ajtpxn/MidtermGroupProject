@@ -4,9 +4,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
 <title>Edit Profile</title>
 </head>
 <body>
+<div class="container">
 <%@ include file="nav.jsp"%>
 <h1>Edit Profile</h1>
 
@@ -27,6 +31,6 @@
 		<input type="submit" value="Confirm Edit">
 	</form>
 
-
+</div>
 </body>
 </html>

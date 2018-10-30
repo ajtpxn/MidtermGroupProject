@@ -7,27 +7,39 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+<title>Books Available to Borrow</title>
 </head>
 <body>
-<h2>Available Books for Borrow</h2>
+
+<div class="container">
+<%@ include file="nav.jsp"%>
+<h2>Books Available to Borrow</h2>
 <c:forEach items="${availCopies}" var="copy">
-
+<hr>
+<h4>
 ${copy.book.title }
-
+</h4>
+${copy.book.description }
+<div class="float-right">
 <form action="copyDetails.do" method="GET">
 	<input type="hidden" name="copy.id" value="${copy.id}">
-	<input type="submit" value="Details" class="btn btn-primary btn-lg">
+	<input type="submit" value="Details" class="btn btn-primary">
 	</form>
+</div>
 
-<br><br>
 
 </c:forEach>
-
+<%-- 
 <form action="home.do" method="GET">
 		<input type="submit" value="Home"
 			class="btn btn-primary btn-lg">
 	</form>
+	
+	 --%>
+	</div>
 
 </body>
 </html>

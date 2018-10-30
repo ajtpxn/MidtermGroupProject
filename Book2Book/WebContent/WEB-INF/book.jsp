@@ -7,38 +7,99 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
 <title>Book</title>
 </head>
 <body>
+<div class="container">
 <%@ include file="nav.jsp"%>
 
-	<h2>Book</h2>
-
-
+	<hr>
+	<form action="getbooks.do" method="GET">
+	<input type="submit" value="List All Books" class="btn btn-primary btn-lg" />
+	</form>
+<hr>
 	<h3>Add a new Book</h3>
 	<form action="add.do" method="POST">
-		<label>title</label> <input type="text" name="title" /> 
-		<label>description</label><input type="text" name="description" />
-		 <label>author first name</label> <input type="text" name="author.firstName" />
-		  <label>author last name</label> <input type="text" name="author.lastName" /> 
-		  <label>Content</label> <input type="number" name="contentRatingId" />
-		   <input type="submit" value="Add Book" class="btn btn-Dark" />
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+		<label>Title</label> 
+    </div>
+    <div class="col-sm">
+		<input type="text" name="title" /> <br>
+    </div>
+    <div class="col-sm">
+      
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm">
+		<label>Description</label>
+    </div>
+    <div class="col-sm">
+		<input type="text" name="description" />
+    </div>
+    <div class="col-sm">
+      
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm">
+		 <label>Author First Name</label> 
+    </div>
+    <div class="col-sm">
+		 <input type="text" name="author.firstName" /><br>
+    </div>
+    <div class="col-sm">
+      
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm">
+		  <label>Author Last Name</label> 
+    </div>
+    <div class="col-sm">
+		  <input type="text" name="author.lastName" /> <br>
+    </div>
+    <div class="col-sm">
+      
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm">
+		  <label>Content Rating Number</label> 
+    </div>
+    <div class="col-sm">
+		  <input type="number" name="contentRatingId" /><br>
+    </div>
+    <div class="col-sm">
+		   <input type="submit" value="Add Book" class="btn btn-primary" />
+      
+    </div>
+  </div>
 	</form>
-	<h2>Search Book</h2>
+
+<hr>
+	<h2>Search for a Book</h2>
 	<form action="searchbook.do" method="GET">
 	
-	<label>search by keyword</label> <input type="text" name="keyword" />
-	<input type="submit" value="Search Book" class="btn btn-Dark" />
+	<label>Search by Keyword: </label> <input type="text" name="keyword" />
+	<input type="submit" value="Search" class="btn btn-primary" />
 	
 	</form>
+	<hr>
 	<h2>Edit Book</h2>
 		<form action="editbook.do" method="GET">
 	
-	<label>search by keyword</label> <input type="text" name="title" />
-	<input type="submit" value="Search Book title" class="btn btn-Dark" />
+	<label>Search by Keyword: </label> <input type="text" name="title" />
+	<input type="submit" value="Search" class="btn btn-primary" />
 	
 	</form>
 	
+	</div>
 	
 </body>
 </html>

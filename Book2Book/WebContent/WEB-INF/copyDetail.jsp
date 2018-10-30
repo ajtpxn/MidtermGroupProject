@@ -20,6 +20,10 @@
 
 <%@ include file="nav.jsp"%>
 <h2>Details on ${copy.book.title}</h2>
+<hr>
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
 <strong>Title:</strong> ${copy.book.title} <br>
 <strong>Author:</strong> ${copy.book.author.firstName} ${copy.book.author.lastName}<br>
 <strong>Description:</strong> ${copy.book.description }<br>
@@ -31,19 +35,25 @@
 <strong>Content Rating: </strong> ${copy.book.contentRatingId}<br>
 <strong>Condition:</strong>  ${copy.conditionId }<br>
 <strong>Lender Name: </strong> ${copy.user.firstName} ${copy.user.lastName}
-
-
-
+    </div>
+    <div class="col-sm">
 <form:form action="addTransUpdateCopy.do" method="POST" modelAttribute="copy">
 
 
-
+I would like to borrow this book<br>
 <input type="hidden" value="${copy.id}" name="copyId">
-<label>Start Date:</label><input type="datetime" value="" name="startDate"><br>
-<label>End Date:</label><input type="datetime" value="" name="endDate"><br>
+<label>starting on &nbsp; &nbsp; </label><input type="datetime" value="" name="startDate"><br>
+<label>and ending on &nbsp; </label><input type="datetime" value="" name="endDate"><br>
 <input type="submit" value="Borrow" class="btn btn-primary">
 
 </form:form>
+ 
+  </div>
+</div>
+
+
+
+
 </div>
 
 </body>

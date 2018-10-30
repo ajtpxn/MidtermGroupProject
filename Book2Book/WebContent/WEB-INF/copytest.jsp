@@ -4,9 +4,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
 <title>Copies</title>
 </head>
 <body>
+<div class="container">
 <c:when test="${not empty copies }">
 			<c:forEach items="${copies }" var="copy">
 				<ul>
@@ -34,5 +38,6 @@
 			<c:otherwise>
 			<h4>No Copy Found</h4>
 			</c:otherwise>
+			</div>
 </body>
 </html>

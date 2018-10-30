@@ -7,10 +7,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
 <title>Insert title here</title>
 </head>
 <body>
-
+<div class="container">
  
  <h3>Edit the book: ${book.title}</h3>
 	<form action="editbook.do" method="POST">
@@ -37,6 +40,6 @@
  <form action="home.do" method="GET">
 <input id="home" type="submit" value="Home" class="btn btn-primary btn-lg">
 </form>
-
+</div>
 </body>
 </html>
