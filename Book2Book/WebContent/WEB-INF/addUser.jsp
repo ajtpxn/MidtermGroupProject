@@ -16,6 +16,13 @@
 	<%--Edit the file nav.jsp to change nav links --%>
 	<%@ include file="nav.jsp"%>
 	<h2>Sign Up</h2>
+	
+	<div class="text-danger">
+	<p>
+	<c:if test="${rejectNotLoggedIn}" >You must be logged in for that. Please sign up or log in.</c:if>
+	</p>
+
+	</div>
 
 	<form action="returnUser.do" method="post" modelAttribute="user">
 		<label for="firstName">First Name: </label> 
