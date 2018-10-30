@@ -46,12 +46,8 @@ public class CopyDAOImpl implements CopyDAO {
 
 	@Override
 	public void deleteCopy(int id) {
-		em = emf.createEntityManager();
-		em.getTransaction().begin();
 		Copy updatedCopy = em.find(Copy.class, id);
 		updatedCopy.setActive(false);
-		em.getTransaction().commit();
-		em.close();
 	}
 
 	@Override
