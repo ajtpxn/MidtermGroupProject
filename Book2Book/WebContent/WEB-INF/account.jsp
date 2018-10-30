@@ -54,7 +54,7 @@
 	<h4> My Books: </h4>
     </div>
     <div class="col-sm">
-	<form action="getbooks.do" method="GET">
+	<form action="home.do" method="GET">
 		<input type="submit" name="seeBook"
 			value="Add a book to your list">
 	</form>
