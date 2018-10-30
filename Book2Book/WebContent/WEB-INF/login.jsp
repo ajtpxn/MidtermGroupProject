@@ -7,16 +7,18 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-
+<link rel="stylesheet" href="stylesheets/login.css">
 <title>Login</title>
 </head>
 <body>
 <div class="container">
 <%--Edit the file nav.jsp to change nav links --%>
-<%@ include file="nav.jsp" %>
+<div id="nav">
+<%@  include file="nav.jsp" %>
+</div>
 <h2>Login</h2>
-
-<form action="login.do" method="post" modelAttribute="user">
+<img id="openbook" alt="openbook" src="media/openbook.jpg">
+<form id ="login" action="login.do" method="post" modelAttribute="user">
 
 
 <label for="userName">Username: </label>
@@ -25,13 +27,13 @@
 <br>
 
 
-<label for="password">Password: </label>
+<label id="pass" for="password">Password: </label>
 <input type="text" name="password" />
 
 
 
 
-<input type="submit" value="Log In">
+<input id="submit" type="submit" value="Log In" class="btn btn-success btn-lg btn-block">
 </form>
 
 </div>
