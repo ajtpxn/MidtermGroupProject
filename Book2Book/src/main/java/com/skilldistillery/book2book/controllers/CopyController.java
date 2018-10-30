@@ -159,27 +159,42 @@ public class CopyController {
 	public ModelAndView findAllAvailableCopiesToRent(HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		User user = (User) session.getAttribute("USER");
-		
+		System.out.println(user);
+		if (user != null) {
+			List<Copy> allAvailableCopies = cDAO.seeAllAvailableCopies(user.getId());
+			mv.addObject("availCopies", allAvailableCopies);
+			mv.setViewName("allAvailCopies");
+			return mv;
+		}
+		else {
+			List<Copy> limitedCopies = cDAO.listLimitedCopies();
+			System.out.println(limitedCopies.size());
+			mv.addObject("availCopies", limitedCopies);
+			mv.setViewName("allAvailCopies");
+			return mv;
+		}
 
-		List<Copy> allAvailableCopies = cDAO.seeAllAvailableCopies(user.getId());
-
-		mv.addObject("availCopies", allAvailableCopies);
-		mv.setViewName("allAvailCopies");
-
-		return mv;
 	}
+
 
 	// GET DETAILS ON COPY
 	@RequestMapping(path = "copyDetails.do", method = RequestMethod.GET)
-	public ModelAndView getCopyDetails(@RequestParam("copy.id") int copyId) {
+	public ModelAndView getCopyDetails(HttpSession session, @RequestParam("copy.id") int copyId) {
 		ModelAndView mv = new ModelAndView();
-
-		Copy copyDetails = cDAO.getCopy(copyId);
-		mv.addObject("copy", copyDetails);
-		mv.setViewName("copyDetail");
-
-		return mv;
-
+		User user = (User) session.getAttribute("USER");
+		System.out.println(user);
+		if (user != null) {
+			Copy copyDetails = cDAO.getCopy(copyId);
+			mv.addObject("copy", copyDetails);
+			mv.setViewName("copyDetail");
+			
+			return mv;
+		}
+		else {
+			mv.addObject("rejectNotLoggedIn", true);
+			mv.setViewName("addUser");
+			return mv;
+		}
 	}
 	
 	//ADD TRANSACTION AND UPDATE USERS COPY.AVAILABLE TO FASLE

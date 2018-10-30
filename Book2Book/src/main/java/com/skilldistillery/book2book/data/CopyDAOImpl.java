@@ -1,6 +1,7 @@
 package com.skilldistillery.book2book.data;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -84,5 +85,16 @@ public class CopyDAOImpl implements CopyDAO {
 		String query = "SELECT c FROM Copy c WHERE c.available = true AND c.user.id != :id";
 		List<Copy> availableBooks = em.createQuery(query, Copy.class).setParameter("id", userId).getResultList();
 		return availableBooks;
+	}
+	@Override
+	public List<Copy> listLimitedCopies() {
+		String query = "SELECT c FROM Copy c";
+		List<Copy> copies = em.createQuery(query, Copy.class).getResultList();
+		Collections.shuffle(copies);
+		List<Copy> output = new ArrayList<Copy>();
+		for (int i = 0; i < 5; i++) {
+			output.add(copies.get(i));
+		}
+		return output;
 	}
 }

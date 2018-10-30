@@ -26,7 +26,7 @@ by ${copy.book.author.firstName } ${copy.book.author.lastName } | ${copy.book.de
 <div class="float-right">
 <form action="copyDetails.do" method="GET">
 	<input type="hidden" name="copy.id" value="${copy.id}">
-	<input type="submit" value="Details" class="btn btn-primary">
+	<input type="submit" value="Details and Borrow" class="btn btn-primary">
 	</form>
 </div>
 
