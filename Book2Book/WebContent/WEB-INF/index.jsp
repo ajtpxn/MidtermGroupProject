@@ -65,7 +65,7 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
 			    </div>
 			    <div class="col-8" class="bg-white">
 			      
-	 <h2 id="booksavail" class="bg-white text-center">Book that are available to Borrow!</h2>
+	 <h2 id="booksavail" class="bg-white text-center">Books that are available to Borrow</h2>
 	 
 	 <c:forEach items="${availCopies}" var="copy" >
 			<hr>
