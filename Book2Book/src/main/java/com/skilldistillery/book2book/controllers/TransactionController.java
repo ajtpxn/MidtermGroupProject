@@ -1,5 +1,6 @@
 package com.skilldistillery.book2book.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -48,9 +49,17 @@ public class TransactionController {
 			  System.out.println("back from transactions");
 			  System.out.println("transactions: "+transactions);
 			  List<Copy> copies = copyDAO.listCopies();
+			  List<User> owners = new ArrayList<User>();
+			  
+			  for (Transaction t : transactions) {
+				  Copy c = copyDAO.getCopy(t.getCopyId());
+				  owners.add(c.getUser());
+			  }
+			  
 			  System.out.println("copies: "+copies);
 			  mv.addObject("copies", copies);
 			  mv.addObject("transactions", transactions);
+			  mv.addObject("owners", owners);
 			  mv.setViewName("transaction");
 			  System.out.println("transactions and copies added to mv and transaction.jsp set");
 			  return mv;
