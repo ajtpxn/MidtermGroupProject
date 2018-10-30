@@ -342,7 +342,7 @@ COMMIT;
 START TRANSACTION;
 USE `bookdb`;
 INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`) VALUES (1, 'The Very Hungry Caterpillar', 'A caterpillar eats a lot and then turns into a butterfly', 1, 1, 0399226907);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`) VALUES (2, 'Harry Potter and the Prisoner of Azkaban', 'A young wizard in training must confront an escaped convict whom may be responsible for the death of his parents.', 2, 2, NULL);
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`) VALUES (2, 'Harry Potter and the Prisoner of Azkaban', 'A young wizard in training must confront an escaped convict who may be responsible for the death of his parents.', 2, 2, NULL);
 INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`) VALUES (3, 'Slaughterhouse-Five', 'A man becomes unstuck in time and must live with the knowledge of his fate. ', 3, 3, NULL);
 INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`) VALUES (4, 'Catherine the Great: Portrait of a Woman', 'Autobiography of the former Empress of Russia.', 4, 3, NULL);
 INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`) VALUES (5, 'The History of the Decline and Fall of the Roman Empire', 'see title', 5, 3, NULL);
