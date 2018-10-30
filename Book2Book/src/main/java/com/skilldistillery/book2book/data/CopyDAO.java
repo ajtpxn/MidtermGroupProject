@@ -21,5 +21,7 @@ public interface CopyDAO {
 	Copy getCopy(int id);
 	public List<Copy> seeAllAvailableCopies(int userId);
 
+	List<Copy> listLimitedCopies();
+
 
 }
