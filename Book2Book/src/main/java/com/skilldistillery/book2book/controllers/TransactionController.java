@@ -1,6 +1,7 @@
 package com.skilldistillery.book2book.controllers;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -111,11 +112,20 @@ public class TransactionController {
 		System.out.println("User Id: " + userId);
 		Transaction returnTrans = transDAO.getTransactionById(transId);
 		Copy borrowedCopy = copyDAO.getCopy(returnTrans.getCopyId());
+		User lender = borrowedCopy.getUser();
 		DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
 		Date today = Calendar.getInstance().getTime();
 		String reportDate = df.format(today);
+		Date dateSet = null;
+		try {
+			dateSet = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").parse(reportDate);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 		System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" + reportDate);
-		returnTrans.setEndDate(today);
+		System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" + dateSet);
+		returnTrans.setEndDate(dateSet);
+		returnTrans.setBorrowers(lender);
 		borrowedCopy.setAvailable(true);
 		copyDAO.editCopy(borrowedCopy, borrowedCopy.getId());
 		transDAO.updateTransaction(transId, returnTrans);
