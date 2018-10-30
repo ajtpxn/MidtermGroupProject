@@ -201,7 +201,7 @@ public class CopyController {
 		}
 	}
 
-	// ADD TRANSACTION AND UPDATE USERS COPY.AVAILABLE TO FASLE
+	// ADD TRANSACTION AND UPDATE USERS COPY.AVAILABLE TO FALSE
 	@RequestMapping(path = "addTransUpdateCopy.do", method = RequestMethod.POST)
 	public String addTransAndUpdateCopyAvailable(@RequestParam(name = "copyId") int copyId,
 			@RequestParam(name = "datefilter") String dateRange, HttpSession session, RedirectAttributes redir) {
@@ -213,6 +213,9 @@ public class CopyController {
 		// SimpleDateFormat f=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		// String time = "2018-10-10 12:00:00";
 		System.out.println(dateRange);
+		if (dateRange == null || dateRange.equals("")){
+			return "fail";
+		}
 		// 10/23/2018 - 11/06/2018
 		String[] dateArray = dateRange.split("\\s-\\s");
 		System.out.println(dateArray[0]);
