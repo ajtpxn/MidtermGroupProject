@@ -19,7 +19,7 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
 		
 			<img id="bookcase" alt="bookcase" src="media/bookcase.jpg">
 			<div class="row">
-			<div class="col offset-9">
+			<div id = "nav" class="col offset-10">
 				<nav>
 					<c:choose>
 
@@ -63,7 +63,7 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
 					by ${copy.book.author.firstName } ${copy.book.author.lastName } |
 					${copy.book.description }
 				</div>
-				<div class="col-1" align="right">
+				<div class="col-2" align="right">
 				
 					<form action="copyDetails.do" method="GET">
 						<input type="hidden" name="copy.id" value="${copy.id}"> <input
