@@ -39,16 +39,14 @@
 				<c:if test="${transaction.copyId==copy.id}">
 	${copy.book.title} <br>
 	${copy.book.description}<br>
-	Copy Condition ID: ${copy.conditionId}
+	Copy Condition ID: ${copy.condition.name}
+	<a href="returnBook.do?id=${transaction.id}" class="btn btn-warning btn-lg">Return Book</a>
 	</c:if>
 			</c:forEach>
 	| Start: ${transaction.startDate}
 	| End: ${transaction.endDate}
-	<form action="userprofile.do" method="GET">
-				<input type="hidden" name="id" value="${owners[loop.index].id}"> <input
-					type="submit" value="View Owner Profile"
-					class="btn btn-warning btn-lg">
-			</form>
+	<a href="userprofile.do?id=${owners[loop.index].id}" class="btn btn-warning btn-lg">View Owner Profile</a>
+	
 		</c:forEach>
 
 
