@@ -2,6 +2,7 @@ package com.skilldistillery.book2book.entities;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -25,8 +27,10 @@ public class Copy {
 	@JoinColumn(name="book_id")
 	private Book book;
 	
-	@Column(name="condition_id")
-	private int conditionId;
+	
+	@ManyToOne(cascade=CascadeType.MERGE)
+	@JoinColumn(name="condition_id")
+	private Condition condition;
 	
 	
 	private boolean available;
@@ -52,12 +56,13 @@ public class Copy {
 		this.book = book;
 	}
 
-	public int getConditionId() {
-		return conditionId;
+	
+	public Condition getCondition() {
+		return condition;
 	}
 
-	public void setConditionId(int conditionId) {
-		this.conditionId = conditionId;
+	public void setCondition(Condition condition) {
+		this.condition = condition;
 	}
 
 	public boolean isAvailable() {
@@ -111,7 +116,7 @@ public class Copy {
 		result = prime * result + (active ? 1231 : 1237);
 		result = prime * result + (available ? 1231 : 1237);
 		result = prime * result + ((book == null) ? 0 : book.hashCode());
-		result = prime * result + conditionId;
+		
 		result = prime * result + ((dateAdded == null) ? 0 : dateAdded.hashCode());
 		result = prime * result + ((dateRemoved == null) ? 0 : dateRemoved.hashCode());
 		result = prime * result + id;
@@ -137,7 +142,7 @@ public class Copy {
 				return false;
 		} else if (!book.equals(other.book))
 			return false;
-		if (conditionId != other.conditionId)
+		if (condition != other.condition)
 			return false;
 		if (dateAdded == null) {
 			if (other.dateAdded != null)
@@ -163,18 +168,18 @@ public class Copy {
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Copy id: ").append(id).append(" book: ").append(book).append(" conditionId: ")
-				.append(conditionId).append(" available: ").append(available).append(" active: ").append(active)
+				.append(condition).append(" available: ").append(available).append(" active: ").append(active)
 				.append(" dateAdded: ").append(dateAdded).append(" dateRemoved: ").append(dateRemoved).append(" user: ")
 				.append(user);
 		return builder.toString();
 	}
 
-	public Copy(int id, Book book, int conditionId, boolean available, boolean active, Date dateAdded, Date dateRemoved,
+	public Copy(int id, Book book, Condition condition, boolean available, boolean active, Date dateAdded, Date dateRemoved,
 			User user) {
 		super();
 		this.id = id;
 		this.book = book;
-		this.conditionId = conditionId;
+		this.condition = condition;
 		this.available = available;
 		this.active = active;
 		this.dateAdded = dateAdded;

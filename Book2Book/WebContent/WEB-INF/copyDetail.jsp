@@ -36,7 +36,7 @@
 </c:forEach>
 <br>
 <strong>Content Rating: </strong> ${copy.book.contentRatingId}<br>
-<strong>Condition:</strong>  ${copy.conditionId }<br>
+<strong>Condition:</strong> ${copy.condition.name}<br>
 <strong>Lender Name: </strong> ${copy.user.firstName} ${copy.user.lastName}
     </div>
     <div class="col-sm">

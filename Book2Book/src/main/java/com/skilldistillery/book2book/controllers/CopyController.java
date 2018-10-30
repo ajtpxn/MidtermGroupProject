@@ -55,7 +55,7 @@ public class CopyController {
 		copy.setAvailable(true);
 		copy.setBook(book);
 		copy.setUser(user);
-		copy.setConditionId(1);
+		copy.setCondition(condition);
 		System.out.println(copy);
 		cDAO.addCopy(copy);
 
@@ -83,7 +83,8 @@ public class CopyController {
 	@RequestMapping(path = "updateCondition.do", method = RequestMethod.POST)
 	public String updateCondition(@RequestParam("conditionId") int newConditionId, @RequestParam("copyId") int copyId) {
 		Copy newCopy = cDAO.getCopy(copyId);
-		newCopy.setConditionId(newConditionId);
+		Condition condition = cDAO.findConditionbyID(newConditionId);
+		newCopy.setCondition(condition);
 		cDAO.editCopy(newCopy, copyId);
 		return "success";
 	}

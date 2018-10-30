@@ -12,6 +12,7 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.skilldistillery.book2book.entities.Condition;
 import com.skilldistillery.book2book.entities.Copy;
 
 @Transactional
@@ -37,7 +38,7 @@ public class CopyDAOImpl implements CopyDAO {
 	@Override
 	public void editCopy(Copy copy, int id) {
 		Copy updatedCopy = em.find(Copy.class, id);
-		updatedCopy.setConditionId(copy.getConditionId());
+		updatedCopy.setCondition(copy.getCondition());
 		updatedCopy.setAvailable(copy.isAvailable());
 		updatedCopy.setActive(copy.isActive());
 		em.flush();
@@ -97,4 +98,31 @@ public class CopyDAOImpl implements CopyDAO {
 		}
 		return output;
 	}
+	
+	public Condition findConditionbyID( int conditionId) {
+		
+		Condition condition = em.find(Condition.class, conditionId);
+				
+		
+		return condition;
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

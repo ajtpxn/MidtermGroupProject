@@ -85,12 +85,8 @@
       
 		<form action="updateCondition.do" method="post">
 			Condition:
+			${copy.condition.name}
 
-			<c:if test="${copy.conditionId == 1}">Brand New</c:if>
-			<c:if test="${copy.conditionId == 2}">Well Kept</c:if>
-			<c:if test="${copy.conditionId == 3}">Used</c:if>
-			<c:if test="${copy.conditionId == 4}">Worn</c:if>
-			<c:if test="${copy.conditionId == 5}">Last Legs</c:if>
 	<br>
 			<select name="conditionId">
 				<option value="0"></option>

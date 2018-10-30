@@ -2,6 +2,7 @@ package com.skilldistillery.book2book.data;
 
 import java.util.List;
 
+import com.skilldistillery.book2book.entities.Condition;
 import com.skilldistillery.book2book.entities.Copy;
 
 public interface CopyDAO {
@@ -22,6 +23,7 @@ public interface CopyDAO {
 	public List<Copy> seeAllAvailableCopies(int userId);
 
 	List<Copy> listLimitedCopies();
+	public Condition findConditionbyID( int conditionId);
 
 
 }
