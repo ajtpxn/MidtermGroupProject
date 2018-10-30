@@ -41,7 +41,11 @@ public class UserController {
 	public ModelAndView index() {
 		System.out.println("index");
 		ModelAndView mv = new ModelAndView();
+		List<Copy> limitedCopies = copyDAO.listLimitedCopies();
+		System.out.println(limitedCopies.size());
+		mv.addObject("availCopies", limitedCopies);
 		mv.setViewName("index");
+		
 		return mv;
 	}
 

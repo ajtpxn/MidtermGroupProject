@@ -273,21 +273,6 @@ public class CopyController {
 	
 	
 	
-	//LIST OF AVAILBEL COPIES TO BORROW ON INDEX PAGE
-	@RequestMapping(path = "index.do", method = RequestMethod.GET)
-	public ModelAndView findAllAvailableCopiesForIndex() {
-		ModelAndView mv = new ModelAndView();
-		
-		List<Copy> limitedCopies = cDAO.listLimitedCopies();
-		System.out.println(limitedCopies.size());
-		mv.addObject("availCopies", limitedCopies);
-		mv.setViewName("index");
-		return mv;
-		
-	}
-	
-	
-	
 	
 	
 	
