@@ -64,9 +64,11 @@ public class UserController {
 		System.out.println("Return User");
 		// userDAO = new UserDAOimpl();
 		ModelAndView mv = new ModelAndView();
+		user.setActive(true);
 		userDAO.creatUser(user);
 		// userDAO = null;
 		mv.addObject(user);
+		
 		mv.setViewName("success");
 		return mv;
 	}
