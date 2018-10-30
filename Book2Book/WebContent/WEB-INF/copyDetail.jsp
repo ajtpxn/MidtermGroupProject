@@ -10,7 +10,10 @@
 
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
 <title>Insert title here</title>
 </head>
@@ -42,18 +45,31 @@
 
 I would like to borrow this book<br>
 <input type="hidden" value="${copy.id}" name="copyId">
-<label>starting on &nbsp; &nbsp; </label><input type="datetime" value="" name="startDate"><br>
-<label>and ending on &nbsp; </label><input type="datetime" value="" name="endDate"><br>
 <input type="submit" value="Borrow" class="btn btn-primary">
 
+<input type="text" name="datefilter" value="" />
+
+<script type="text/javascript">
+$(function() {
+
+  $('input[name="datefilter"]').daterangepicker({
+      autoUpdateInput: false,
+      locale: {
+          cancelLabel: 'Clear'
+      }
+  });
+
+  $('input[name="datefilter"]').on('apply.daterangepicker', function(ev, picker) {
+      $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
+  });
+
+  $('input[name="datefilter"]').on('cancel.daterangepicker', function(ev, picker) {
+      $(this).val('');
+  });
+
+});
+</script>
 </form:form>
- 
-  </div>
-</div>
-
-
-
-
 </div>
 
 </body>
