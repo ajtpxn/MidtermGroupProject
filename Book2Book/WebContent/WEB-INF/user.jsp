@@ -16,6 +16,7 @@
 </head>
 <body>
 	<div class="container">
+		<%@ include file="nav.jsp"%>
 		<h2>User Details</h2>
 
 		<c:choose>
