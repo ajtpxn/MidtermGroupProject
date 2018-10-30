@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.skilldistillery.book2book.data.BookDAO;
 import com.skilldistillery.book2book.data.CopyDAO;
@@ -37,7 +38,7 @@ public class CopyController {
 
 	@Autowired
 	private BookDAO bDAO;
-	
+
 	@Autowired
 	private TransactionDAO tDAO;
 
@@ -161,15 +162,14 @@ public class CopyController {
 		ModelAndView mv = new ModelAndView();
 		User user = (User) session.getAttribute("USER");
 		System.out.println(user);
-		
+
 		if (user != null) {
 			List<Copy> allAvailableCopies = cDAO.seeAllAvailableCopies(user.getId());
 			mv.addObject("availCopies", allAvailableCopies);
 			mv.setViewName("allAvailCopies");
 			return mv;
-		}
-		else {
-			
+		} else {
+
 			mv.addObject("rejectNotLoggedIn", true);
 			mv.setViewName("addUser");
 			return mv;
@@ -182,7 +182,6 @@ public class CopyController {
 
 	}
 
-
 	// GET DETAILS ON COPY
 	@RequestMapping(path = "copyDetails.do", method = RequestMethod.GET)
 	public ModelAndView getCopyDetails(HttpSession session, @RequestParam("copy.id") int copyId) {
@@ -193,30 +192,34 @@ public class CopyController {
 			Copy copyDetails = cDAO.getCopy(copyId);
 			mv.addObject("copy", copyDetails);
 			mv.setViewName("copyDetail");
-			
+
 			return mv;
-		}
-		else {
+		} else {
 			mv.addObject("rejectNotLoggedIn", true);
 			mv.setViewName("addUser");
 			return mv;
 		}
 	}
-	
-	//ADD TRANSACTION AND UPDATE USERS COPY.AVAILABLE TO FASLE
+
+	// ADD TRANSACTION AND UPDATE USERS COPY.AVAILABLE TO FASLE
 	@RequestMapping(path = "addTransUpdateCopy.do", method = RequestMethod.POST)
+
 	public String addTransAndUpdateCopyAvailable( @RequestParam(name="copyId") int copyId,
 			@RequestParam(name="datefilter") String dateRange, HttpSession session) {
 		
+	}
+	public String addTransAndUpdateCopyAvailable(@RequestParam(name = "copyId") int copyId,
+			@RequestParam(name = "datefilter") String dateRange, HttpSession session, RedirectAttributes redir) {
+
 		Copy copy = cDAO.getCopy(copyId);
-		
+
 		User user = (User) session.getAttribute("USER");
-		//PARSES START AND END DATE FROM STRING TO DATE
-		//SimpleDateFormat f=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
-		//String time = "2018-10-10 12:00:00";
+		// PARSES START AND END DATE FROM STRING TO DATE
+		// SimpleDateFormat f=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		// String time = "2018-10-10 12:00:00";
 		System.out.println(dateRange);
-		//10/23/2018 - 11/06/2018
-		String[] dateArray= dateRange.split("\\s-\\s");
+		// 10/23/2018 - 11/06/2018
+		String[] dateArray = dateRange.split("\\s-\\s");
 		System.out.println(dateArray[0]);
 		System.out.println(dateArray[1]);
 		String sd = dateArray[0];
@@ -224,7 +227,7 @@ public class CopyController {
 		String ed = dateArray[1];
 		String endDateWithTime = ed.concat(" 10:00:00");
 		Date startD = null;
-		//Date cDate = null;
+		// Date cDate = null;
 		Date endD = null;
 
 		try {
@@ -234,78 +237,58 @@ public class CopyController {
 			System.out.println(endD);
 //			startD = f.parse(startDate);
 //			endD = f.parse(endDate);
-			//cDate = f.parse(time);
-			
+			// cDate = f.parse(time);
+
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		// CREATES NEW TRANSANACTION
-		Transaction newTrans = new Transaction();
 
-		newTrans.setBorrowers(user);
-		newTrans.setCopyId(copy.getId());
-		newTrans.setStartDate(startD);
-		newTrans.setEndDate(endD);
-		//newTrans.setDateCreated(cDate);
-		
-		tDAO.makeTransaction(newTrans);
-		
-		//SWITCHES AVAILABLITY TO FALSE
-		copy.setAvailable(false);
-		cDAO.editCopy(copy, copyId);
-		
-		
-		
-		
+		List<Transaction> transactionsInvolvingCopy = tDAO.getTransactionsByCopyId(copyId);
+		boolean newTransactionIsValid = true;
+		Transaction overlappingTransaction = null;
+
+		for (Transaction otherTransaction : transactionsInvolvingCopy) {
+			if (startD.compareTo(otherTransaction.getEndDate()) < 1
+					&& endD.compareTo(otherTransaction.getStartDate()) > -1) {
+				newTransactionIsValid = false;
+				overlappingTransaction = otherTransaction;
+				break;
+			}
+		}
+
+		if (newTransactionIsValid) {
+			// CREATES NEW TRANSANACTION
+			Transaction newTrans = new Transaction();
+
+			newTrans.setBorrowers(user);
+			newTrans.setCopyId(copy.getId());
+			newTrans.setStartDate(startD);
+			newTrans.setEndDate(endD);
+			// newTrans.setDateCreated(cDate);
+
+			tDAO.makeTransaction(newTrans);
+
+			// SWITCHES AVAILABLITY TO FALSE
+			copy.setAvailable(false);
+			cDAO.editCopy(copy, copyId);
+		} else {
+			redir.addAttribute("newtransactionerror",
+					"The new transaction conflicts with another transaction with start date "
+							+ overlappingTransaction.getStartDate() + " and end date "
+							+ overlappingTransaction.getEndDate());
+
+		}
+
 		return "redirect:transaction.do";
 	}
-	
+
 	@RequestMapping(path = "changedCopyTrans.do", method = RequestMethod.GET)
 	public ModelAndView addedTransandUpdatedCopy() {
 		ModelAndView mv = new ModelAndView();
-		
-		
+
 		mv.setViewName("allAvailCopies");
 		return mv;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

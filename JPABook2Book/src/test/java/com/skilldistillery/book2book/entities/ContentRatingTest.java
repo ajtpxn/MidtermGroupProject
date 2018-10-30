@@ -1,6 +1,8 @@
 package com.skilldistillery.book2book.entities;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -39,11 +41,21 @@ class ContentRatingTest {
 	}
 
 
+//	@Test
+//	@DisplayName("test link with content rating and DB")
+//	void test() {
+//		ContentRating cr = em.find(ContentRating.class, 1);
+//		assertEquals("Kids", cr.getContentName());
+//	}
+	
 	@Test
-	@DisplayName("test link with content rating and DB")
-	void test() {
-		ContentRating cr = em.find(ContentRating.class, 1);
-		assertEquals("Kids", cr.getContentName());
+	@DisplayName("test link with contenrating and book")
+	void test2() {
+		Book book = em.find(Book.class, 1);
+		
+		ContentRating ratings = book.getContentRating();
+		
+		assertEquals("Kids", ratings.getContentName());
 	}
 
 }

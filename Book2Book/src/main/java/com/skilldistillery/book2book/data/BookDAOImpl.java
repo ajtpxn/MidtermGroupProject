@@ -35,7 +35,7 @@ public class BookDAOImpl implements BookDAO {
 		// USES AUTHOR MANAGED AUTHOR ABOVE
 		updatedBook.setAuthor(managedAuthor);
 
-		updatedBook.setContentRatingId(bookWithNewValues.getContentRatingId());
+		updatedBook.setContentRating(bookWithNewValues.getContentRating());
 		updatedBook.setDescription(bookWithNewValues.getDescription());
 		updatedBook.setTitle(bookWithNewValues.getTitle());
 	}

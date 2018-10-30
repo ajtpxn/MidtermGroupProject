@@ -28,8 +28,9 @@ public class Book {
 	
 	private String description;
 	
-	@Column(name="content_rating")
-	private Integer contentRatingId;
+	@ManyToOne(cascade=CascadeType.PERSIST)
+	@JoinColumn(name="content_rating")
+	private ContentRating contentRating;
 	
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name="book_genre",
@@ -37,6 +38,20 @@ public class Book {
 	inverseJoinColumns=@JoinColumn(name="genre_id"))
 	private List<Genre> genres;
 	
+	@Column(name = "image_url")
+	private String imageUrl;
+
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
+	
+//	@Column(name="pic_url")
+//	private String picture;
+//	
 	
 	
 	//GETTERS ANDN SETTERS 
@@ -70,8 +85,8 @@ public class Book {
 	}
 	
 	
-	public void setContentRatingId(Integer contentRatingId) {
-		this.contentRatingId = contentRatingId;
+	public void setContentRating(ContentRating contentRating) {
+		this.contentRating = contentRating;
 	}
 	public String getTitle() {
 		return title;
@@ -85,11 +100,8 @@ public class Book {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public int getContentRatingId() {
-		return contentRatingId;
-	}
-	public void setContentRatingId(int contentRatingId) {
-		this.contentRatingId = contentRatingId;
+	public ContentRating getContentRating() {
+		return contentRating;
 	}
 	public Author getAuthor() {
 		return author;
@@ -106,7 +118,6 @@ public class Book {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((author == null) ? 0 : author.hashCode());
-		result = prime * result + contentRatingId;
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + id;
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
@@ -126,7 +137,7 @@ public class Book {
 				return false;
 		} else if (!author.equals(other.author))
 			return false;
-		if (contentRatingId != other.contentRatingId)
+		if (contentRating != other.contentRating)
 			return false;
 		if (description == null) {
 			if (other.description != null)
@@ -146,16 +157,16 @@ public class Book {
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Book id: ").append(id).append(" title: ").append(title).append(" author: ").append(author)
-				.append(" description: ").append(description).append(" contentRatingId: ").append(contentRatingId);
+				.append(" description: ").append(description).append(" contentRatingId: ").append(contentRating);
 		return builder.toString();
 	}
-	public Book(int id, String title, Author author, String description, int contentRatingId) {
+	public Book(int id, String title, Author author, String description, ContentRating contentRating) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.author = author;
 		this.description = description;
-		this.contentRatingId = contentRatingId;
+		this.contentRating = contentRating;
 	}
 	public Book() {
 		super();

@@ -22,7 +22,7 @@
 		<label>description</label><input type="text" name="description" value="${book.description}" />
 		 <label>author first name</label> <input type="text" name="author.firstName" value="${book.author.firstName}" />
 		  <label>author last name</label> <input type="text" name="author.lastName" value="${book.author.lastName}" /> 
-		  <label>Content</label> <input type="number" name="contentRatingId" value="${book.contentRatingId}" />
+		  <label>Content</label> <input type="text" name="contentRating" value="${book.contentRating}" />
 		   <input type="submit" value="Edit Book" class="btn btn-Dark" />
 	</form>
  
