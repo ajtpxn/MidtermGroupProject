@@ -56,7 +56,7 @@
 				Available
 			</c:when>
 			<c:otherwise>
-				Lent out to "${borrowers[loop.index].userName }"
+				Lent out to ${borrowers[loop.index].firstName} ${borrowers[loop.index].lastName}
 			</c:otherwise>
 		</c:choose>
 
