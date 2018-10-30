@@ -47,7 +47,7 @@
 	${book.id}
 				
 				<div class="float-left">
-	<form action="copy.do" method="POST" modelAttribute="book">
+					<form action="copy.do" method="POST" modelAttribute="book">
 					<input type="hidden" value="${book.id}" name="bookId"> <input
 						type="submit" value="Add Book to My List"
 						class="btn btn-primary">
