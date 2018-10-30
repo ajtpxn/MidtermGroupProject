@@ -92,7 +92,7 @@ public class CopyDAOImpl implements CopyDAO {
 		List<Copy> copies = em.createQuery(query, Copy.class).getResultList();
 		Collections.shuffle(copies);
 		List<Copy> output = new ArrayList<Copy>();
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < Math.min(copies.size(), 5); i++) {
 			output.add(copies.get(i));
 		}
 		return output;
