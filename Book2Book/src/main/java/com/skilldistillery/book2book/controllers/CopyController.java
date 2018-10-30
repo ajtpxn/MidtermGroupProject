@@ -208,8 +208,6 @@ public class CopyController {
 	public String addTransAndUpdateCopyAvailable( @RequestParam(name="copyId") int copyId,
 			@RequestParam(name="datefilter") String dateRange, HttpSession session) {
 		
-		
-		
 		Copy copy = cDAO.getCopy(copyId);
 		
 		User user = (User) session.getAttribute("USER");

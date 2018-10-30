@@ -64,7 +64,7 @@ public class TransactionDAOImpl implements TransactionDAO {
 
 	@Override
 	public Transaction updateTransaction(int id, Transaction updated) {
-		Transaction managedTransaction = em.find(Transaction.class, "id");
+		Transaction managedTransaction = em.find(Transaction.class, id);
 		managedTransaction.setBorrowers(updated.getBorrowers());
 		managedTransaction.setCopyId(updated.getCopyId());
 		managedTransaction.setDateCreated(updated.getDateCreated());
