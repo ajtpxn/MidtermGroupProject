@@ -172,6 +172,7 @@ CREATE TABLE IF NOT EXISTS `copy_transaction` (
   `date_created` DATETIME NULL DEFAULT current_timestamp,
   `borrow_id` INT NOT NULL,
   `copy_id` INT NOT NULL,
+  `concluded` TINYINT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_transaction_user2_idx` (`borrow_id` ASC),
   INDEX `fk_transaction_copy1_idx` (`copy_id` ASC),
@@ -344,12 +345,12 @@ COMMIT;
 START TRANSACTION;
 USE `bookdb`;
 INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (1, 'The Very Hungry Caterpillar', 'A caterpillar eats a lot and then turns into a butterfly', 1, 1, 0399226907, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (2, 'Harry Potter and the Prisoner of Azkaban', 'A young wizard in training must confront an escaped convict whom may be responsible for the death of his parents.', 2, 2, NULL, NULL);
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (2, 'Harry Potter and the Prisoner of Azkaban', 'A young wizard in training must confront an escaped convict who may be responsible for the death of his parents.', 2, 2, NULL, NULL);
 INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (3, 'Slaughterhouse-Five', 'A man becomes unstuck in time and must live with the knowledge of his fate. ', 3, 3, NULL, NULL);
 INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (4, 'Catherine the Great: Portrait of a Woman', 'Autobiography of the former Empress of Russia.', 4, 3, NULL, NULL);
 INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (5, 'The History of the Decline and Fall of the Roman Empire', 'see title', 5, 3, NULL, NULL);
 INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (6, 'American Psycho', 'A wealthy yuppie goes on a bloody rampage in this critique of high society.', 6, 4, NULL, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (7, 'The Hobbit', 'There and Back Again', 37, 1, 0, NULL);
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (7, 'The Hobbit', 'There and Back Again', 37, 1, 0, 'https://imgur.com/a/SacNs7h');
 INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (8, 'The Divine Comedy', '', 8, 1, 0, NULL);
 INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (9, 'The Brothers Karamazov', '', 28, 1, 0, NULL);
 INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (10, 'The Adventures of Huckleberry Finn', '', 38, 1, 0, NULL);
@@ -463,9 +464,9 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `bookdb`;
-INSERT INTO `copy_transaction` (`id`, `start_date`, `end_date`, `date_created`, `borrow_id`, `copy_id`) VALUES (1, '2011-01-01 00:00:00', '2011-01-07 00:00:00', '2010-12-25 00:00:00', 3, 2);
-INSERT INTO `copy_transaction` (`id`, `start_date`, `end_date`, `date_created`, `borrow_id`, `copy_id`) VALUES (2, '2011-07-30 03:07:20', '2011-09-20 18:30:19', '2007-04-30 01:02:03', 1, 2);
-INSERT INTO `copy_transaction` (`id`, `start_date`, `end_date`, `date_created`, `borrow_id`, `copy_id`) VALUES (3, '2018-10-25 05:20:13', '2018-11-11 11:11:11', '2018-10-01 04:03:02', 2, 3);
+INSERT INTO `copy_transaction` (`id`, `start_date`, `end_date`, `date_created`, `borrow_id`, `copy_id`, `concluded`) VALUES (1, '2011-01-01 00:00:00', '2011-01-07 00:00:00', '2010-12-25 00:00:00', 3, 2, NULL);
+INSERT INTO `copy_transaction` (`id`, `start_date`, `end_date`, `date_created`, `borrow_id`, `copy_id`, `concluded`) VALUES (2, '2011-07-30 03:07:20', '2011-09-20 18:30:19', '2007-04-30 01:02:03', 1, 2, NULL);
+INSERT INTO `copy_transaction` (`id`, `start_date`, `end_date`, `date_created`, `borrow_id`, `copy_id`, `concluded`) VALUES (3, '2018-10-25 05:20:13', '2018-11-11 11:11:11', '2018-10-01 04:03:02', 2, 3, NULL);
 
 COMMIT;
 
