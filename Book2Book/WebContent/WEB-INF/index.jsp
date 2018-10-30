@@ -17,24 +17,27 @@
 <c:choose>
 	
 		<c:when test="${not empty USER }">
-		<a href="account.do">Account</a> |
-		<a href="logout.do">Log Out</a>
+		<a href="account.do" class="btn btn-primary btn-sm">Account</a> 
+		<a href="logout.do" class="btn btn-primary btn-sm">Log Out</a>
 		</c:when>
-		<c:otherwise><a href="login.do">Log In</a> | <a href="addUser.do">Sign Up</a>
+		<c:otherwise><a href="login.do" class="btn btn-primary btn-sm">Log In</a> 
+		<a href="addUser.do" class="btn btn-primary btn-sm">Sign Up</a>
 		</c:otherwise>
 		
 	</c:choose>
 	</nav>
+	<div class="text-center">
+	
 	<h2>Book2Book</h2>
 
 	
 	<form action="home.do" method="GET">
 		<input type="submit" name="seeBook"
-			value="Add a book you own to your profile" class="btn btn-primary btn-lg" >
+			value="Add a Book You Own to Your Profile" class="btn btn-primary btn-lg" >
 	</form>
 	<br>
 	<form action="listAvailableCopy.do" method="GET">
-		<input type="submit" value="Search Available Books to Borrow"
+		<input type="submit" value="Search Books Available to Borrow"
 			class="btn btn-warning btn-lg">
 	</form>
 
@@ -48,7 +51,7 @@
 	</p>
 	 -->
 	
-	
+	</div>
 </div>
 
 </body>

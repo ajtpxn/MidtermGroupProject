@@ -224,7 +224,7 @@ public class CopyController {
 		
 		
 		
-		return "redirect:changedCopyTrans.do";
+		return "redirect:transaction.do";
 	}
 	
 	@RequestMapping(path = "changedCopyTrans.do", method = RequestMethod.GET)

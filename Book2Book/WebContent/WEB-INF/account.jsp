@@ -18,13 +18,13 @@
 <div class="container">
   <div class="row">
     <div class="col-sm">
-	<h2>My Profile</h2>
+	<h2>My Profile
+	
+	<a href="editProfile.do" class="btn btn-secondary btn-sm" >Edit Profile</a>
+	</h2>
+	
     </div>
     <div class="col-sm">
-	<form action="editProfile.do" method="GET">
-		 <input type="submit" name="editProfile"
-			value="Edit Profile">
-	</form>
     </div>
     <div class="col-sm">
 	<%--Edit the file nav.jsp to change nav links --%>
@@ -56,7 +56,7 @@
     <div class="col-sm">
 	<form action="home.do" method="GET">
 		<input type="submit" name="seeBook"
-			value="Add a book to your list">
+			value="Add a book to your list" class="btn btn-secondary btn-sm">
 	</form>
 	
     </div>
@@ -69,13 +69,17 @@
 	
 
 	<c:forEach items="${copies}" var="copy" varStatus="loop">
+	<hr>
 	<div class="container">
   <div class="row">
     <div class="col-sm">
       
-			${copy.book.title} <br> Author: ${copy.book.author.firstName}
-			${copy.book.author.lastName} <br> Description:
-			${copy.book.description} <br>
+			${copy.book.title} by ${copy.book.author.firstName}
+			${copy.book.author.lastName} 
+		<form action="removeCopy.do" method="post">
+			<input type="hidden" name="copyId" value="${copy.id}"> <input
+				type="submit" name="removeCopy" value="Remove Book" class="btn btn-secondary btn-sm">
+		</form>
     </div>
     <div class="col-sm">
       
@@ -112,25 +116,22 @@
 			</c:otherwise>
 		</c:choose>
 
-		<form action="removeCopy.do" method="post">
-			<input type="hidden" name="copyId" value="${copy.id}"> <input
-				type="submit" name="removeCopy" value="Remove Book">
-		</form>
     </div>
   </div>
 </div>
-		<hr>
 	</c:forEach>
+		<hr>
 	<br>
 
-
+<div class="text-center">
 
 
 	<form action="transaction.do" method="get">
 		 <input type="submit" name="seeTransactions"
-			value="Books I am Borrowing">
+			value="Books I am Borrowing" class="btn btn-secondary btn-sm">
 	</form>
 	
+</div>
 	
 	
 

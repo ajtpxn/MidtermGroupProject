@@ -22,7 +22,7 @@
 <h4>
 ${copy.book.title }
 </h4>
-${copy.book.description }
+by ${copy.book.author.firstName } ${copy.book.author.lastName } | ${copy.book.description }
 <div class="float-right">
 <form action="copyDetails.do" method="GET">
 	<input type="hidden" name="copy.id" value="${copy.id}">

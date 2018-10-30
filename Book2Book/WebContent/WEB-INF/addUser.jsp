@@ -8,14 +8,14 @@
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-<title>Add User</title>
+<title>Sign Up</title>
 </head>
 <body>
 
 <div class="container">
 	<%--Edit the file nav.jsp to change nav links --%>
 	<%@ include file="nav.jsp"%>
-	<h2>Add User</h2>
+	<h2>Sign Up</h2>
 
 	<form action="returnUser.do" method="post" modelAttribute="user">
 		<label for="firstName">First Name: </label> 
@@ -30,7 +30,7 @@
 		<label for="password">Password: </label> 
 		<input type="text" name="password" /> 
 		
-		<input type="submit" value="Add User">
+		<input type="submit" value="Sign Up">
 	</form>
 	
 	</div>

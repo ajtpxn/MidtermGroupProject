@@ -32,7 +32,7 @@
     </div>
     <div class="col-sm">
     	<form action="home.do" method="GET">
-		<input id="home" type="submit" value="Back to Add and Edit"
+		<input id="home" type="submit" value="Add or Edit"
 			class="btn btn-primary btn-lg">
 	</form>
     </div>
