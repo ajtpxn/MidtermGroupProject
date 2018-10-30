@@ -64,6 +64,23 @@ public class UserController {
 		System.out.println("Return User");
 		// userDAO = new UserDAOimpl();
 		ModelAndView mv = new ModelAndView();
+		if (user.getFirstName() == null || user.getFirstName().equals("")) {
+			mv.setViewName("fail");
+			return mv;
+		}
+		if (user.getLastName() == null || user.getLastName().equals("")) {
+			mv.setViewName("fail");
+			return mv;
+		}
+		if (user.getUserName() == null || user.getUserName().equals("")) {
+			mv.setViewName("fail");
+			return mv;
+		}
+		if (user.getPassword() == null || user.getPassword().equals("")) {
+			mv.setViewName("fail");
+			return mv;
+		}
+	
 		user.setActive(true);
 		userDAO.creatUser(user);
 		// userDAO = null;
@@ -110,7 +127,7 @@ public class UserController {
 			System.out.println("*****sessionPositive******");
 			// mv.setViewName("index.do");
 			// return mv;
-			return "redirect:index.do";
+			return "redirect:account.do";
 
 		}
 		String username = formUser.getUserName();
@@ -122,7 +139,7 @@ public class UserController {
 		if (validUser != null) {
 			session.setAttribute("USER", validUser);
 			// mv.setViewName("account.do");
-			return "redirect:index.do";
+			return "redirect:account.do";
 		} else {
 			return "redirect:fail.do";
 		}
