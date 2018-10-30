@@ -91,8 +91,8 @@ public class BookController {
 	public ModelAndView findBookByName(String title) {
 		ModelAndView mv = new ModelAndView();
 		
-		Book book = bd.searchForBookByTitle(title);
-		mv.addObject("book", book);
+		List<Book> book = bd.searchForBookbyKeyword(title);
+		mv.addObject("books", book);
 		mv.setViewName("bookedit");
 	
 		
