@@ -2,7 +2,7 @@
 
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
 -- Schema bookdb
@@ -248,9 +248,8 @@ CREATE TABLE IF NOT EXISTS `book_rating` (
 ENGINE = InnoDB;
 
 SET SQL_MODE = '';
-GRANT USAGE ON *.* TO admin@localhost;
- DROP USER admin@localhost;
-SET SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+DROP USER IF EXISTS admin@localhost;
+SET SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 CREATE USER 'admin'@'localhost' IDENTIFIED BY 'book2book';
 
 GRANT SELECT, INSERT, TRIGGER, UPDATE, DELETE ON TABLE * TO 'admin'@'localhost';
@@ -342,7 +341,7 @@ COMMIT;
 START TRANSACTION;
 USE `bookdb`;
 INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`) VALUES (1, 'The Very Hungry Caterpillar', 'A caterpillar eats a lot and then turns into a butterfly', 1, 1, 0399226907);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`) VALUES (2, 'Harry Potter and the Prisoner of Azkaban', 'A young wizard in training must confront an escaped convict who may be responsible for the death of his parents.', 2, 2, NULL);
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`) VALUES (2, 'Harry Potter and the Prisoner of Azkaban', 'A young wizard in training must confront an escaped convict whom may be responsible for the death of his parents.', 2, 2, NULL);
 INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`) VALUES (3, 'Slaughterhouse-Five', 'A man becomes unstuck in time and must live with the knowledge of his fate. ', 3, 3, NULL);
 INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`) VALUES (4, 'Catherine the Great: Portrait of a Woman', 'Autobiography of the former Empress of Russia.', 4, 3, NULL);
 INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`) VALUES (5, 'The History of the Decline and Fall of the Roman Empire', 'see title', 5, 3, NULL);
@@ -506,3 +505,4 @@ USE `bookdb`;
 INSERT INTO `book_rating` (`id`, `rating`, `date_created`, `book_id`, `user_id`) VALUES (5, '5', '2017-01-02 18:19:20', 6, 2);
 
 COMMIT;
+
