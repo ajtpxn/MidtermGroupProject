@@ -32,7 +32,6 @@ public class Copy {
 	@JoinColumn(name="condition_id")
 	private Condition condition;
 	
-	
 	private boolean available;
 	private boolean active;
 	@Temporal(TemporalType.TIMESTAMP)
@@ -47,6 +46,17 @@ public class Copy {
 	@ManyToOne
 	@JoinColumn(name="user_id")
 	private User user;
+	
+	@Column(name = "image_url")
+	private String imageUrl;
+
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
 
 	public Book getBook() {
 		return book;

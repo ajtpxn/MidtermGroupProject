@@ -77,6 +77,7 @@ public class UserController {
 		System.out.println("userIsLoggedIn");
 		boolean status = false;
 		User user = (User) session.getAttribute("USER");
+		System.out.println(user);
 		if (user != null) {
 			status = true;
 		}
