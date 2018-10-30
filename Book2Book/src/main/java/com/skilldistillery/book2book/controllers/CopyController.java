@@ -203,11 +203,6 @@ public class CopyController {
 
 	// ADD TRANSACTION AND UPDATE USERS COPY.AVAILABLE TO FASLE
 	@RequestMapping(path = "addTransUpdateCopy.do", method = RequestMethod.POST)
-
-	public String addTransAndUpdateCopyAvailable( @RequestParam(name="copyId") int copyId,
-			@RequestParam(name="datefilter") String dateRange, HttpSession session) {
-		
-	}
 	public String addTransAndUpdateCopyAvailable(@RequestParam(name = "copyId") int copyId,
 			@RequestParam(name = "datefilter") String dateRange, HttpSession session, RedirectAttributes redir) {
 
