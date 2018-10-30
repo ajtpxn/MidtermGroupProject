@@ -15,10 +15,8 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
 <title>Home</title>
 </head>
 <body>
-
-		
 			<img id="bookcase" alt="bookcase" src="media/bookcase.jpg">
-			<div class="row">
+
 			<div id = "nav" class="col offset-10">
 				<nav>
 					<c:choose>
@@ -35,11 +33,20 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
 					</c:choose>
 				</nav>
 			</div>
-
-
-			<h2 id="title">Book2Book</h2>
 		
-		</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+    </div>
+    <div class="col-8">
+			<h2 id="title" class="bg-light text-center"> &nbsp; Book2Book &nbsp;</h2>
+    </div>
+    <div class="col">
+    </div>
+  </div>
+</div>
+		
 
 
 	
@@ -51,22 +58,24 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
 			value="Add a Book You Own to Your Profile" class="btn btn-primary btn-lg" >
 	</form>
 	 -->
-	 <div class="container">
-			  <div class="row">
-			    <div class="col">
+	 <div class="container" class="bg-white">
+			  <div class="row" class="bg-white">
+			    <div class="col" class="bg-white">
 			    </div>
-			    <div class="col-8">
+			    <div class="col-8" class="bg-white">
 			      
-	 <h2 id="booksavail">Book that are available to Borrow!</h2>
+	 <h2 id="booksavail" class="bg-white text-center">Book that are available to Borrow!</h2>
 	 
-	 <c:forEach items="${availCopies}" var="copy">
+	 <c:forEach items="${availCopies}" var="copy" >
 			<hr>
 
-					<h4>${copy.book.title }</h4>
+					<h4 class="bg-white">${copy.book.title }</h4>
+					<p class="bg-white">
 					by ${copy.book.author.firstName } ${copy.book.author.lastName } |
 					${copy.book.description }
+					</p>
 				
-					<form action="copyDetails.do" method="GET" class="float-right">
+					<form action="copyDetails.do" method="GET">
 						<input type="hidden" name="copy.id" value="${copy.id}"> <input
 							type="submit" value="Details and Borrow" class="btn btn-primary">
 					</form>
@@ -79,7 +88,7 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
 			  </div>
 			</div>
 		
-		<div class="container">
+		<div class="container" >
 		  <div class="row">
 		    <div class="col">
 		    </div>
