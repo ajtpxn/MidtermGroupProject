@@ -15,6 +15,7 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
 <title>Home</title>
 </head>
 <body>
+
 			<img id="bookcase" alt="bookcase" src="media/bookcase.jpg">
 
 			<div id = "nav" class="col offset-10">
