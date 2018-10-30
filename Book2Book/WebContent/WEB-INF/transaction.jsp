@@ -22,6 +22,12 @@
 <%@ include file="nav.jsp"%>
 
 	<h2>Books I am Borrowing</h2>
+	
+		<form action="listAvailableCopy.do" method="GET">
+		<input type="submit" value="Search Available Books to Borrow"
+			class="btn btn-warning btn-lg">
+	</form>
+	
 	<c:forEach items="${transactions}" var="transaction">
 	<hr>
 	<c:forEach items="${copies}" var="copy">
