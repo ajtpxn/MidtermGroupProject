@@ -1,10 +1,13 @@
 package com.skilldistillery.book2book.entities;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -16,6 +19,11 @@ public class ContentRating {
 	
 	@Column(name="name")
 	private String contentName;
+	
+	@OneToMany(mappedBy="contentRating")
+	private List<Book> booksbyRating;
+	
+	//GETTERS AND SETTERS
 	
 	public int getId() {
 		return id;
@@ -29,6 +37,15 @@ public class ContentRating {
 	public void setContentName(String contentName) {
 		this.contentName = contentName;
 	}
+	
+	
+	public List<Book> getBooksbyRating() {
+		return booksbyRating;
+	}
+	public void setBooksbyRating(List<Book> booksbyRating) {
+		this.booksbyRating = booksbyRating;
+	}
+	//HASHCODE AND EQUALS
 	@Override
 	public int hashCode() {
 		final int prime = 31;
