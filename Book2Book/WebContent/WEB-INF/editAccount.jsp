@@ -26,7 +26,8 @@
 		<input type="text" name="userName" value="${user.userName}"/> 
 		<br>
 		<label for="password">Password: </label> 
-		<input type="text" name="password" value="${user.password}" /> 
+		<input type="password" placeholder="Password" name="password" id="password" required>
+        <input type="password" placeholder="Confirm Password" id="confirm_password" value="${user.password}" required> 
 		<br>
 		
 		<input type="submit" value="Confirm Edit">
