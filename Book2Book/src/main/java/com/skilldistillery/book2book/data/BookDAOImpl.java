@@ -13,6 +13,8 @@ import org.springframework.stereotype.Repository;
 
 import com.skilldistillery.book2book.entities.Author;
 import com.skilldistillery.book2book.entities.Book;
+import com.skilldistillery.book2book.entities.ContentRating;
+import com.skilldistillery.book2book.entities.Genre;
 
 @Transactional
 @Repository
@@ -23,8 +25,22 @@ public class BookDAOImpl implements BookDAO {
 
 	@Override
 	public void addBook(Book book) {
+		System.out.println("**************************************************");
+		System.out.println(book);
+		System.out.println("**************************************************");
 		em.persist(book);
 		em.flush();
+	}
+	@Override
+	public Genre findGenreById(int id) {
+		Genre genre = em.find(Genre.class, id);
+		return genre;
+	}
+	@Override
+	public ContentRating findContentRatingById( int id) {
+		
+		ContentRating rating = em.find(ContentRating.class, id);
+		return rating;
 	}
 
 	@Override

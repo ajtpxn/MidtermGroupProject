@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.skilldistillery.book2book.entities.Author;
 import com.skilldistillery.book2book.entities.Book;
+import com.skilldistillery.book2book.entities.ContentRating;
+import com.skilldistillery.book2book.entities.Genre;
 
 public interface BookDAO {
 
@@ -18,6 +20,8 @@ public interface BookDAO {
 	public List<Book> listAllBooks();
 
 	Book getBookById(int id);
+	public Genre findGenreById(int id);
+	public ContentRating findContentRatingById( int id);
 	
 
 }
