@@ -126,6 +126,11 @@
 		 <input type="submit" name="seeTransactions"
 			value="Books I am Borrowing" class="btn btn-secondary btn-sm">
 	</form>
+	<form action="transactionHistory.do" method="get">
+	<input type="hidden" name="id" value="${USER.id}">
+		 <input type="submit"
+			value="My Transaction History" class="btn btn-secondary btn-sm">
+	</form>
 	
 </div>
 	

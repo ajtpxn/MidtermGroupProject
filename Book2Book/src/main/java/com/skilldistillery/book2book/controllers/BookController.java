@@ -32,6 +32,9 @@ public class BookController {
 	//ADD NEW BOOK TO DB
 	@RequestMapping(path="add.do", method= RequestMethod.POST)
 	public String addNewBook(Book book ) {
+		Book newBook = new Book();
+		book.getAuthor().getFirstName();
+		book.getAuthor().getLastName();
 		
 				bd.addBook(book);
 				
