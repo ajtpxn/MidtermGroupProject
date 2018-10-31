@@ -16,11 +16,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.skilldistillery.book2book.data.CopyDAO;
-import com.skilldistillery.book2book.data.CopyDAOImpl;
 import com.skilldistillery.book2book.data.TransactionDAO;
-import com.skilldistillery.book2book.data.TransactionDAOImpl;
 import com.skilldistillery.book2book.data.UserDAO;
-import com.skilldistillery.book2book.data.UserDAOimpl;
 import com.skilldistillery.book2book.entities.Copy;
 import com.skilldistillery.book2book.entities.User;
 

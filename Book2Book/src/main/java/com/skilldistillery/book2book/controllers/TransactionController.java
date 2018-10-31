@@ -3,7 +3,6 @@ package com.skilldistillery.book2book.controllers;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -20,9 +19,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.skilldistillery.book2book.data.CopyDAO;
-import com.skilldistillery.book2book.data.CopyDAOImpl;
 import com.skilldistillery.book2book.data.TransactionDAO;
-import com.skilldistillery.book2book.data.TransactionDAOImpl;
 import com.skilldistillery.book2book.data.UserDAO;
 import com.skilldistillery.book2book.entities.Copy;
 import com.skilldistillery.book2book.entities.Transaction;
