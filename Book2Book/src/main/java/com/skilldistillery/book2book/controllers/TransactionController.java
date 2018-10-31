@@ -133,5 +133,14 @@ public class TransactionController {
 		System.out.println(returnTrans.getEndDate());
 		return mv;
 	}
+	
+	@RequestMapping(path = "transactionHistory.do", method = RequestMethod.GET)
+	public ModelAndView getTransactionHistory(@RequestParam("id") int id) {
+		ModelAndView mv = new ModelAndView();
+		List<Transaction> history = transDAO.getSortedTransactionsByUserId(id);
+		mv.addObject("history", history);
+		mv.setViewName("transactionHistory");
+		return mv;
+	}
 
 }
