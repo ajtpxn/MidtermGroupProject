@@ -1,5 +1,9 @@
 package com.skilldistillery.book2book.data;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -37,8 +41,17 @@ public class TransactionDAOImpl implements TransactionDAO {
 
 	@Override
 	public List<Transaction> getTransactionsByBorrowerId(int id) {
-		String query = "SELECT t FROM Transaction t WHERE t.borrower.id = :id";
-		List<Transaction> result = em.createQuery(query, Transaction.class).setParameter("id", id).getResultList();
+		DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+		Date today = Calendar.getInstance().getTime();
+		String reportDate = df.format(today);
+		Date dateSet = null;
+		try {
+			dateSet = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").parse(reportDate);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		String query = "SELECT t FROM Transaction t WHERE t.borrower.id = :id AND t.endDate > :currentDate";
+		List<Transaction> result = em.createQuery(query, Transaction.class).setParameter("id", id).setParameter("currentDate", dateSet).getResultList();
 		System.out.println(result);
 		return result;
 	}
