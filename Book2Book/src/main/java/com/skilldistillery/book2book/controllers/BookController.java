@@ -35,6 +35,7 @@ public class BookController {
 
 	//ADD NEW BOOK TO DB
 	@RequestMapping(path="add.do", method= RequestMethod.POST)
+<<<<<<< HEAD
 	public String addNewBook(@RequestParam("genreName")int[] genreid,
 			@RequestParam("contentRating.id")int contentId, Book book ) {
 		
@@ -52,6 +53,12 @@ public class BookController {
 		
 		
 		
+=======
+	public String addNewBook(Book book ) {
+		Book newBook = new Book();
+		book.getAuthor().getFirstName();
+		book.getAuthor().getLastName();
+>>>>>>> 74fb5ae5727544bef9ff3caa42d0cbeb83deacc5
 		
 				bd.addBook(book);
 				

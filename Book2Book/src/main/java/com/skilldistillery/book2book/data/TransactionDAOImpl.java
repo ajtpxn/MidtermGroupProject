@@ -85,4 +85,11 @@ public class TransactionDAOImpl implements TransactionDAO {
 		}
 	}
 
+	@Override
+	public List<Transaction> getSortedTransactionsByUserId(int id) {
+		String query = "SELECT t FROM Transaction t JOIN Copy c ON t.copyId = c.id WHERE t.borrower.id = :id OR c.user.id = :id ORDER BY t.startDate";
+		List<Transaction> result = em.createQuery(query, Transaction.class).setParameter("id", id).getResultList();
+		return result;
+	}
+
 }
