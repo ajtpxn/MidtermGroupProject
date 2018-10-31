@@ -20,17 +20,6 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
 
 	<div class="container">
 	
-	<!-- 
-	
-			<div class="hero-image">
-			  <div class="hero-text">
-			    <h1>I am John Doe</h1>
-			    <p>And I'm a Photographer</p>
-			    <button>Hire me</button>
-			  </div>
-			</div>
-			
-			 -->
 			
 	
 			<div class="books-image">
