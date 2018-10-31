@@ -2,19 +2,13 @@ package com.skilldistillery.book2book.controllers;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.log4j.helpers.DateTimeDateFormat;
-import org.jboss.logging.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -213,7 +207,7 @@ public class CopyController {
 		// SimpleDateFormat f=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		// String time = "2018-10-10 12:00:00";
 		System.out.println(dateRange);
-		if (dateRange == null || dateRange.equals("")){
+		if (dateRange == null || dateRange.equals("")) {
 			return "fail";
 		}
 		// 10/23/2018 - 11/06/2018

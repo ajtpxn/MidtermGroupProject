@@ -20,10 +20,11 @@ public interface CopyDAO {
 	List<Copy> listUserCopies(int userId);
 
 	Copy getCopy(int id);
+
 	public List<Copy> seeAllAvailableCopies(int userId);
 
 	List<Copy> listLimitedCopies();
-	public Condition findConditionbyID( int conditionId);
 
+	public Condition findConditionbyID(int conditionId);
 
 }

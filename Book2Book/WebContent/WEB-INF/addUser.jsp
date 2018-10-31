@@ -45,18 +45,17 @@
 		<input type="text" name="userName" /> 
 		<br>
 		<label for="password">Password: </label> 
-		<input type="text" name="password" /> 
+		<input type="password" name="password" /> 
 		
 		<input type="submit" value="Sign Up">
 	</form>
 	
 	</div>
-	<div class="col">
-	<img id="pic" alt="" src="media/freebookexchange.jpg">
+	<!--<div class="col">
+	 <img id="pic" alt="" src="media/freebookexchange.jpg"> 
 	
 	</div>
-	</div>
-	
+	</div> -->
 
 </body>
 </html>
