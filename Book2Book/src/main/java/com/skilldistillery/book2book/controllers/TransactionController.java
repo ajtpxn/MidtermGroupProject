@@ -138,7 +138,23 @@ public class TransactionController {
 	public ModelAndView getTransactionHistory(@RequestParam("id") int id) {
 		ModelAndView mv = new ModelAndView();
 		List<Transaction> history = transDAO.getSortedTransactionsByUserId(id);
+		List<User> lenders = new ArrayList<User>();
+		List<Copy> copies = new ArrayList<Copy>();
+		
+		for (Transaction t : history) {
+			copies.add(copyDAO.getCopy(t.getCopyId()));
+			
+			if (t.getBorrowers().getId() == id) {
+				User lender = copyDAO.getCopy(t.getCopyId()).getUser();
+				lenders.add(lender);
+			} else {
+				lenders.add(null);
+			}
+		}
+		
 		mv.addObject("history", history);
+		mv.addObject("lenders", lenders);
+		mv.addObject("copies", copies);
 		mv.setViewName("transactionHistory");
 		return mv;
 	}
