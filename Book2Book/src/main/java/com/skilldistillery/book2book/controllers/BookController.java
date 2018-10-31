@@ -1,5 +1,7 @@
 package com.skilldistillery.book2book.controllers;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -16,6 +18,8 @@ import com.skilldistillery.book2book.data.CopyDAO;
 import com.skilldistillery.book2book.data.TransactionDAO;
 import com.skilldistillery.book2book.data.UserDAO;
 import com.skilldistillery.book2book.entities.Book;
+import com.skilldistillery.book2book.entities.ContentRating;
+import com.skilldistillery.book2book.entities.Genre;
 import com.skilldistillery.book2book.entities.User;
 
 @Controller
@@ -31,7 +35,23 @@ public class BookController {
 
 	//ADD NEW BOOK TO DB
 	@RequestMapping(path="add.do", method= RequestMethod.POST)
-	public String addNewBook(Book book ) {
+	public String addNewBook(@RequestParam("genreName")int[] genreid,
+			@RequestParam("contentRating.id")int contentId, Book book ) {
+		
+		
+		List<Genre> genres = new ArrayList<>();
+		for (int i : genreid) {
+			Genre genre = bd.findGenreById(i);
+			genres.add(genre);
+		}
+		ContentRating rating = bd.findContentRatingById(contentId);
+		
+		book.setContentRating(rating);
+		book.setGenres(genres);
+		
+		
+		
+		
 		
 				bd.addBook(book);
 				

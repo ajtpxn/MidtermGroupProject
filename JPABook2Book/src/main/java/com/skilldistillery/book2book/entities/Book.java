@@ -28,7 +28,7 @@ public class Book {
 	
 	private String description;
 	
-	@ManyToOne(cascade=CascadeType.PERSIST)
+	@ManyToOne
 	@JoinColumn(name="content_rating")
 	private ContentRating contentRating;
 	
@@ -155,19 +155,21 @@ public class Book {
 	}
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Book id: ").append(id).append(" title: ").append(title).append(" author: ").append(author)
-				.append(" description: ").append(description).append(" contentRatingId: ").append(contentRating);
-		return builder.toString();
+		return "Book [id=" + id + ", title=" + title + ", author=" + author + ", description=" + description
+				+ ", contentRating=" + contentRating + ", genres=" + genres + "]";
 	}
-	public Book(int id, String title, Author author, String description, ContentRating contentRating) {
+	public Book(String title, Author author, String description, ContentRating contentRating, List<Genre> genres
+			) {
 		super();
-		this.id = id;
 		this.title = title;
 		this.author = author;
 		this.description = description;
 		this.contentRating = contentRating;
+		this.genres = genres;
+		
 	}
+
+	
 	public Book() {
 		super();
 	}
