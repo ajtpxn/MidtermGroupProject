@@ -14,6 +14,8 @@
 </head>
 <body>
 <div class="container">
+<c:choose>
+<c:when test="${book != null}">
 <c:forEach items="${books}" var="book">
  
  <h3>Edit the book: ${book.title}</h3>
@@ -28,9 +30,9 @@
 	</form>
 	
 	</c:forEach>
- 
- 
- 
+ </c:when>
+ <c:otherwise>No Book Found</c:otherwise>
+ </c:choose>
  
  
  
