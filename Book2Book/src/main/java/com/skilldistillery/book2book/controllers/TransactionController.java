@@ -70,7 +70,7 @@ public class TransactionController {
 			System.out.println("transactions and copies added to mv and transaction.jsp set");
 			return mv;
 		} else {
-			mv.setViewName("login.do");
+			mv.setViewName("login");
 			return mv;
 		}
 	}
