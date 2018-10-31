@@ -200,6 +200,7 @@ public class UserController {
 	// EDIT USER PROFILE/ACCOUNT INFO
 	@RequestMapping(path = "editingProfile.do", method = RequestMethod.POST)
 	public String editProfile(User updatedUser, HttpSession session) {
+		updatedUser.setActive(true);
 		System.out.println("********************************************");
 		System.out.println(updatedUser);
 		System.out.println("********************************************");

@@ -51,11 +51,15 @@
 	</form>
 	
 	</div>
-	<!--<div class="col">
-	 <img id="pic" alt="" src="media/freebookexchange.jpg"> 
+
+	<div class="col">
+	<img id="pic" alt="" src="media/StackOfBooks.jpg">
+
+	
+
 	
 	</div>
-	</div> -->
+	
 
 </body>
 </html>

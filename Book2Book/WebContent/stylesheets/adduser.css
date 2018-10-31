@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 #nav{
-	position:absolute;
+	position:relative;
 	margin-top:2%;
 	
 }
@@ -13,12 +13,20 @@
 }
 #pic{
 	position:relative;
-	margin-top:10%;
+	width:300px;
+	height:500px;
 	
 }
 #title{
 	position:absolute;
 	margin-top:2%;
 	left:15%;
+	
+}
+#pic2{
+	position:relative;
+	width:250px;
+	height:350px;
+	
 	
 }
