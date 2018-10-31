@@ -52,7 +52,7 @@
 	
 	</div>
 	<div class="col">
-	<img id="pic" alt="" src="media/freebookexchange.jpg">
+	<img id="pic" alt="" src="media/StackOfBooks.jpg">
 	
 	</div>
 	</div>
