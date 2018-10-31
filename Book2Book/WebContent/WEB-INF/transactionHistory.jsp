@@ -12,7 +12,7 @@
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	crossorigin="anonymous">
 
-<title>Home</title>
+<title>Transaction History</title>
 </head>
 <body>
 
@@ -24,14 +24,29 @@
 
 		<%@ include file="nav.jsp"%>
 
-		<h2>My Transaction History</h2>
+		<h4>My Transaction History</h4>
 		<c:choose>
 			<c:when test="${not empty history}">
 				<c:forEach items="${history}" var="transaction" varStatus="loop">
-					<ul>
-						<li>Start Date: ${transaction.startDate }</li>
-						<li>End Date: ${transaction.endDate }</li>
-					</ul>
+					<c:choose>
+						<c:when test="${empty lenders[loop.index] }">
+							<h5>Lent Out <em>${copies[loop.index].book.title }</em></h5>
+							<ul>
+								<li></li>
+								<li>Borrower: ${transaction.borrower.userName }</li>
+								<li>Start Date: ${transaction.startDate }</li>
+								<li>End Date: ${transaction.endDate }</li>
+							</ul>
+						</c:when>
+						<c:otherwise>
+							<h5>Borrowed <em>${copies[loop.index].book.title }</em></h5>
+							<ul>
+								<li>Lender: ${lenders[loop.index].userName }</li>
+								<li>Start Date: ${transaction.startDate }</li>
+								<li>End Date: ${transaction.endDate }</li>
+							</ul>
+						</c:otherwise>
+					</c:choose>
 				</c:forEach>
 			</c:when>
 			<c:otherwise>
