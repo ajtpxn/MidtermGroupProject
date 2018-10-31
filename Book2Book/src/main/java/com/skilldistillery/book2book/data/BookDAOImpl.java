@@ -31,14 +31,16 @@ public class BookDAOImpl implements BookDAO {
 		em.persist(book);
 		em.flush();
 	}
+
 	@Override
 	public Genre findGenreById(int id) {
 		Genre genre = em.find(Genre.class, id);
 		return genre;
 	}
+
 	@Override
-	public ContentRating findContentRatingById( int id) {
-		
+	public ContentRating findContentRatingById(int id) {
+
 		ContentRating rating = em.find(ContentRating.class, id);
 		return rating;
 	}

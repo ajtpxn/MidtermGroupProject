@@ -20,45 +20,75 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
 
 	<div class="container">
 	
-			<div id="backgroundimage">
+	<!-- 
+	
+			<div class="hero-image">
+			  <div class="hero-text">
+			    <h1>I am John Doe</h1>
+			    <p>And I'm a Photographer</p>
+			    <button>Hire me</button>
+			  </div>
+			</div>
 			
-			<!-- 
-					<img class="img-fluid" id="bookcase" alt="bookcase" src="media/bookcase.jpg">
-					 -->
+			 -->
+			
+	
+			<div class="books-image">
 	
 					<div id = "nav" class="col offset-10">
 						<nav>
 							<c:choose>
 		
 								<c:when test="${not empty USER }">
-									<a href="account.do" class="btn btn-primary btn-sm">Account</a>
-									<a href="logout.do" class="btn btn-primary btn-sm">Log Out</a>
+									<a href="account.do" class="btn btn-primary btn-lg">Account</a>
+									<a href="logout.do" class="btn btn-primary btn-lg">Log Out</a>
 								</c:when>
 								<c:otherwise>
-									<a href="login.do" class="btn btn-primary btn-sm">Log In</a>
-									<a href="addUser.do" class="btn btn-primary btn-sm">Sign Up</a>
+									<a href="login.do" class="btn btn-primary btn-lg">Log In</a>
+									<a href="addUser.do" class="btn btn-primary btn-lg">Sign Up</a>
 								</c:otherwise>
 		
 							</c:choose>
 						</nav>
 					</div>
-			
+			<div class="row">&nbsp;</div>
+			<div class="row">&nbsp;</div>
+			<div class="row">&nbsp;</div>
+			<div class="row">&nbsp;</div>
+			<div class="row">&nbsp;</div>
+			<div class="row">&nbsp;</div>
+			<div class="row">&nbsp;</div>
+			<div class="row">&nbsp;</div>
+
+				<div class="text-center">
 		
-				
-					<img id="banner" alt="B2B" src="media/Book2BookLogo.jpg">
-		
-					<h2 class="text-center display-4"> &nbsp; Book2Book &nbsp;</h2>
+					<img class="bookbanner" alt="B2B" src="media/Book2BookLogo.jpg">
 					
-			
-			</div>
-			<hr>
-			<div class="container">
+					<strong class="bg-white display-1">&nbsp; Book2Book &nbsp;</strong>
+					
+				</div>
+					
+			<div class="row">&nbsp;</div>
+			<div class="row">&nbsp;</div>
+			<div class="row">&nbsp;</div>
+			<div class="row">&nbsp;</div>
+			<div class="row">&nbsp;</div>
+			<div class="row">&nbsp;</div>
+			<div class="row">&nbsp;</div>
+			<div class="row">&nbsp;</div>
+			<div class="row">&nbsp;</div>
+			<div class="row">&nbsp;</div>
+			<div class="row">&nbsp;</div>
+			<div class="row">&nbsp;</div>
+			<div class="row">&nbsp;</div>
+			<div class="row">&nbsp;</div>
+			<div class="row">&nbsp;</div>
+			<div class="row">&nbsp;</div>
 		
-			 <div class="container" class="bg-white">
-			  <div class="row" class="bg-white">
-			    <div class="col" class="bg-white">
-			    </div>
-			    <div class="col-8" class="bg-white">
+			</div>
+			<div class="booksmargins">
+			<hr>
+		
 			      
 			 	<h2 id="booksavail" class="bg-white text-center">Books that are available to Borrow</h2>
 			 
@@ -73,35 +103,21 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
 						
 							<form action="copyDetails.do" method="GET">
 								<input type="hidden" name="copy.id" value="${copy.id}"> <input
-									type="submit" value="Details and Borrow" class="btn btn-primary">
+									type="submit" value="Details and Borrow" class="btn btn-primary btn-block">
 							</form>
 		
 				</c:forEach>
-			      
-			    </div>
-			    <div class="col">
-			    </div>
-			  </div>
-			</div>
 			
-			<div class="container" >
-			  <div class="row">
-			    <div class="col">
-			    </div>
-			    <div class="col-8">
+			<br>
+			
 				<div id="searchbutton">
 					<form action="listAvailableCopy.do" method="GET">
 						<input type="submit" value="Search More Books Available to Borrow"
-							class="btn btn-warning btn-lg">
+							class="btn btn-warning btn-lg btn-block">
 					</form>
 					</div>
 			
-			    </div>
-			    <div class="col">
-			    </div>
-			  </div>
 		 
-			</div>
 			</div>
 	</div>
 

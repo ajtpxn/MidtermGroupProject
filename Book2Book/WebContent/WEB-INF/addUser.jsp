@@ -45,18 +45,22 @@
 		<input type="text" name="userName" /> 
 		<br>
 		<label for="password">Password: </label> 
-		<input type="text" name="password" /> 
+		<input type="password" name="password" /> 
 		
 		<input type="submit" value="Sign Up">
 	</form>
 	
 	</div>
+<<<<<<< HEAD
 	<div class="col">
 	<img id="pic" alt="" src="media/StackOfBooks.jpg">
+=======
+	<!--<div class="col">
+	 <img id="pic" alt="" src="media/freebookexchange.jpg"> 
+>>>>>>> ca6826e20805456741d55d1c9a41ccc127809a20
 	
 	</div>
-	</div>
-	
+	</div> -->
 
 </body>
 </html>

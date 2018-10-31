@@ -77,12 +77,14 @@ public class CopyDAOImpl implements CopyDAO {
 		System.out.println(copyList);
 		return copyList;
 	}
+
 	@Override
 	public List<Copy> seeAllAvailableCopies(int userId) {
 		String query = "SELECT c FROM Copy c WHERE c.available = true AND c.user.id != :id";
 		List<Copy> availableBooks = em.createQuery(query, Copy.class).setParameter("id", userId).getResultList();
 		return availableBooks;
 	}
+
 	@Override
 	public List<Copy> listLimitedCopies() {
 		String query = "SELECT c FROM Copy c";
@@ -94,31 +96,13 @@ public class CopyDAOImpl implements CopyDAO {
 		}
 		return output;
 	}
-	
-	public Condition findConditionbyID( int conditionId) {
-		
+
+	public Condition findConditionbyID(int conditionId) {
+
 		Condition condition = em.find(Condition.class, conditionId);
-				
-		
+
 		return condition;
-		
+
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 }

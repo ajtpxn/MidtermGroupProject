@@ -1,14 +1,37 @@
 
 
-.banner {
- height: 100vh;
- 
- /* Flexbox */
- display: flex;
- align-items: center;
+
+
+.books-image {
+    background-image:  url("../media/bookcase.jpg");
+    height: 50%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    
+	padding-left: 400px;
+	margin-left: -400px;
+
+	padding-right: 400px;
+	margin-right: -400px;
 }
 
 
+.bookbanner {
+	display: block;
+	margin-left: auto;
+    margin-right: auto;
+	width: 30%;
+    height: auto;
+}
+
+.booksmargins {
+	margin-left: 150px;
+	margin-right: 150px;
+}
+
+ 
 /* 
 
 #bookcase{
