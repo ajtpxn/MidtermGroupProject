@@ -1,15 +1,4 @@
-#backgroundimage{
-	
-	background-image: url(media/bookcase.jpg);
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center; 
-	
-}
 
-#homelogo {
-	
-}
 
 .banner {
  height: 100vh;

@@ -45,9 +45,9 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
 			
 		
 				
-					<img id="homelogo" class="img-fluid text-center" alt="B2B" src="media/Book2BookLogo.jpg">
+					<img id="banner" alt="B2B" src="media/Book2BookLogo.jpg">
 		
-					<h2 class="bg-light text-center display-4"> &nbsp; Book2Book &nbsp;</h2>
+					<h2 class="text-center display-4"> &nbsp; Book2Book &nbsp;</h2>
 					
 			
 			</div>
