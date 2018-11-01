@@ -19,6 +19,7 @@ import com.skilldistillery.book2book.data.CopyDAO;
 import com.skilldistillery.book2book.data.TransactionDAO;
 import com.skilldistillery.book2book.data.UserDAO;
 import com.skilldistillery.book2book.entities.Copy;
+import com.skilldistillery.book2book.entities.Transaction;
 import com.skilldistillery.book2book.entities.User;
 
 @Controller
@@ -171,11 +172,13 @@ public class UserController {
 			System.out.println("User Id: " + userId);
 			List<Copy> copies = copyDAO.listUserCopies(userId);
 			List<User> borrowers = new ArrayList<User>();
+			List<User> owners = new ArrayList<User>();
 			System.out.println("back from copies");
 			System.out.println(copies);
 			System.out.println(userDAO);
 			System.out.println(copyDAO);
 			System.out.println(transDAO);
+			List<Transaction> transactions = transDAO.getTransactionsByBorrowerId(userId);
 			for (Copy c : copies) {
 				borrowers.add(transDAO.getBorrowerByCopyIdAndDate(c.getId(), new Date()));
 			}
@@ -185,8 +188,18 @@ public class UserController {
 			 * Integer.toString(i); Transaction t = transactions.get(0);
 			 * mv.addObject(transName, t); }
 			 */
+			for (Transaction t : transactions) {
+				Copy c = copyDAO.getCopy(t.getCopyId());
+				owners.add(c.getUser());
+			}
+			
+			List<Copy> transCopies = copyDAO.listBorrowerCopies(userId);
+			System.out.println("transCopies"+transCopies);
 			mv.addObject("copies", copies);
 			mv.addObject("borrowers", borrowers);
+			mv.addObject("transactions", transactions);
+			mv.addObject("owners", owners);
+			mv.addObject("transCopies", transCopies);
 			mv.setViewName("account");
 			System.out.println("copies added to mv and account.jsp set");
 			System.out.println(borrowers);

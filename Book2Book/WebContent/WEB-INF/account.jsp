@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,21 +51,21 @@
 	
 	
 	
-	<div class="container">
-  <div class="row">
-    <div class="col-sm">
-	<h4> My Books: </h4>
-    </div>
-    <div class="col-sm">
-	<form action="home.do" method="GET">
-		<input type="submit" name="seeBook"
-			value="Add a book to your list" class="btn btn-secondary btn-sm">
-	</form>
-	
-    </div>
-    <div class="col-sm">
-    </div>
-  </div>
+<div class="container">
+	  <div class="row">
+	    <div class="col-sm">
+		<h4> My Books: </h4>
+	    </div>
+	    <div class="col-sm">
+		<form action="home.do" method="GET">
+			<input type="submit" name="seeBook"
+				value="Add a book to your list" class="btn btn-secondary btn-sm">
+		</form>
+		
+	    </div>
+	    <div class="col-sm">
+	    </div>
+	  </div>
 </div>
 	
 	
@@ -76,8 +77,8 @@
   <div class="row">
     <div class="col-sm">
       
-			${copy.book.title} by ${copy.book.author.firstName}
-			${copy.book.author.lastName} 
+			<c:out value="${copy.book.title}" /> by <c:out value="${copy.book.author.firstName}" />
+			<c:out value="${copy.book.author.lastName}" />
 		<form action="removeCopy.do" method="post">
 			<input type="hidden" name="copyId" value="${copy.id}"> <input
 				type="submit" name="removeCopy" value="Remove Book" class="btn btn-secondary btn-sm">
@@ -121,13 +122,79 @@
 		<hr>
 	<br>
 
-<div class="text-center">
-
-
-	<form action="transaction.do" method="get">
-		 <input type="submit" name="seeTransactions"
-			value="Books I am Borrowing" class="btn btn-secondary btn-sm">
+<div class="container">
+	  <div class="row">
+	    <div class="col-sm">
+		<h4> Books I am Borrowing: </h4>
+	    </div>
+	    <div class="col-sm">
+		<form action="listAvailableCopy.do" method="get">
+		 <input type="submit" value="Search Available Books to Borrow" class="btn btn-secondary btn-sm">
 	</form>
+		
+	    </div>
+	    <div class="col-sm">
+	    </div>
+	  </div>
+</div>
+
+	
+		<c:choose>
+			<c:when test="${not empty transactions}">
+
+		<c:forEach items="${transactions}" var="transaction" varStatus="loop">
+			<hr>
+	<div class="container">
+	  		<div class="row">
+	    		<div class="col-1">
+			
+						<a href="returnBook.do?id=${transaction.id}" class="btn btn-secondary btn-sm">Return</a>
+						
+						
+				</div>
+		    	<div class="col">
+						
+						<c:forEach items="${transCopies}" var="copy">
+							
+						
+						<c:if test="${transaction.copyId==copy.id}">
+						${copy.book.title} |
+						${copy.condition.name}
+						</c:if>
+						</c:forEach>
+						| Return by:
+						<c:set var="str" value="${transaction.endDate}" />
+					    ${fn:substringBefore(str, ' ')}
+					    
+				</div>
+		    	<div class="col-1">
+				    
+				    
+				    
+						<a href="userprofile.do?id=${owners[loop.index].id}" class="btn btn-secondary btn-sm">Owner</a>
+	
+	
+	
+	
+		    	</div>
+	  		</div>
+	</div>
+	
+		</c:forEach>
+		
+		</c:when>
+		
+			<c:otherwise>
+			You are not borrowing any books yet!
+			</c:otherwise>
+		
+		
+		</c:choose>
+	
+	<br>
+	<br>
+	<br>
+<div class="text-center">
 	<form action="transactionHistory.do" method="get">
 	<input type="hidden" name="id" value="${USER.id}">
 		 <input type="submit"
@@ -135,10 +202,16 @@
 	</form>
 	
 </div>
-	
-	
-
+	<br>
+	<br>
+	<br>
+	<%@ include file="footer.jsp"%>
+	<br>
+	<br>
+	<br>
 </div>
+
+
 <!--  <div id="HCB_comment_box"><a href="http://www.htmlcommentbox.com">Comment Form</a> is loading comments...</div>
  <link rel="stylesheet" type="text/css" href="//www.htmlcommentbox.com/static/skins/bootstrap/twitter-bootstrap.css?v=0" />
  <script type="text/javascript" id="hcb"> /*<!--*/ if(!window.hcb_user){hcb_user={};} (function(){var s=document.createElement("script"), 

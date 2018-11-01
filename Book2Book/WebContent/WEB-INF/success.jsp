@@ -20,6 +20,13 @@
 <p>
 The action you were attempting has succeeded.
 </p>
+				<br>
+	<br>
+	<br>
+	<%@ include file="footer.jsp"%>
+	<br>
+	<br>
+	<br>
 </div>
 </body>
 </html>

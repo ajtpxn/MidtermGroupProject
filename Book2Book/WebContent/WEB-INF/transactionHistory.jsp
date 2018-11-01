@@ -55,7 +55,13 @@
 			You do not have any transactions yet!
 			</c:otherwise>
 		</c:choose>
-
+				<br>
+	<br>
+	<br>
+	<%@ include file="footer.jsp"%>
+	<br>
+	<br>
+	<br>
 	</div>
 
 

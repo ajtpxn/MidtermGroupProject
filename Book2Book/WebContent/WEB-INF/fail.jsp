@@ -20,6 +20,14 @@
 <p>
 The action you were attempting has failed.
 </p>
+
+	<br>
+	<br>
+	<br>
+	<%@ include file="footer.jsp"%>
+	<br>
+	<br>
+	<br>
 </div>
 </body>
 </html>

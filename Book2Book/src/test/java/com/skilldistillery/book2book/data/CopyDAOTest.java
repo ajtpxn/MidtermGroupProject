@@ -92,6 +92,16 @@ public class CopyDAOTest {
 //		assertEquals("Used", actual);
 //	}
 	
+//	@Test
+//	@DisplayName("Test user dao listBorrowerCopies")
+//	void test03() {
+//		List<Copy> copies = dao.listBorrowerCopies(2);
+//		System.out.println(copies);
+//		Condition condition = copies.get(0).getCondition();
+//		String actual = condition.getName();
+//		assertEquals("Used", actual);
+//	}
+	
 	
 	
 	

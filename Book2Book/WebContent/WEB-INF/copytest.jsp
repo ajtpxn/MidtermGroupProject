@@ -40,6 +40,13 @@
 			<c:otherwise>
 			<h4>No Copy Found</h4>
 			</c:otherwise>
+				<br>
+	<br>
+	<br>
+	<%@ include file="footer.jsp"%>
+	<br>
+	<br>
+	<br>
 			</div>
 </body>
 </html>

@@ -27,4 +27,6 @@ public interface CopyDAO {
 
 	public Condition findConditionbyID(int conditionId);
 
+	List<Copy> listBorrowerCopies(int userId);
+
 }

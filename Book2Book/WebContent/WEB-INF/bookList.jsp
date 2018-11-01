@@ -58,6 +58,14 @@
 		No books could be found!
 		</c:otherwise>
 	</c:choose>
+	
+		<br>
+	<br>
+	<br>
+	<%@ include file="footer.jsp"%>
+	<br>
+	<br>
+	<br>
 
 	</div>
 </body>

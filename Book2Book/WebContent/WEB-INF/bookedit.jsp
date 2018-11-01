@@ -47,6 +47,16 @@
  <form action="home.do" method="GET">
 <input id="home" type="submit" value="Home" class="btn btn-primary btn-lg">
 </form>
+
+	<br>
+	<br>
+	<br>
+	<%@ include file="footer.jsp"%>
+	<br>
+	<br>
+	<br>
+
+
 </div>
 </body>
 </html>

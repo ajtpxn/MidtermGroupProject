@@ -34,6 +34,10 @@
 		</p>
 
 		<h2>Books I am Borrowing</h2>
+		
+		
+		<c:choose>
+			<c:when test="${not empty transactions}">
 
 		<c:forEach items="${transactions}" var="transaction" varStatus="loop">
 			<hr>
@@ -50,8 +54,23 @@
 	<a href="userprofile.do?id=${owners[loop.index].id}" class="btn btn-warning btn-lg">View Owner Profile</a>
 	
 		</c:forEach>
+		
+		</c:when>
+		
+			<c:otherwise>
+			You are not borrowing any books yet!
+			</c:otherwise>
+		
+		
+		</c:choose>
 
-
+				<br>
+	<br>
+	<br>
+	<%@ include file="footer.jsp"%>
+	<br>
+	<br>
+	<br>
 	</div>
 
 

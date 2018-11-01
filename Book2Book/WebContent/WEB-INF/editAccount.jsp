@@ -34,6 +34,14 @@
 		
 		<input type="submit" value="Confirm Edit">
 	</form>
+	
+		<br>
+	<br>
+	<br>
+	<%@ include file="footer.jsp"%>
+	<br>
+	<br>
+	<br>
 
 </div>
 </body>

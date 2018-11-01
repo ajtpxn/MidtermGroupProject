@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.skilldistillery.book2book.entities.Condition;
 import com.skilldistillery.book2book.entities.Copy;
+import com.skilldistillery.book2book.entities.Transaction;
 
 @Transactional
 @Repository
@@ -75,6 +76,24 @@ public class CopyDAOImpl implements CopyDAO {
 		copyList = em.createQuery(query, Copy.class).setParameter("userId", userId).getResultList();
 		System.out.println("About to return");
 		System.out.println(copyList);
+		return copyList;
+	}
+	
+	@Override
+	public List<Copy> listBorrowerCopies(int userId) {
+		System.out.println("listBorrowerCopies");
+		System.out.println("User ID: " + userId);
+		List<Transaction> transList = new ArrayList<>();
+		String query = "SELECT t FROM Transaction t WHERE t.borrower.id = :userId";
+		transList = em.createQuery(query, Transaction.class).setParameter("userId", userId).getResultList();
+		List<Copy> copyList = new ArrayList<>();
+		for (Transaction transaction : transList) {
+			int copyID = transaction.getCopyId();
+			Copy thisCopy = em.find(Copy.class, copyID);
+			copyList.add(thisCopy);
+		}
+		System.out.println("About to return");
+		System.out.println(transList);
 		return copyList;
 	}
 

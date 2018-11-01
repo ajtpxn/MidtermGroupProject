@@ -52,6 +52,14 @@
 	<img id="pic" alt="" src="media/StackOfBooks.jpg">
 	</div>
 	</div>
+	
+	<br>
+	<br>
+	<br>
+	<%@ include file="footer.jsp"%>
+	<br>
+	<br>
+	<br>
 </div>
 
 </body>

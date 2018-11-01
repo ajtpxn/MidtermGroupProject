@@ -38,6 +38,13 @@
 	<form action="index.do">
 		<input type="submit" value="Home">
 	</form>
+					<br>
+	<br>
+	<br>
+	<%@ include file="footer.jsp"%>
+	<br>
+	<br>
+	<br>
 	</div>
 </body>
 </html>

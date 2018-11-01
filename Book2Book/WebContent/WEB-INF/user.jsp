@@ -35,7 +35,13 @@
 			</c:when>
 			<c:otherwise>The user could not be found!</c:otherwise>
 		</c:choose>
-
+				<br>
+	<br>
+	<br>
+	<%@ include file="footer.jsp"%>
+	<br>
+	<br>
+	<br>
 	</div>
 </body>
 </html>
