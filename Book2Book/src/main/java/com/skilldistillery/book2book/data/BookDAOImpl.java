@@ -48,6 +48,7 @@ public class BookDAOImpl implements BookDAO {
 	@Override
 	public void editBook(Book bookWithNewValues, int idOfBookToBeEdited) {
 		Author managedAuthor = bookWithNewValues.getAuthor();
+		
 
 		Book updatedBook = em.find(Book.class, idOfBookToBeEdited);
 		// USES AUTHOR MANAGED AUTHOR ABOVE

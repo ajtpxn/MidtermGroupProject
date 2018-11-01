@@ -48,11 +48,6 @@ public class BookController {
 		book.setContentRating(rating);
 		book.setGenres(genres);
 
-//	public String addNewBook(Book book ) {
-//		Book newBook = new Book();
-//		book.getAuthor().getFirstName();
-//		book.getAuthor().getLastName();
-
 		bd.addBook(book);
 
 		return "redirect:addbook.do";
@@ -68,18 +63,29 @@ public class BookController {
 	}
 
 	// EDIT BOOK
-	@RequestMapping(path = "editbook.do", method = RequestMethod.POST)
-	public String editBook(Book updatedBook, @RequestParam("id") int id) {
-		int oldBookId = updatedBook.getId();
-		System.out.println(oldBookId);
+	@RequestMapping(path = "editingbook.do", method = RequestMethod.POST)
+	public String editBook(@RequestParam("genreName") int[] genreid, @RequestParam("contentRating.id") int contentId,
+	Book book, @RequestParam("id") int bookid) {
+		
+		
+		List<Genre> genres = new ArrayList<>();
+		for (int i : genreid) {
+			Genre genre = bd.findGenreById(i);
+			genres.add(genre);
+		}
+		ContentRating rating = bd.findContentRatingById(contentId);
 
-		System.out.println("ID passed by request" + id);
-		bd.editBook(updatedBook, id);
+		book.setContentRating(rating);
+		book.setGenres(genres);
+		
 
-		return "redirect:editBook.do";
+		
+		bd.editBook(book, bookid);
+
+		return "redirect:editedBook.do";
 	}
 
-	@RequestMapping(path = "editBook.do", method = RequestMethod.GET)
+	@RequestMapping(path = "editedBook.do", method = RequestMethod.GET)
 	public ModelAndView editedBook() {
 		ModelAndView mv = new ModelAndView();
 

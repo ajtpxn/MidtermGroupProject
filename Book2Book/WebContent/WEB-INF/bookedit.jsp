@@ -17,17 +17,56 @@
 <body>
 <div class="container">
 <c:choose>
-<c:when test="${book != null}">
+<c:when test="${books != null}">
 <c:forEach items="${books}" var="book">
  
  <h3>Edit the book: ${book.title}</h3>
-	<form action="editbook.do" method="POST">
+	<form action="editingbook.do" method="POST">
 		<input type="hidden" name="id" value="${book.id}"/> 
 		<label>title</label> <input type="text" name="title" value="${book.title}"/> 
 		<label>description</label><input type="text" name="description" value="${book.description}" />
 		 <label>author first name</label> <input type="text" name="author.firstName" value="${book.author.firstName}" />
 		  <label>author last name</label> <input type="text" name="author.lastName" value="${book.author.lastName}" /> 
-		  <label>Content</label> <input type="text" name="contentRating" value="${book.contentRating}" />
+		   <br>
+		    <label>Content Rating</label> 
+   
+    
+		  <select name="contentRating.id">
+				<option value="0"></option>
+				<option value="1">Kids</option>
+				<option value="2">Young Adult</option>
+				<option value="3">Adult</option>
+				<option value="4">Adult Plus</option>
+			</select> <input type="hidden" name="contentRating.id" >
+		  <br>
+		  <label>Genre</label>
+		  <div class="form-check">
+    <div class="col-sm">
+        <input class="form-check-input" type="checkbox" name="genreName" value="1">
+          Childrens
+        
+        </div>
+        <div class="col-sm">
+        <input class="form-check-input" type="checkbox" name="genreName" value="2">
+          Fantasy
+        </div>
+        <div class="col-sm">
+        <input class="form-check-input" type="checkbox" name="genreName" value="3">
+          History
+        </div>
+        <div class="col-sm">
+        <input class="form-check-input" type="checkbox" name="genreName" value="4">
+          Biography
+        </div>
+        <div class="col-sm">
+        <input class="form-check-input" type="checkbox" name="genreName" value="5">
+          Satire
+      </div>
+      
+		
+    </div>
+		  
+		  
 		   <input type="submit" value="Edit Book" class="btn btn-Dark" />
 	</form>
 	

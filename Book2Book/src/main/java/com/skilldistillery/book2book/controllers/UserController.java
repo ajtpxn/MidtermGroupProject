@@ -156,7 +156,7 @@ public class UserController {
 	public String logOut(HttpSession session) {
 		System.out.println("logOut");
 		session.invalidate();
-		return "index";
+		return "redirect:index.do";
 
 	}
 
