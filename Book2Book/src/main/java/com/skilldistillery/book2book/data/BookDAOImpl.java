@@ -62,7 +62,8 @@ public class BookDAOImpl implements BookDAO {
 	@Override
 	public List<Book> searchForBookbyKeyword(String search) {
 		List<Book> bookList = new ArrayList<>();
-		String query = "select b from Book b where concat(b.title, b.description, b.author.firstName, b.author.lastName) like :search";
+		//String query = "select b from Book b where concat(b.title, b.description, b.author.firstName, b.author.lastName) like :search";
+		String query = "select b from Book b where b.title like :search or b.description like :search or b.author.firstName like :search or b.author.lastName like :search";
 		bookList = em.createQuery(query, Book.class).setParameter("search", "%" + search + "%").getResultList();
 		return bookList;
 	}

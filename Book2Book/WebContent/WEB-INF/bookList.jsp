@@ -12,7 +12,7 @@
 
 <link rel="icon" href="media/favicon.ico">
 
-<title>Insert title here</title>
+<title>Book List</title>
 </head>
 <body>
 <div class="container">
@@ -46,6 +46,7 @@
       		<img id="coverpics" alt="Book Cover Image"
 						src="${copy.book.imageUrl}" width="150" height="240">
     </div>
+   	&emsp;
 	${book.title } | 
 	${book.id}
 				
