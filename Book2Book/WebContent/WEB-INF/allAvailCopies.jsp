@@ -30,6 +30,7 @@
 					<h4>${copy.book.title }</h4>
 					by ${copy.book.author.firstName } ${copy.book.author.lastName } |
 					${copy.book.description }
+					
 				</div>
 				<div class="col-1" align="right">
 					<form action="userprofile.do" method="GET">

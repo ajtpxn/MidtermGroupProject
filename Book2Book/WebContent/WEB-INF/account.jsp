@@ -125,8 +125,8 @@
 			<input type="hidden" name="copyId" value="${copy.id}"> <input
 				type="submit" name="removeCopy" value="Remove Book" class="btn btn-secondary btn-sm">
 		</form>
-		<form action="editbook.do" method="post">
-			<input type="hidden" name="editBook" value="${copy.book.title}"> <input
+		<form action="editbook.do" method="GET">
+			<input type="hidden" name="title" value="${copy.book.title}"> <input
 				type="submit" name="editBook" value="Edit Book" class="btn btn-secondary btn-sm">
 		</form>
 

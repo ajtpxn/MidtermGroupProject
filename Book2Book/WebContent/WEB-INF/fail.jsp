@@ -23,6 +23,13 @@
 That username is already taken.  Please try again.
 </p>
 </c:when>
+<c:when test="${titleFail}">
+<p>
+That title already exists or one of the book's fields was left blank.  
+<br>
+Please select that title directly or fill out all fields of the book you wish to add.
+</p>
+</c:when>
 <c:otherwise>
 <p>
 The action you were attempting has failed.

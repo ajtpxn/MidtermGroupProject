@@ -206,20 +206,16 @@ public class CopyController {
 		// PARSES START AND END DATE FROM STRING TO DATE
 		// SimpleDateFormat f=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		// String time = "2018-10-10 12:00:00";
-		System.out.println(dateRange);
 		if (dateRange == null || dateRange.equals("")) {
 			return "fail";
 		}
-		// 10/23/2018 - 11/06/2018
+		// 10/23/2018 - 11/06/2018 split into two strings via regex
 		String[] dateArray = dateRange.split("\\s-\\s");
-		System.out.println(dateArray[0]);
-		System.out.println(dateArray[1]);
 		String sd = dateArray[0];
 		String startDateWithTime = sd.concat(" 10:00:00");
 		String ed = dateArray[1];
 		String endDateWithTime = ed.concat(" 10:00:00");
 		Date startD = null;
-		// Date cDate = null;
 		Date endD = null;
 
 		try {
@@ -227,15 +223,10 @@ public class CopyController {
 			endD = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").parse(endDateWithTime);
 			System.out.println(startD);
 			System.out.println(endD);
-//			startD = f.parse(startDate);
-//			endD = f.parse(endDate);
-			// cDate = f.parse(time);
-
+			
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 		List<Transaction> transactionsInvolvingCopy = tDAO.getTransactionsByCopyId(copyId);
 		boolean newTransactionIsValid = true;
 		Transaction overlappingTransaction = null;
@@ -248,19 +239,14 @@ public class CopyController {
 				break;
 			}
 		}
-
 		if (newTransactionIsValid) {
-			// CREATES NEW TRANSANACTION
+			// CREATES NEW TRANSACTION
 			Transaction newTrans = new Transaction();
-
 			newTrans.setBorrowers(user);
 			newTrans.setCopyId(copy.getId());
 			newTrans.setStartDate(startD);
 			newTrans.setEndDate(endD);
-			// newTrans.setDateCreated(cDate);
-
 			tDAO.makeTransaction(newTrans);
-
 			// SWITCHES AVAILABLITY TO FALSE
 			copy.setAvailable(false);
 			cDAO.editCopy(copy, copyId);
@@ -269,9 +255,7 @@ public class CopyController {
 					"The new transaction conflicts with another transaction with start date "
 							+ overlappingTransaction.getStartDate() + " and end date "
 							+ overlappingTransaction.getEndDate());
-
 		}
-
 		return "redirect:account.do";
 	}
 
