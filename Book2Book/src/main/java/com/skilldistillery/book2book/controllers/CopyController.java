@@ -272,7 +272,7 @@ public class CopyController {
 
 		}
 
-		return "redirect:transaction.do";
+		return "redirect:account.do";
 	}
 
 	@RequestMapping(path = "changedCopyTrans.do", method = RequestMethod.GET)

@@ -78,7 +78,7 @@
 	<div class="container">
   <div class="row">
     <div class="col-1">
-      		<img id="coverpics"  alt="Book Cover" src="https://prodimage.images-bn.com/pimages/9780345445605_p0_v1_s550x406.jpg">
+      		<img id="coverpics"  alt="Book Cover Image" src="${copy.book.imageUrl}">
     </div>
     <div class="col-sm">
 			<c:out value="${copy.book.title}" /> by <c:out value="${copy.book.author.firstName}" />
@@ -166,6 +166,9 @@
 							
 						
 						<c:if test="${transaction.copyId==copy.id}">
+						<img id="coverpics"  alt="Book Cover Image" src="${copy.book.imageUrl}">
+    
+						
 						${copy.book.title} |
 						${copy.condition.name}
 						</c:if>
