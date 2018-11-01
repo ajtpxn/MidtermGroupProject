@@ -2,7 +2,7 @@
 
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
 -- -----------------------------------------------------
 -- Schema bookdb
@@ -172,7 +172,6 @@ CREATE TABLE IF NOT EXISTS `copy_transaction` (
   `date_created` DATETIME NULL DEFAULT current_timestamp,
   `borrow_id` INT NOT NULL,
   `copy_id` INT NOT NULL,
-  `concluded` TINYINT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_transaction_user2_idx` (`borrow_id` ASC),
   INDEX `fk_transaction_copy1_idx` (`copy_id` ASC),
@@ -252,8 +251,9 @@ CREATE TABLE IF NOT EXISTS `book_rating` (
 ENGINE = InnoDB;
 
 SET SQL_MODE = '';
-DROP USER IF EXISTS admin@localhost;
-SET SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+GRANT USAGE ON *.* TO admin@localhost;
+ DROP USER admin@localhost;
+SET SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 CREATE USER 'admin'@'localhost' IDENTIFIED BY 'book2book';
 
 GRANT SELECT, INSERT, TRIGGER, UPDATE, DELETE ON TABLE * TO 'admin'@'localhost';
@@ -270,6 +270,12 @@ USE `bookdb`;
 INSERT INTO `user` (`id`, `first_name`, `last_name`, `username`, `password`, `active`, `date_created`, `image_url`) VALUES (1, 'User', 'McUserface', 'usermcuserface', 'imauser', 1, NULL, 'https://imgur.com/a/0xEDkGy');
 INSERT INTO `user` (`id`, `first_name`, `last_name`, `username`, `password`, `active`, `date_created`, `image_url`) VALUES (2, 'Gritty', 'Mascot', 'iamgritty', 'hiimgritty', 1, NULL, 'https://imgur.com/a/R1DCHBu');
 INSERT INTO `user` (`id`, `first_name`, `last_name`, `username`, `password`, `active`, `date_created`, `image_url`) VALUES (3, 'Kyle', 'Paladini', 'mynameiskyle', 'passw0rd', 1, NULL, 'https://imgur.com/a/3UrqGOW');
+INSERT INTO `user` (`id`, `first_name`, `last_name`, `username`, `password`, `active`, `date_created`, `image_url`) VALUES (4, 'George', 'Genesee', 'george', 'password', 1, '2018-10-30 16:55:28', NULL);
+INSERT INTO `user` (`id`, `first_name`, `last_name`, `username`, `password`, `active`, `date_created`, `image_url`) VALUES (5, 'Hank', 'Henderson', 'hank', 'password', 1, '2018-10-30 16:55:52', NULL);
+INSERT INTO `user` (`id`, `first_name`, `last_name`, `username`, `password`, `active`, `date_created`, `image_url`) VALUES (6, 'Ike', 'Irvine', 'ike', 'password', 1, '2018-10-30 16:57:40', NULL);
+INSERT INTO `user` (`id`, `first_name`, `last_name`, `username`, `password`, `active`, `date_created`, `image_url`) VALUES (8, 'Jack', 'Johannesburg', 'jack', 'password', 1, '2018-10-30 17:13:34', NULL);
+INSERT INTO `user` (`id`, `first_name`, `last_name`, `username`, `password`, `active`, `date_created`, `image_url`) VALUES (9, 'Danny', 'Dallas', 'danny', 'password', 1, '2018-10-30 17:13:34', NULL);
+INSERT INTO `user` (`id`, `first_name`, `last_name`, `username`, `password`, `active`, `date_created`, `image_url`) VALUES (10, 'Eddie', 'Earlville', 'eddie', 'password', 1, '2018-10-30 17:13:34', NULL);
 
 COMMIT;
 
@@ -344,90 +350,90 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `bookdb`;
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (1, 'The Very Hungry Caterpillar', 'A caterpillar eats a lot and then turns into a butterfly', 1, 1, 0399226907, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (2, 'Harry Potter and the Prisoner of Azkaban', 'A young wizard in training must confront an escaped convict who may be responsible for the death of his parents.', 2, 2, NULL, NULL);
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (1, 'The Very Hungry Caterpillar', 'A caterpillar eats a lot and then turns into a butterfly', 1, 1, 399226907, 'https://images-na.ssl-images-amazon.com/images/I/51reF9VCr1L._SY354_BO1,204,203,200_.jpg');
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (2, 'Harry Potter and the Prisoner of Azkaban', 'A young wizard in training must confront an escaped convict who may be responsible for the death of his parents.', 2, 2, NULL, 'https://www.klinebooks.com/pictures/medium/41318.jpg');
 INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (3, 'Slaughterhouse-Five', 'A man becomes unstuck in time and must live with the knowledge of his fate. ', 3, 3, NULL, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (4, 'Catherine the Great: Portrait of a Woman', 'Autobiography of the former Empress of Russia.', 4, 3, NULL, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (5, 'The History of the Decline and Fall of the Roman Empire', 'see title', 5, 3, NULL, NULL);
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (4, 'Catherine the Great: Portrait of a Woman', 'Autobiography of the former Empress of Russia.', 4, 3, NULL, 'https://images.gr-assets.com/books/1403395276l/10414941.jpg');
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (5, 'The History of the Decline and Fall of the Roman Empire', 'see title', 5, 3, NULL, 'https://www.burnsiderarebooks.com/pictures/160730004_1.jpg?v=1469925334');
 INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (6, 'American Psycho', 'A wealthy yuppie goes on a bloody rampage in this critique of high society.', 6, 4, NULL, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (7, 'The Hobbit', 'There and Back Again', 37, 1, 0, 'https://imgur.com/a/SacNs7h');
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (8, 'The Divine Comedy', '', 8, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (9, 'The Brothers Karamazov', '', 28, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (10, 'The Adventures of Huckleberry Finn', '', 38, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (11, 'Alice\'s Adventures in Wonderland', '', 19, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (12, 'Wuthering Heights', '', 16, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (14, 'Pride and Prejudice', '', 10, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (15, 'Nineteen Eighty Four', '', 35, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (16, 'Great Expectations', '', 27, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (17, 'Gulliver\'s Travels', '', 36, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (18, 'David Copperfield', '', 27, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (19, 'The Canterbury Tales', '', 20, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (20, 'The Lord of the Rings', '', 37, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (21, 'The Lion, the Witch and the Wardrobe', '', 34, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (23, 'Animal Farm', '', 35, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (43, 'Jurassic Park', '', 24, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (46, 'Physics & Philosophy', '', 30, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (49, 'Machine Learning for Hackers', '', 21, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (51, 'Introduction to Algorithms', '', 23, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (52, 'Outsider, The', '', 17, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (53, 'Complete Sherlock Holmes, The - Vol I', '', 29, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (57, 'Complete Sherlock Holmes, The - Vol II', '', 29, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (59, 'Tao of Physics, The', '', 18, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (61, 'Farewell to Arms, A', '', 31, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (64, 'False Impressions', '', 9, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (65, 'Jurassic Park', '', 24, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (68, 'Russian Journal, A', '', 41, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (70, 'Hidden Connections, The', '', 18, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (71, 'Asami Asami', '', 26, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (72, 'Journal of a Novel', '', 41, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (73, 'Once There Was a War', '', 41, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (82, 'Moon is Down, The', '', 41, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (88, 'Learning OpenCV', '', 15, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (90, 'Crime and Punishment', '', 28, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (92, 'Argumentative Indian, The', '', 42, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (95, 'Idea of Justice, The', '', 42, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (98, 'Prisoner of Birth, A', '', 9, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (100, 'Last Mughal, The', '', 25, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (101, 'Radiowaril Bhashane & Shrutika', '', 26, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (102, 'Gun Gayin Awadi', '', 26, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (110, 'Aghal Paghal', '', 26, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (111, 'Winter of Our Discontent, The', '', 41, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (117, 'On Education', '', 39, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (118, 'Electric Universe', '', 14, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (119, 'Hunchback of Notre Dame, The', '', 32, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (122, 'Burning Bright', '', 41, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (123, 'Down and Out in Paris & London', '', 35, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (124, 'Identity & Violence', '', 42, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (132, 'Beyond the Three Seas', '', 25, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (133, 'Artist and the Mathematician, The', '', 7, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (134, 'History of Western Philosophy', '', 39, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (136, 'Rationality & Freedom', '', 42, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (137, 'Uncommon Wisdom', '', 18, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (141, 'One', '', 11, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (142, 'Apulki', '', 26, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (145, 'Unpopular Essays', '', 39, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (157, 'Char Shabda', '', 26, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (163, 'Life in Letters, A', '', 41, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (164, 'Grapes of Wrath, The', '', 41, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (166, 'Vyakti ani Valli', '', 26, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (167, 'Empire of the Mughal - The Tainted Throne', '', 40, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (168, 'Empire of the Mughal - Brothers at War', '', 40, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (169, 'Empire of the Mughal - Ruler of the World', '', 40, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (170, 'Empire of the Mughal - The Serpent\'s Tooth', '', 40, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (171, 'Empire of the Mughal - Raiders from the North', '', 40, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (172, 'Mossad', '', 12, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (174, 'Jim Corbett Omnibus', '', 22, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (175, 'Batatyachi Chal', '', 26, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (176, 'Hafasavnuk', '', 26, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (186, 'Urlasurla', '', 26, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (194, 'Men of Mathematics', '', 13, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (195, 'History of England, Foundation', '', 43, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (201, 'City of Djinns', '', 25, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (202, 'Eyeless in Gaza', '', 33, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (208, 'Tales of Beedle the Bard', '', 2, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (209, 'Animal Farm', '', 35, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (210, 'Idiot, The', '', 28, 1, 0, NULL);
-INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (211, 'Christmas Carol, A', '', 27, 1, 0, NULL);
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (7, 'The Hobbit', 'There and Back Again', 37, 1, NULL, 'https://prodimage.images-bn.com/pimages/9780345445605_p0_v1_s550x406.jpg');
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (8, 'The Divine Comedy', NULL, 8, 1, NULL, 'https://prodimage.images-bn.com/pimages/9781435162082_p0_v2_s550x406.jpg');
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (9, 'The Brothers Karamazov', NULL, 28, 1, NULL, 'https://i.ebayimg.com/images/g/pYwAAOSwjKFZO7r5/s-l600.jpg');
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (10, 'The Adventures of Huckleberry Finn', NULL, 38, 1, NULL, 'https://www-tc.pbs.org/wgbh/americanexperience/media/filer_public_thumbnails/filer_public/d9/27/d9276988-95ca-44d4-9ef4-83d01619ee90/banned-huckfinn-feature.jpg__350x494_q85_crop_subsampling-2_upscale.jpg');
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (11, 'Alice\'s Adventures in Wonderland', NULL, 19, 1, NULL, 'https://images-na.ssl-images-amazon.com/images/I/51Dp6aAR4HL._SX357_BO1,204,203,200_.jpg');
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (12, 'Wuthering Heights', NULL, 16, 1, NULL, NULL);
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (14, 'Pride and Prejudice', NULL, 10, 1, NULL, 'https://images.penguinrandomhouse.com/cover/9780553897395');
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (15, 'Nineteen Eighty Four', NULL, 35, 1, NULL, 'https://images-na.ssl-images-amazon.com/images/I/41R3pYJCqpL._SX331_BO1,204,203,200_.jpg');
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (16, 'Great Expectations', NULL, 27, 1, NULL, NULL);
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (17, 'Gulliver\'s Travels', NULL, 36, 1, NULL, 'https://i.pinimg.com/originals/3b/e3/0a/3be30a7ff5bb858d838b11e5130d98eb.jpg');
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (18, 'David Copperfield', NULL, 27, 1, NULL, NULL);
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (19, 'The Canterbury Tales', NULL, 20, 1, NULL, NULL);
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (20, 'The Lord of the Rings', NULL, 37, 1, NULL, NULL);
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (21, 'The Lion, the Witch and the Wardrobe', NULL, 34, 1, NULL, NULL);
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (23, 'Animal Farm', NULL, 35, 1, NULL, NULL);
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (43, 'Jurassic Park', NULL, 24, 1, NULL, 'https://i2.wp.com/www.wordsarework.com/wp-content/uploads/2016/02/jurassic-park-michael-crichton-book-cover.jpg');
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (46, 'Physics & Philosophy', NULL, 30, 1, NULL, NULL);
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (49, 'Machine Learning for Hackers', NULL, 21, 1, NULL, NULL);
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (51, 'Introduction to Algorithms', NULL, 23, 1, NULL, 'https://images-na.ssl-images-amazon.com/images/I/41-1VkO%2B1lL._SX359_BO1,204,203,200_.jpg');
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (52, 'Outsider, The', NULL, 17, 1, NULL, NULL);
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (53, 'Complete Sherlock Holmes, The - Vol I', NULL, 29, 1, NULL, NULL);
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (57, 'Complete Sherlock Holmes, The - Vol II', NULL, 29, 1, NULL, NULL);
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (59, 'Tao of Physics, The', NULL, 18, 1, NULL, 'https://images-na.ssl-images-amazon.com/images/I/811tLunRdrL.jpg');
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (61, 'Farewell to Arms, A', NULL, 31, 1, NULL, 'https://images-na.ssl-images-amazon.com/images/I/5188um8SnIL._SX327_BO1,204,203,200_.jpg');
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (64, 'False Impressions', NULL, 9, 1, NULL, NULL);
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (65, 'Jurassic Park', NULL, 24, 1, NULL, NULL);
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (68, 'Russian Journal, A', NULL, 41, 1, NULL, NULL);
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (70, 'Hidden Connections, The', NULL, 18, 1, NULL, NULL);
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (71, 'Asami Asami', NULL, 26, 1, NULL, NULL);
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (72, 'Journal of a Novel', NULL, 41, 1, NULL, NULL);
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (73, 'Once There Was a War', NULL, 41, 1, NULL, NULL);
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (82, 'Moon is Down, The', NULL, 41, 1, NULL, NULL);
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (88, 'Learning OpenCV', NULL, 15, 1, NULL, NULL);
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (90, 'Crime and Punishment', NULL, 28, 1, NULL, NULL);
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (92, 'Argumentative Indian, The', NULL, 42, 1, NULL, NULL);
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (95, 'Idea of Justice, The', NULL, 42, 1, NULL, NULL);
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (98, 'Prisoner of Birth, A', NULL, 9, 1, NULL, NULL);
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (100, 'Last Mughal, The', NULL, 25, 1, NULL, NULL);
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (101, 'Radiowaril Bhashane & Shrutika', NULL, 26, 1, NULL, NULL);
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (102, 'Gun Gayin Awadi', NULL, 26, 1, NULL, NULL);
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (110, 'Aghal Paghal', NULL, 26, 1, NULL, NULL);
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (111, 'Winter of Our Discontent, The', NULL, 41, 1, NULL, NULL);
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (117, 'On Education', NULL, 39, 1, NULL, NULL);
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (118, 'Electric Universe', NULL, 14, 1, NULL, NULL);
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (119, 'Hunchback of Notre Dame, The', NULL, 32, 1, NULL, 'https://images.gr-assets.com/books/1388342667l/30597.jpg');
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (122, 'Burning Bright', NULL, 41, 1, NULL, NULL);
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (123, 'Down and Out in Paris & London', NULL, 35, 1, NULL, NULL);
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (124, 'Identity & Violence', NULL, 42, 1, NULL, NULL);
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (132, 'Beyond the Three Seas', NULL, 25, 1, NULL, NULL);
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (133, 'Artist and the Mathematician, The', NULL, 7, 1, NULL, NULL);
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (134, 'History of Western Philosophy', NULL, 39, 1, NULL, NULL);
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (136, 'Rationality & Freedom', NULL, 42, 1, NULL, NULL);
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (137, 'Uncommon Wisdom', NULL, 18, 1, NULL, NULL);
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (141, 'One', NULL, 11, 1, NULL, NULL);
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (142, 'Apulki', NULL, 26, 1, NULL, NULL);
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (145, 'Unpopular Essays', NULL, 39, 1, NULL, NULL);
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (157, 'Char Shabda', NULL, 26, 1, NULL, NULL);
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (163, 'Life in Letters, A', NULL, 41, 1, NULL, 'https://images-na.ssl-images-amazon.com/images/I/91xEFnKpSFL.jpg');
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (164, 'Grapes of Wrath, The', NULL, 41, 1, NULL, NULL);
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (166, 'Vyakti ani Valli', NULL, 26, 1, NULL, NULL);
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (167, 'Empire of the Mughal - The Tainted Throne', NULL, 40, 1, NULL, NULL);
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (168, 'Empire of the Mughal - Brothers at War', NULL, 40, 1, NULL, NULL);
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (169, 'Empire of the Mughal - Ruler of the World', NULL, 40, 1, NULL, NULL);
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (170, 'Empire of the Mughal - The Serpent\'s Tooth', NULL, 40, 1, NULL, 'https://images-na.ssl-images-amazon.com/images/I/51JnlXyBF5L._SX323_BO1,204,203,200_.jpg');
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (171, 'Empire of the Mughal - Raiders from the North', NULL, 40, 1, NULL, NULL);
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (172, 'Mossad', NULL, 12, 1, NULL, NULL);
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (174, 'Jim Corbett Omnibus', NULL, 22, 1, NULL, NULL);
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (175, 'Batatyachi Chal', NULL, 26, 1, NULL, NULL);
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (176, 'Hafasavnuk', NULL, 26, 1, NULL, NULL);
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (186, 'Urlasurla', NULL, 26, 1, NULL, NULL);
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (194, 'Men of Mathematics', NULL, 13, 1, NULL, NULL);
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (195, 'History of England, Foundation', NULL, 43, 1, NULL, NULL);
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (201, 'City of Djinns', NULL, 25, 1, NULL, NULL);
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (202, 'Eyeless in Gaza', NULL, 33, 1, NULL, NULL);
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (208, 'Tales of Beedle the Bard', NULL, 2, 1, NULL, NULL);
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (209, 'Animal Farm', NULL, 35, 1, NULL, NULL);
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (210, 'Idiot, The', NULL, 28, 1, NULL, NULL);
+INSERT INTO `book` (`id`, `title`, `description`, `author_id`, `content_rating`, `isbn`, `image_url`) VALUES (211, 'Christmas Carol, A', NULL, 27, 1, NULL, NULL);
 
 COMMIT;
 
@@ -451,10 +457,28 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `bookdb`;
-INSERT INTO `copy` (`id`, `available`, `date_added`, `date_removed`, `user_id`, `book_id`, `active`, `condition_id`, `image_url`) VALUES (1, 1, '2017-02-03 12:00:00', NULL, 1, 1, 1, 1, NULL);
-INSERT INTO `copy` (`id`, `available`, `date_added`, `date_removed`, `user_id`, `book_id`, `active`, `condition_id`, `image_url`) VALUES (2, 1, '2016-11-10 11:11:11', NULL, 3, 4, 1, 4, NULL);
+INSERT INTO `copy` (`id`, `available`, `date_added`, `date_removed`, `user_id`, `book_id`, `active`, `condition_id`, `image_url`) VALUES (1, 0, '2017-02-03 12:00:00', NULL, 1, 1, 1, 1, NULL);
+INSERT INTO `copy` (`id`, `available`, `date_added`, `date_removed`, `user_id`, `book_id`, `active`, `condition_id`, `image_url`) VALUES (2, 0, '2016-11-10 11:11:11', NULL, 3, 4, 1, 4, NULL);
 INSERT INTO `copy` (`id`, `available`, `date_added`, `date_removed`, `user_id`, `book_id`, `active`, `condition_id`, `image_url`) VALUES (3, 0, '2016-11-08 23:00:00', NULL, 2, 2, 0, 2, NULL);
-INSERT INTO `copy` (`id`, `available`, `date_added`, `date_removed`, `user_id`, `book_id`, `active`, `condition_id`, `image_url`) VALUES (4, 1, '2017-11-02 21:21:21', NULL, 2, 4, 1, 3, NULL);
+INSERT INTO `copy` (`id`, `available`, `date_added`, `date_removed`, `user_id`, `book_id`, `active`, `condition_id`, `image_url`) VALUES (4, 0, '2017-11-02 21:21:21', NULL, 2, 4, 1, 3, NULL);
+INSERT INTO `copy` (`id`, `available`, `date_added`, `date_removed`, `user_id`, `book_id`, `active`, `condition_id`, `image_url`) VALUES (5, 0, '2018-10-30 17:02:08', '2018-10-30 17:02:08', 6, 119, 1, 3, NULL);
+INSERT INTO `copy` (`id`, `available`, `date_added`, `date_removed`, `user_id`, `book_id`, `active`, `condition_id`, `image_url`) VALUES (6, 0, '2018-10-30 17:02:31', '2018-10-30 17:02:31', 6, 18, 1, 1, NULL);
+INSERT INTO `copy` (`id`, `available`, `date_added`, `date_removed`, `user_id`, `book_id`, `active`, `condition_id`, `image_url`) VALUES (7, 0, '2018-10-30 17:02:51', '2018-10-30 17:02:51', 6, 170, 1, 1, NULL);
+INSERT INTO `copy` (`id`, `available`, `date_added`, `date_removed`, `user_id`, `book_id`, `active`, `condition_id`, `image_url`) VALUES (8, 0, '2018-10-30 17:03:13', '2018-10-30 17:03:13', 6, 17, 1, 1, NULL);
+INSERT INTO `copy` (`id`, `available`, `date_added`, `date_removed`, `user_id`, `book_id`, `active`, `condition_id`, `image_url`) VALUES (9, 0, '2018-10-30 17:03:43', '2018-10-30 17:03:43', 5, 51, 1, 1, NULL);
+INSERT INTO `copy` (`id`, `available`, `date_added`, `date_removed`, `user_id`, `book_id`, `active`, `condition_id`, `image_url`) VALUES (10, 1, '2018-10-30 17:03:52', '2018-10-30 17:03:52', 5, 21, 1, 1, NULL);
+INSERT INTO `copy` (`id`, `available`, `date_added`, `date_removed`, `user_id`, `book_id`, `active`, `condition_id`, `image_url`) VALUES (11, 1, '2018-10-30 17:03:58', '2018-10-30 17:03:58', 5, 9, 1, 1, NULL);
+INSERT INTO `copy` (`id`, `available`, `date_added`, `date_removed`, `user_id`, `book_id`, `active`, `condition_id`, `image_url`) VALUES (12, 1, '2018-10-30 17:06:43', '2018-10-30 17:06:43', 4, 164, 1, 1, NULL);
+INSERT INTO `copy` (`id`, `available`, `date_added`, `date_removed`, `user_id`, `book_id`, `active`, `condition_id`, `image_url`) VALUES (13, 1, '2018-10-30 17:06:57', '2018-10-30 17:06:57', 4, 157, 1, 1, NULL);
+INSERT INTO `copy` (`id`, `available`, `date_added`, `date_removed`, `user_id`, `book_id`, `active`, `condition_id`, `image_url`) VALUES (14, 0, '2018-10-30 17:07:06', '2018-10-30 17:07:06', 4, 51, 1, 1, NULL);
+INSERT INTO `copy` (`id`, `available`, `date_added`, `date_removed`, `user_id`, `book_id`, `active`, `condition_id`, `image_url`) VALUES (15, 0, '2018-10-30 17:07:16', '2018-10-30 17:07:16', 4, 61, 1, 1, NULL);
+INSERT INTO `copy` (`id`, `available`, `date_added`, `date_removed`, `user_id`, `book_id`, `active`, `condition_id`, `image_url`) VALUES (16, 0, '2018-10-30 19:31:20', '2018-10-30 19:31:20', 8, 59, 1, 1, NULL);
+INSERT INTO `copy` (`id`, `available`, `date_added`, `date_removed`, `user_id`, `book_id`, `active`, `condition_id`, `image_url`) VALUES (17, 1, '2018-10-30 19:31:55', '2018-10-30 19:31:55', 8, 163, 1, 1, NULL);
+INSERT INTO `copy` (`id`, `available`, `date_added`, `date_removed`, `user_id`, `book_id`, `active`, `condition_id`, `image_url`) VALUES (18, 0, '2018-10-30 19:32:11', '2018-10-30 19:32:11', 8, 14, 1, 1, NULL);
+INSERT INTO `copy` (`id`, `available`, `date_added`, `date_removed`, `user_id`, `book_id`, `active`, `condition_id`, `image_url`) VALUES (19, 1, '2018-10-31 22:00:02', '2018-10-31 22:00:02', 4, 10, 1, 1, NULL);
+INSERT INTO `copy` (`id`, `available`, `date_added`, `date_removed`, `user_id`, `book_id`, `active`, `condition_id`, `image_url`) VALUES (20, 0, '2018-11-01 10:06:08', '2018-11-01 10:06:08', 6, 7, 1, 1, NULL);
+INSERT INTO `copy` (`id`, `available`, `date_added`, `date_removed`, `user_id`, `book_id`, `active`, `condition_id`, `image_url`) VALUES (21, 1, '2018-11-01 10:14:23', '2018-11-01 10:14:23', 5, 2, 1, 1, NULL);
+INSERT INTO `copy` (`id`, `available`, `date_added`, `date_removed`, `user_id`, `book_id`, `active`, `condition_id`, `image_url`) VALUES (22, 1, '2018-11-01 10:34:51', '2018-11-01 10:34:51', 8, 7, 1, 1, NULL);
 
 COMMIT;
 
@@ -464,9 +488,28 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `bookdb`;
-INSERT INTO `copy_transaction` (`id`, `start_date`, `end_date`, `date_created`, `borrow_id`, `copy_id`, `concluded`) VALUES (1, '2011-01-01 00:00:00', '2011-01-07 00:00:00', '2010-12-25 00:00:00', 3, 2, NULL);
-INSERT INTO `copy_transaction` (`id`, `start_date`, `end_date`, `date_created`, `borrow_id`, `copy_id`, `concluded`) VALUES (2, '2011-07-30 03:07:20', '2011-09-20 18:30:19', '2007-04-30 01:02:03', 1, 2, NULL);
-INSERT INTO `copy_transaction` (`id`, `start_date`, `end_date`, `date_created`, `borrow_id`, `copy_id`, `concluded`) VALUES (3, '2018-10-25 05:20:13', '2018-11-11 11:11:11', '2018-10-01 04:03:02', 2, 3, NULL);
+INSERT INTO `copy_transaction` (`id`, `start_date`, `end_date`, `date_created`, `borrow_id`, `copy_id`) VALUES (1, '2018-10-30 17:02:08', '2018-12-01 10:14:23', '2018-10-30 17:02:08', 1, 1);
+INSERT INTO `copy_transaction` (`id`, `start_date`, `end_date`, `date_created`, `borrow_id`, `copy_id`) VALUES (2, '2018-10-30 17:02:08', '2018-12-01 10:14:23', '2018-10-30 17:02:08', 3, 4);
+INSERT INTO `copy_transaction` (`id`, `start_date`, `end_date`, `date_created`, `borrow_id`, `copy_id`) VALUES (3, '2018-10-30 17:02:08', '2018-12-01 10:14:23', '2018-10-30 17:02:08', 2, 2);
+INSERT INTO `copy_transaction` (`id`, `start_date`, `end_date`, `date_created`, `borrow_id`, `copy_id`) VALUES (4, '2018-10-30 17:02:08', '2018-12-01 10:14:23', '2018-10-30 17:02:08', 2, 3);
+INSERT INTO `copy_transaction` (`id`, `start_date`, `end_date`, `date_created`, `borrow_id`, `copy_id`) VALUES (5, '2018-10-30 17:02:08', '2018-12-01 10:14:23', '2018-10-30 17:02:08', 6, 5);
+INSERT INTO `copy_transaction` (`id`, `start_date`, `end_date`, `date_created`, `borrow_id`, `copy_id`) VALUES (6, '2018-10-30 17:02:08', '2018-12-01 10:14:23', '2018-10-30 17:02:08', 6, 6);
+INSERT INTO `copy_transaction` (`id`, `start_date`, `end_date`, `date_created`, `borrow_id`, `copy_id`) VALUES (7, '2018-10-30 17:02:08', '2018-12-01 10:14:23', '2018-10-30 17:02:08', 6, 7);
+INSERT INTO `copy_transaction` (`id`, `start_date`, `end_date`, `date_created`, `borrow_id`, `copy_id`) VALUES (8, '2018-10-30 17:02:08', '2018-12-01 10:14:23', '2018-10-30 17:02:08', 6, 8);
+INSERT INTO `copy_transaction` (`id`, `start_date`, `end_date`, `date_created`, `borrow_id`, `copy_id`) VALUES (9, '2018-10-30 17:02:08', '2018-12-01 10:14:23', '2018-10-30 17:02:08', 5, 9);
+INSERT INTO `copy_transaction` (`id`, `start_date`, `end_date`, `date_created`, `borrow_id`, `copy_id`) VALUES (10, '2018-10-30 17:02:08', '2018-12-01 10:14:23', '2018-10-30 17:02:08', 5, 21);
+INSERT INTO `copy_transaction` (`id`, `start_date`, `end_date`, `date_created`, `borrow_id`, `copy_id`) VALUES (11, '2018-10-30 17:02:08', '2018-12-01 10:14:23', '2018-10-30 17:02:08', 5, 12);
+INSERT INTO `copy_transaction` (`id`, `start_date`, `end_date`, `date_created`, `borrow_id`, `copy_id`) VALUES (12, '2018-10-30 17:02:08', '2018-12-01 10:14:23', '2018-10-30 17:02:08', 4, 10);
+INSERT INTO `copy_transaction` (`id`, `start_date`, `end_date`, `date_created`, `borrow_id`, `copy_id`) VALUES (13, '2018-10-30 17:02:08', '2018-12-01 10:14:23', '2018-10-30 17:02:08', 4, 11);
+INSERT INTO `copy_transaction` (`id`, `start_date`, `end_date`, `date_created`, `borrow_id`, `copy_id`) VALUES (14, '2018-10-30 17:02:08', '2018-12-01 10:14:23', '2018-10-30 17:02:08', 4, 13);
+INSERT INTO `copy_transaction` (`id`, `start_date`, `end_date`, `date_created`, `borrow_id`, `copy_id`) VALUES (15, '2018-10-30 17:02:08', '2018-12-01 10:14:23', '2018-10-30 17:02:08', 4, 14);
+INSERT INTO `copy_transaction` (`id`, `start_date`, `end_date`, `date_created`, `borrow_id`, `copy_id`) VALUES (16, '2018-10-30 17:02:08', '2018-12-01 10:14:23', '2018-10-30 17:02:08', 8, 15);
+INSERT INTO `copy_transaction` (`id`, `start_date`, `end_date`, `date_created`, `borrow_id`, `copy_id`) VALUES (17, '2018-10-30 17:02:08', '2018-12-01 10:14:23', '2018-10-30 17:02:08', 8, 16);
+INSERT INTO `copy_transaction` (`id`, `start_date`, `end_date`, `date_created`, `borrow_id`, `copy_id`) VALUES (18, '2018-10-30 17:02:08', '2018-12-01 10:14:23', '2018-10-30 17:02:08', 8, 17);
+INSERT INTO `copy_transaction` (`id`, `start_date`, `end_date`, `date_created`, `borrow_id`, `copy_id`) VALUES (19, '2018-10-30 17:02:08', '2018-12-01 10:14:23', '2018-10-30 17:02:08', 4, 18);
+INSERT INTO `copy_transaction` (`id`, `start_date`, `end_date`, `date_created`, `borrow_id`, `copy_id`) VALUES (20, '2018-10-30 17:02:08', '2018-12-01 10:14:23', '2018-10-30 17:02:08', 6, 19);
+INSERT INTO `copy_transaction` (`id`, `start_date`, `end_date`, `date_created`, `borrow_id`, `copy_id`) VALUES (21, '2018-10-30 17:02:08', '2018-12-01 10:14:23', '2018-10-30 17:02:08', 5, 20);
+INSERT INTO `copy_transaction` (`id`, `start_date`, `end_date`, `date_created`, `borrow_id`, `copy_id`) VALUES (22, '2018-10-30 17:02:08', '2018-12-01 10:14:23', '2018-10-30 17:02:08', 8, 22);
 
 COMMIT;
 
@@ -509,4 +552,3 @@ USE `bookdb`;
 INSERT INTO `book_rating` (`id`, `rating`, `date_created`, `book_id`, `user_id`) VALUES (5, '5', '2017-01-02 18:19:20', 6, 2);
 
 COMMIT;
-
