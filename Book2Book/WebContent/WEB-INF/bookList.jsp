@@ -42,10 +42,16 @@
 			<c:forEach items="${books}" var="book">
 			<hr>
 	&nbsp; &nbsp;  	
-	<div class="col-1">
-      		<img id="coverpics" alt="Book Cover Image"
-						src="${copy.book.imageUrl}" width="150" height="240">
-    </div>
+	<c:choose>
+					<c:when test="${copy.book.imageUrl != null}">
+						<img id="coverpics" alt="Book Cover Image"
+							src="${copy.book.imageUrl}" width="150" height="240">
+					</c:when>
+					<c:otherwise>
+						<img id="coverpics" alt="Book Cover Image"
+							src="media/placeholder-book-cover-default.png" width="150" height="240">
+					</c:otherwise>
+				</c:choose>
    	&emsp;
 	${book.title } | 
 	${book.id}
