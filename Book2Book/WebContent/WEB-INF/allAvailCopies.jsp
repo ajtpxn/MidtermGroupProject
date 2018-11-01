@@ -28,6 +28,8 @@
 			<div class="row">
 				<div class="col-9">
 					<h4>${copy.book.title }</h4>
+					<img id="coverpics" alt="Book Cover Image"
+						src="${copy.book.imageUrl}" width="150" height="240">
 					by ${copy.book.author.firstName } ${copy.book.author.lastName } |
 					${copy.book.description }
 					
