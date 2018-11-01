@@ -43,9 +43,9 @@
 			<hr>
 	&nbsp; &nbsp;  	
 	<c:choose>
-					<c:when test="${copy.book.imageUrl != null}">
+					<c:when test="${book.imageUrl != null}">
 						<img id="coverpics" alt="Book Cover Image"
-							src="${copy.book.imageUrl}" width="150" height="240">
+							src="${book.imageUrl}" width="150" height="240">
 					</c:when>
 					<c:otherwise>
 						<img id="coverpics" alt="Book Cover Image"
