@@ -206,14 +206,11 @@ public class CopyController {
 		// PARSES START AND END DATE FROM STRING TO DATE
 		// SimpleDateFormat f=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		// String time = "2018-10-10 12:00:00";
-		System.out.println(dateRange);
 		if (dateRange == null || dateRange.equals("")) {
 			return "fail";
 		}
-		// 10/23/2018 - 11/06/2018
+		// 10/23/2018 - 11/06/2018 split into two strings via regex
 		String[] dateArray = dateRange.split("\\s-\\s");
-		System.out.println(dateArray[0]);
-		System.out.println(dateArray[1]);
 		String sd = dateArray[0];
 		String startDateWithTime = sd.concat(" 10:00:00");
 		String ed = dateArray[1];
