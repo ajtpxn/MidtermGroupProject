@@ -12,6 +12,8 @@
 
 <link rel="icon" href="media/favicon.ico">
 
+<link rel="stylesheet" href="stylesheets/universal.css">
+
 <title>Profile</title>
 </head>
 <body>
@@ -75,14 +77,12 @@
 	<hr>
 	<div class="container">
   <div class="row">
+    <div class="col-1">
+      		<img id="coverpics"  alt="Book Cover" src="https://prodimage.images-bn.com/pimages/9780345445605_p0_v1_s550x406.jpg">
+    </div>
     <div class="col-sm">
-      
 			<c:out value="${copy.book.title}" /> by <c:out value="${copy.book.author.firstName}" />
 			<c:out value="${copy.book.author.lastName}" />
-		<form action="removeCopy.do" method="post">
-			<input type="hidden" name="copyId" value="${copy.id}"> <input
-				type="submit" name="removeCopy" value="Remove Book" class="btn btn-secondary btn-sm">
-		</form>
     </div>
     <div class="col-sm">
       
@@ -114,6 +114,14 @@
 				Lent out to ${borrowers[loop.index].firstName} ${borrowers[loop.index].lastName}
 			</c:otherwise>
 		</c:choose>
+		<form action="removeCopy.do" method="post">
+			<input type="hidden" name="copyId" value="${copy.id}"> <input
+				type="submit" name="removeCopy" value="Remove Book" class="btn btn-secondary btn-sm">
+		</form>
+		<form action="editbook.do" method="post">
+			<input type="hidden" name="editBook" value="${copy.book.title}"> <input
+				type="submit" name="editBook" value="Edit Book" class="btn btn-secondary btn-sm">
+		</form>
 
     </div>
   </div>
