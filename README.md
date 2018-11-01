@@ -3,25 +3,30 @@
 ## Midterm Group Project, Skill Distillery, Week Nine ##
 
 Book2Book is peer2peer file sharing for books!  List your own that you're willing to lend, search for a book you haven't read, and lend, borrow, or exchange books all on the same site.  
+- Home page includes login and account creation as well as a sample list of available books to borrow.
+- Once logged in, users have the option to curate their list of books they wish to lend, request a book to borrow, and search books in our database or add one of their own.  
 
 
 
--- mapping entities
+<!-- -- mapping entities
 -- cascading fields
 -- controllers pulling from different DAO
 -- merge conflicts
 -- session through out pages
 -- having two lists but displaying in same controller method
--- pair programming
+-- pair programming  -->
 
 ## Built With
 
 * [Java] - Backend logic
 * [Gradle][JPA][SpringMVC] - Dependency Management
-* [HTML][CSS][Javascript] - Front end functionality and styling
+* [HTML][CSS][Javascript][Bootstrap] - Front end functionality and styling
 * [Tomcat] - local server host
 * [MySQL] - database entity
-* [github] - team collaboration
+* [github][Trello] - team collaboration
+* [AWS] - web deployment
+* [Eclipse with STS][Atom] - IDE
+
 
 ## Authors
 

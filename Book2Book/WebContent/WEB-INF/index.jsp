@@ -108,6 +108,7 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
 		
 							<h4 class="bg-white">${copy.book.title }</h4>
 							<p class="bg-white">
+							<img id="coverpics"  alt="Book Cover Image" src="${copy.book.imageUrl}">
 							by ${copy.book.author.firstName } ${copy.book.author.lastName } |
 							${copy.book.description }
 							</p>
