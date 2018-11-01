@@ -10,30 +10,28 @@
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
+<link rel="icon" href="media/favicon.ico">
+
 <title>Insert title here</title>
 </head>
 <body>
 <div class="container">
 	<%@ include file="./nav.jsp"%>
 	
-	
+	<hr>
 	<div class="container">
   <div class="row">
     <div class="col-sm">
-		
-    </div>
-    <div class="col-sm">
-	<form action="searchbook.do" method="GET">
-	
-	<label>Keyword: </label><input type="text" name="keyword" />
-	<input type="submit" value="Search" class="btn btn-primary" />
-	
+	<form class="form-inline" action="searchbook.do" method="GET">
+	<!-- <label>Keyword: </label>-->
+	<input type="text" name="keyword" class="form-control mb-2" placeholder="Keyword"/> 
+	<input type="submit" value="Search" class="btn btn-primary form-control mb-2 " />
 	</form>
     </div>
     <div class="col-sm">
-    	<form action="home.do" method="GET">
-		<input id="home" type="submit" value="Add or Edit"
-			class="btn btn-primary btn-lg">
+    <form action="home.do" method="GET">
+		<input id="home" type="submit" value="My Book Is Not Listed"
+			class="btn btn-primary">
 	</form>
     </div>
   </div>

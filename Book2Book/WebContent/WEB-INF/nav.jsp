@@ -7,6 +7,8 @@
 
 <link rel="stylesheet" href="stylesheets/nav.css">
 
+<link rel="icon" href="media/favicon.ico">
+
 <nav class="nav justify-content-end">
 
   <li class="nav-item">

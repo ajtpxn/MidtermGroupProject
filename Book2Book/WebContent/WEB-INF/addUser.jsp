@@ -14,15 +14,12 @@
 </head>
 <body>
 
-<div class="row">
-<div class="col offset-9">
+<div class="container">
 
 	<%--Edit the file nav.jsp to change nav links --%>
-	<div id="nav">
 	<%@ include file="nav.jsp"%>
-	</div>
-	</div>
-	</div>
+	
+	
 	<h2 id="title">   Sign Up</h2>
 	<div class="row">
 	<div id="text" class="col-4">
@@ -35,31 +32,27 @@
 
 
 	<form action="returnUser.do" method="post" modelAttribute="user">
-		<label for="firstName">First Name: </label> 
-		<input type="text" name="firstName" /> 
+		<!-- <label for="firstName">First Name: </label>  -->
+		<input type="text" name="firstName" class="form-control" placeholder="First Name"/> 
 		<br>
-		<label for="lastName">Last Name: </label>
-		<input type="text" name="lastName" /> 
+		<!-- <label for="lastName">Last Name: </label> -->
+		<input type="text" name="lastName" class="form-control" placeholder="Last Name"/> 
 		<br> 
-		<label for="userName">Username: </label>
-		<input type="text" name="userName" /> 
+		<!-- <label for="userName">Username: </label> -->
+		<input type="text" name="userName" class="form-control" placeholder="Username"/> 
 		<br>
-		<label for="password">Password: </label> 
-		<input type="password" name="password" /> 
-		
-		<input type="submit" value="Sign Up">
+		<!-- <label for="password">Password: </label>  -->
+		<input type="password" name="password" class="form-control" placeholder="Password"/> 
+		<br>
+		<input type="submit" class="form-control btn btn-success btn-block" value="Sign Up">
 	</form>
-	
 	</div>
 
 	<div class="col">
 	<img id="pic" alt="" src="media/StackOfBooks.jpg">
-
-	
-
-	
 	</div>
-	
+	</div>
+</div>
 
 </body>
 </html>

@@ -10,13 +10,15 @@
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
+<link rel="icon" href="media/favicon.ico">
+
 <title>Book</title>
 </head>
 <body>
 <div class="container">
 <%@ include file="nav.jsp"%>
 
-	<hr>
+	
 	<form action="getbooks.do" method="GET">
 	<input type="submit" value="List All Books" class="btn btn-primary btn-lg" />
 	</form>
