@@ -16,6 +16,7 @@
 	rel="stylesheet">
 
 <link rel="stylesheet" href="stylesheets/indexpage.css">
+<link rel="stylesheet" href="stylesheets/universal.css">
 
 <link rel="icon" href="media/favicon.ico">
 
@@ -104,42 +105,50 @@
 
 			<c:forEach items="${availCopies}" var="copy">
 				<hr>
-
+				<div class="container">
+  <div class="row">
+    <div class="col-2">
+				<c:choose>
+					<c:when test="${copy.book.imageUrl != null}">
+						<img id="coverpics" alt="Book Cover Image"
+							src="${copy.book.imageUrl}">
+					</c:when>
+					<c:otherwise>
+						<img id="coverpics" alt="Book Cover Image"
+							src="media/placeholder-book-cover-default.png">
+					</c:otherwise>
+				</c:choose>
+				</div>
+				<div class="col-sm">
 				<h4 class="bg-white">${copy.book.title }</h4>
-				<img id="coverpics" alt="Book Cover Image"
-						src="${copy.book.imageUrl}" width="150" height="240">
 				<p class="bg-white">by ${copy.book.author.firstName }
-					${copy.book.author.lastName } | ${copy.book.description }<div class="col-1">
-					
-    </div></p>
-				
-						
-							<form action="copyDetails.do" method="GET">
-								<input type="hidden" name="copy.id" value="${copy.id}"> <input
+					${copy.book.author.lastName } | ${copy.book.description }
+				</p>
+				</div>
+				</div>
+				</div>
+				<form action="copyDetails.do" method="GET">
+					<input type="hidden" name="copy.id" value="${copy.id}"> <input
 						type="submit" value="Details and Borrow"
 						class="btn btn-primary btn-block">
-							</form>
-		
-				</c:forEach>
-			
+				</form>
+
+			</c:forEach>
+
 			<br>
-			
-				<div id="searchbutton">
-					<form action="listAvailableCopy.do" method="GET">
-						<input type="submit" value="Search More Books Available to Borrow"
+
+			<div id="searchbutton">
+				<form action="listAvailableCopy.do" method="GET">
+					<input type="submit" value="Search More Books Available to Borrow"
 						class="btn btn-warning btn-lg btn-block">
-					</form>
-					</div>
-			
-		 
+				</form>
 			</div>
-				<br>
-	<br>
-	<br>
-	<%@ include file="footer.jsp"%>
-	<br>
-	<br>
-	<br>
+
+
+		</div>
+		<br> <br> <br>
+		<%@ include file="footer.jsp"%>
+		<br> <br> <br>
 	</div>
 
 </body>
