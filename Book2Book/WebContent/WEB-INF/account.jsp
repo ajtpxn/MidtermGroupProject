@@ -166,9 +166,7 @@
 							
 						
 						<c:if test="${transaction.copyId==copy.id}">
-						<img id="coverpics"  alt="Book Cover Image" src="${copy.book.imageUrl}">
-    
-						
+						<img id="coverpics"  alt="Book Cover Image" src="${copy.book.imageUrl}"> | 
 						${copy.book.title} |
 						${copy.condition.name}
 						</c:if>
