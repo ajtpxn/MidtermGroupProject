@@ -78,7 +78,14 @@
 	<div class="container">
   <div class="row">
     <div class="col-1">
+    <c:choose>
+    <c:when test="${copy.book.imageUrl != null}">
       		<img id="coverpics"  alt="Book Cover Image" src="${copy.book.imageUrl}">
+    </c:when>
+    <c:otherwise>
+      		<img id="coverpics"  alt="Book Cover Image" src="media/placeholder-book-cover-default.png">
+    </c:otherwise>
+    </c:choose>
     </div>
     <div class="col-sm">
 			<c:out value="${copy.book.title}" /> by <c:out value="${copy.book.author.firstName}" />
@@ -166,7 +173,15 @@
 							
 						
 						<c:if test="${transaction.copyId==copy.id}">
-						<img id="coverpics"  alt="Book Cover Image" src="${copy.book.imageUrl}"> | 
+						    <c:choose>
+					    <c:when test="${copy.book.imageUrl != null}">
+					      		<img id="coverpics"  alt="Book Cover Image" src="${copy.book.imageUrl}">
+					    </c:when>
+					    <c:otherwise>
+					      		<img id="coverpics"  alt="Book Cover Image" src="media/placeholder-book-cover-default.png">
+					    </c:otherwise>
+					    </c:choose>
+						 | 
 						${copy.book.title} |
 						${copy.condition.name}
 						</c:if>
