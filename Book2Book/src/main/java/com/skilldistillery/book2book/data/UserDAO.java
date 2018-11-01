@@ -7,7 +7,7 @@ import com.skilldistillery.book2book.entities.Transaction;
 import com.skilldistillery.book2book.entities.User;
 
 public interface UserDAO {
-	public User creatUser(User user);
+	public User createUser(User user);
 
 	public User updateUser(int id, User updatedUser);
 
@@ -20,4 +20,6 @@ public interface UserDAO {
 	public List<Transaction> listAllTransactionsByUserId(int userId);
 
 	public User getUserByCredentials(String userName, String password);
+
+	public List<String> getUserNameList();
 }

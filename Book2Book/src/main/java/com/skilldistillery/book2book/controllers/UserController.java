@@ -62,6 +62,14 @@ public class UserController {
 		System.out.println("Return User");
 		// userDAO = new UserDAOimpl();
 		ModelAndView mv = new ModelAndView();
+		List<String> allUserNames = userDAO.getUserNameList();
+		boolean takenUserName = false;
+		for (String string : allUserNames) {
+			if (string == user.getUserName()) {
+				takenUserName = true;
+			}
+			
+		}
 		if (user.getFirstName() == null || user.getFirstName().equals("")) {
 			mv.setViewName("fail");
 			return mv;
@@ -70,7 +78,7 @@ public class UserController {
 			mv.setViewName("fail");
 			return mv;
 		}
-		if (user.getUserName() == null || user.getUserName().equals("")) {
+		if (user.getUserName() == null || user.getUserName().equals("") || takenUserName) {
 			mv.setViewName("fail");
 			return mv;
 		}
@@ -80,7 +88,7 @@ public class UserController {
 		}
 	
 		user.setActive(true);
-		userDAO.creatUser(user);
+		userDAO.createUser(user);
 		// userDAO = null;
 		mv.addObject(user);
 		
