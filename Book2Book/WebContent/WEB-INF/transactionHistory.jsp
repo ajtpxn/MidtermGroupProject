@@ -32,21 +32,57 @@
 				<c:forEach items="${history}" var="transaction" varStatus="loop">
 					<c:choose>
 						<c:when test="${empty lenders[loop.index] }">
-							<h5>Lent Out <em>${copies[loop.index].book.title }</em></h5>
-							<ul>
-								<li></li>
-								<li>Borrower: ${transaction.borrower.userName }</li>
-								<li>Start Date: ${transaction.startDate }</li>
-								<li>End Date: ${transaction.endDate }</li>
-							</ul>
+							<div class="row">
+								<div class="col-9">
+									<h5>
+										Lent Out <em>${copies[loop.index].book.title }</em>
+									</h5>
+									<ul>
+										<li></li>
+										<li>Borrower: ${transaction.borrower.userName }</li>
+										<li>Start Date: ${transaction.startDate }</li>
+										<li>End Date: ${transaction.endDate }</li>
+									</ul>
+								</div>
+								<div class="col-1" align="right">
+									<form action="userprofile.do" method="GET">
+										<input type="hidden" name="id" value="${copies[loop.index].user.id}">
+										<input type="submit" value="View Lender Profile"
+											class="btn btn-warning">
+									</form>
+									<form action="copyDetails.do" method="GET">
+										<input type="hidden" name="copy.id" value="${copies[loop.index].id}">
+										<input type="submit" value="Copy Details"
+											class="btn btn-primary">
+									</form>
+								</div>
+							</div>
 						</c:when>
 						<c:otherwise>
-							<h5>Borrowed <em>${copies[loop.index].book.title }</em></h5>
-							<ul>
-								<li>Lender: ${lenders[loop.index].userName }</li>
-								<li>Start Date: ${transaction.startDate }</li>
-								<li>End Date: ${transaction.endDate }</li>
-							</ul>
+							<div class="row">
+								<div class="col-9">
+									<h5>
+										Borrowed <em>${copies[loop.index].book.title }</em>
+									</h5>
+									<ul>
+										<li>Lender: ${lenders[loop.index].userName }</li>
+										<li>Start Date: ${transaction.startDate }</li>
+										<li>End Date: ${transaction.endDate }</li>
+									</ul>
+								</div>
+								<div class="col-1" align="right">
+									<form action="userprofile.do" method="GET">
+										<input type="hidden" name="id" value="${lenders[loop.index].id}">
+										<input type="submit" value="View Lender Profile"
+											class="btn btn-warning">
+									</form>
+									<form action="copyDetails.do" method="GET">
+										<input type="hidden" name="copy.id" value="${copies[loop.index].id}">
+										<input type="submit" value="Copy Details"
+											class="btn btn-primary">
+									</form>
+								</div>
+							</div>
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
@@ -55,13 +91,9 @@
 			You do not have any transactions yet!
 			</c:otherwise>
 		</c:choose>
-				<br>
-	<br>
-	<br>
-	<%@ include file="footer.jsp"%>
-	<br>
-	<br>
-	<br>
+		<br> <br> <br>
+		<%@ include file="footer.jsp"%>
+		<br> <br> <br>
 	</div>
 
 
