@@ -10,6 +10,8 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" 
 integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
+<link href="https://fonts.googleapis.com/css?family=Archivo+Black" rel="stylesheet">
+
 <link rel="stylesheet" href="stylesheets/indexpage.css">
 
 <link rel="icon" href="media/favicon.ico">
@@ -23,27 +25,40 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
 			
 	
 			<div class="books-image">
-	
-					<div id = "nav" class="col offset-10">
-						<nav>
-							<c:choose>
-		
-								<c:when test="${not empty USER }">
-									<a href="account.do" class="btn btn-primary btn-lg">Account</a>
-									<a href="logout.do" class="btn btn-primary btn-lg">Log Out</a>
-								</c:when>
-								<c:otherwise>
-									<a href="login.do" class="btn btn-primary btn-lg">Log In</a>
-									<a href="addUser.do" class="btn btn-primary btn-lg">Sign Up</a>
-								</c:otherwise>
-		
-							</c:choose>
-						</nav>
-					</div>
-			<div class="row">&nbsp;</div>
-			<div class="row">&nbsp;</div>
-			<div class="row">&nbsp;</div>
-			<div class="row">&nbsp;</div>
+					
+					<div class="row">&nbsp;</div>
+					
+					<nav class="nav justify-content-end">
+					
+						<c:choose>
+							<c:when test="${not empty USER }">
+					
+					  <li class="nav-item">
+					    <a class=" btn btn-primary btn-lg" href="account.do">Account</a>&nbsp;
+					  </li>
+					  
+					  <li class="nav-item">
+					    <a class=" btn btn-primary btn-lg" href="logout.do">Log Out</a>&nbsp;
+					  </li>
+					  
+							</c:when>
+							<c:otherwise>
+					  
+					  <li class="nav-item">
+					    <a class=" btn btn-primary btn-lg" href="login.do">Log In</a>&nbsp;
+					  </li>
+					  
+					  <li class="nav-item">
+					    <a class=" btn btn-primary btn-lg" href="addUser.do">Sign Up</a>
+					  </li>
+					  
+							</c:otherwise>
+						</c:choose>
+					  
+					</ul>
+					
+					</nav>
+
 			<div class="row">&nbsp;</div>
 			<div class="row">&nbsp;</div>
 			<div class="row">&nbsp;</div>
@@ -53,7 +68,9 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
 		
 					<img class="bookbanner" alt="B2B" src="media/Book2BookLogo.jpg">
 					
-					<strong class="bg-white display-1">&nbsp; Book2Book &nbsp;</strong>
+					<br>
+					
+					<strong class="bg-white display-2 bookbannertext">&nbsp; Book2Book &nbsp;</strong>
 					
 				</div>
 					
@@ -61,18 +78,7 @@ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLP
 			<div class="row">&nbsp;</div>
 			<div class="row">&nbsp;</div>
 			<div class="row">&nbsp;</div>
-			<div class="row">&nbsp;</div>
-			<div class="row">&nbsp;</div>
-			<div class="row">&nbsp;</div>
-			<div class="row">&nbsp;</div>
-			<div class="row">&nbsp;</div>
-			<div class="row">&nbsp;</div>
-			<div class="row">&nbsp;</div>
-			<div class="row">&nbsp;</div>
-			<div class="row">&nbsp;</div>
-			<div class="row">&nbsp;</div>
-			<div class="row">&nbsp;</div>
-			<div class="row">&nbsp;</div>
+
 		
 			</div>
 			<div class="booksmargins">

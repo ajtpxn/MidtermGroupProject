@@ -1,22 +1,30 @@
-@charset "UTF-8";
 
-#openbook{
-	position:fixed;
-	z-index:-1;
-	right:7%;
+ 
+.book-image {
+    background-image: url("../media/openbook.jpg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 900px;
+    /* 
+    padding-top: 90%; (img-height / img-width * container-width)
+                (853 / 1280 * 100)
+      */           
 }
 
-#login{
-	position:absolute;
-	margin-top:15%;
-	margin-left:5%;
+
+
+/* 
+.book-image {
+    background-image:  url("../media/openbook.jpg");
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    height:100%;
+
 }
-#submit{
-	position:absolute;
-	margin-top:5%;
-	
-}
-#nav{
-	position:relative;
-	margin-top:2%;
-}
+
+ */
+
