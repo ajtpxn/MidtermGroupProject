@@ -27,7 +27,7 @@ public class UserDAOimpl implements UserDAO {
 
 	// CREATE NEW USER
 	@Override
-	public User creatUser(User user) {
+	public User createUser(User user) {
 		em.persist(user);
 		em.flush();
 		return user;
@@ -124,6 +124,14 @@ public class UserDAOimpl implements UserDAO {
 		}
 		return returnUser;
 	}
+	
+	@Override
+	public List<String> getUserNameList(){
+		String queryStr = "SELECT u.userName FROM User u";
+		List<String> takenUserNames = em.createQuery(queryStr, String.class).getResultList();
+		return takenUserNames;
+	}
+	
 }
 	
 	
