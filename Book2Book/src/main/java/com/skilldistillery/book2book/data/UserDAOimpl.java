@@ -127,7 +127,7 @@ public class UserDAOimpl implements UserDAO {
 	
 	@Override
 	public List<String> getUserNameList(){
-		String queryStr = "SELECT u.username FROM User u WHERE u.username = :taken";
+		String queryStr = "SELECT u.userName FROM User u";
 		List<String> takenUserNames = em.createQuery(queryStr, String.class).getResultList();
 		return takenUserNames;
 	}

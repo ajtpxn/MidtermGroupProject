@@ -17,10 +17,18 @@
 <%@ include file="nav.jsp" %>
 <h2>Fail</h2>
 
+<c:choose>
+<c:when test="${userNameFail}">
+<p>
+That username is already taken.  Please try again.
+</p>
+</c:when>
+<c:otherwise>
 <p>
 The action you were attempting has failed.
 </p>
-
+</c:otherwise>
+</c:choose>
 	<br>
 	<br>
 	<br>
