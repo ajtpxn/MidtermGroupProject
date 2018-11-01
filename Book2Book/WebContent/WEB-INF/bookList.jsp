@@ -41,7 +41,11 @@
 		<c:when test="${not empty books }">
 			<c:forEach items="${books}" var="book">
 			<hr>
-	&nbsp; &nbsp;  	<img id="coverpics"  alt="Book Cover Image" src="${copy.book.imageUrl}">
+	&nbsp; &nbsp;  	
+	<div class="col-1">
+      		<img id="coverpics" alt="Book Cover Image"
+						src="${copy.book.imageUrl}" width="150" height="240">
+    </div>
 	${book.title } | 
 	${book.id}
 				

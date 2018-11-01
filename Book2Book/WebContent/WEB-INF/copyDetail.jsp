@@ -30,6 +30,9 @@
   <div class="row">
     <div class="col-sm">
 <strong>Title:</strong> ${copy.book.title} <br>
+<img id="coverpics" alt="Book Cover Image"
+						src="${copy.book.imageUrl}" width="150" height="240">
+						<br>
 <strong>Author:</strong> ${copy.book.author.firstName} ${copy.book.author.lastName}<br>
 <strong>Description:</strong> ${copy.book.description }<br>
 <strong>Genre:</strong>
