@@ -122,7 +122,7 @@ public class TransactionController {
 		System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" + reportDate);
 		System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" + dateSet);
 		returnTrans.setEndDate(dateSet);
-		returnTrans.setBorrowers(lender);
+		//returnTrans.setBorrowers(lender);
 		borrowedCopy.setAvailable(true);
 		copyDAO.editCopy(borrowedCopy, borrowedCopy.getId());
 		transDAO.updateTransaction(transId, returnTrans);
