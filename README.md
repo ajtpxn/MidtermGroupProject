@@ -35,9 +35,8 @@ Book2Book is peer2peer file sharing for books!  List your own that you're willin
 * **Brandon Jaloway [ajtpxn](https://github.com/ajtpxn)
 * **Andy Iwamoto [aiwamoto789](https://github.com/aiwamoto789)
 
-See also the list of [contributors](https://github.com/ajtpxn/MidtermGroupProject/contributors) who participated in this project.
+
 
 ## Acknowledgments
 
-* The Dark Lord of Beans
-* Denise, Alex, Rob, Paul, and any other instructors who helped us see bugs hidden in plain site and those that were more esoteric.
+* Denise, Alex, Rob, Paul, and any other instructors who helped us see bugs hidden in plain sight and those that were more esoteric.
