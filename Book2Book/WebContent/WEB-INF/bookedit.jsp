@@ -16,63 +16,136 @@
 </head>
 <body>
 <div class="container">
+
+<%@  include file="nav.jsp" %>
+
+<h1>
+Edit
+</h1>
+<hr>
 <c:choose>
 <c:when test="${books != null}">
 <c:forEach items="${books}" var="book">
  
- <h3>Edit the book: ${book.title}</h3>
-	<form action="editingbook.do" method="POST">
-		<input type="hidden" name="id" value="${book.id}"/> 
-		<label>title</label> <input type="text" name="title" value="${book.title}"/> 
-		<label>description</label><input type="text" name="description" value="${book.description}" />
-		 <label>author first name</label> <input type="text" name="author.firstName" value="${book.author.firstName}" />
-		  <label>author last name</label> <input type="text" name="author.lastName" value="${book.author.lastName}" /> 
-		   <br>
-		    <label>Content Rating</label> 
+ <h3> ${book.title}</h3>
+ 
+	<div class="container">
+				<div class="row">
+							<div class="col-2">
+
+								<form action="editingbook.do" method="POST">
+									<input type="hidden" name="id" value="${book.id}" /> 
+									<label>Title: </label>
+							</div>
+						<div class="col-sm">
+							 <input class="form-control" type="text" name="title" value="${book.title}"/> 
+						</div>
+				</div>
+
+				<div class="row">
+						  <div class="col-2">
+								<label>Description: </label>
+						  </div>
+						  <div class="col-sm">
+								<input class="form-control" type="text" name="description" value="${book.description}" />
+						  </div>
+			    </div>
+			    
+<div class="row">
+			<div class="col-6">
+						<div class="row">
+								    <div class="col-4">
+												 <label>Author First Name: </label> 
+								    </div>
+								  	<div class="col">
+				 								<input class="form-control"  type="text" name="author.firstName" value="${book.author.firstName}" />
+			    					</div>
+			 			</div>
+		    		
+		    		
+				    		<div class="row">
+									    <div class="col-4">
+					  								<label>Author Last Name: </label> 
+					  					</div>
+									  	<div class="col">
+					  								<input class="form-control"  type="text" name="author.lastName" value="${book.author.lastName}" /> 
+										</div>
+				    		</div>
+							<div class="row">
+									    <div class="col-4">
+					   								 <label>Content Rating: </label> 
+					 					</div>
+										<div class="col">
+											    
+													  <select  class="form-control"  name="contentRating.id">
+															<option value="0"></option>
+															<option value="1">Kids</option>
+															<option value="2">Young Adult</option>
+															<option value="3">Adult</option>
+															<option value="4">Adult Plus</option>
+														</select> <input type="hidden" name="contentRating.id" >
+										</div>
+					 		</div>
+			 </div>
+		 					
+							<div class="col-1">
+							<br><br>
+											  <label>Genre: </label>
+							
+		 					</div>
+		 					
+		 					<div class="col-sm">
+		  
+												  <div class="form-check">
+										    <div class="col-sm">
+										        <input class="form-check-input" type="checkbox" name="genreName" value="1">
+										          Childrens
+										        
+										        </div>
+										        <div class="col-sm">
+										        <input class="form-check-input" type="checkbox" name="genreName" value="2">
+										          Fantasy
+										        </div>
+										        <div class="col-sm">
+										        <input class="form-check-input" type="checkbox" name="genreName" value="3">
+										          History
+										        </div>
+										        <div class="col-sm">
+										        <input class="form-check-input" type="checkbox" name="genreName" value="4">
+										          Biography
+										        </div>
+										        <div class="col-sm">
+										        <input class="form-check-input" type="checkbox" name="genreName" value="5">
+										          Satire
+										      </div>
+										      
+												
+										    </div>
+		  
+		 					
+		 					</div>
+</div>
+	    		
+	    		<div class="row">
+						    	<div class="col-2">
+						    	</div>
+						    	<div class="col-sm">
+		  
+		   
    
-    
-		  <select name="contentRating.id">
-				<option value="0"></option>
-				<option value="1">Kids</option>
-				<option value="2">Young Adult</option>
-				<option value="3">Adult</option>
-				<option value="4">Adult Plus</option>
-			</select> <input type="hidden" name="contentRating.id" >
-		  <br>
-		  <label>Genre</label>
-		  <div class="form-check">
-    <div class="col-sm">
-        <input class="form-check-input" type="checkbox" name="genreName" value="1">
-          Childrens
-        
-        </div>
-        <div class="col-sm">
-        <input class="form-check-input" type="checkbox" name="genreName" value="2">
-          Fantasy
-        </div>
-        <div class="col-sm">
-        <input class="form-check-input" type="checkbox" name="genreName" value="3">
-          History
-        </div>
-        <div class="col-sm">
-        <input class="form-check-input" type="checkbox" name="genreName" value="4">
-          Biography
-        </div>
-        <div class="col-sm">
-        <input class="form-check-input" type="checkbox" name="genreName" value="5">
-          Satire
-      </div>
-      
-		
-    </div>
 		  
 		  
-		   <input type="submit" value="Edit Book" class="btn btn-Dark" />
-	</form>
+		  
+												   <input type="submit" value="Apply Changes" class="btn btn-success btn-lg btn-block" />
+											</form>
 	
+		   						 </div>
+					  </div>
+					</div>
+	<hr>
 	</c:forEach>
  </c:when>
- <c:otherwise>No Book Found</c:otherwise>
+ <c:otherwise>No Book Found <hr></c:otherwise>
  </c:choose>
  
  
@@ -82,11 +155,11 @@
  
  
  
- 
+<%--  
  <form action="home.do" method="GET">
 <input id="home" type="submit" value="Home" class="btn btn-primary btn-lg">
 </form>
-
+ --%>
 	<br>
 	<br>
 	<br>
