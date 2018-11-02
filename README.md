@@ -39,5 +39,4 @@ See also the list of [contributors](https://github.com/ajtpxn/MidtermGroupProjec
 
 ## Acknowledgments
 
-* The Dark Lord of Beans
-* Denise, Alex, Rob, Paul, and any other instructors who helped us see bugs hidden in plain site and those that were more esoteric.
+* Denise, Alex, Rob, Paul, and any other instructors who helped us see bugs hidden in plain sight and those that were more esoteric.
