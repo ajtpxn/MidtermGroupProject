@@ -75,6 +75,7 @@
 													type="submit" value="Add Book to My List"
 													class="btn btn-primary">
 											</form>
+									
 											</div>
 							</div>
 					</div>
