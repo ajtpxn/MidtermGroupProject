@@ -18,21 +18,76 @@
 <h1>Edit Profile</h1>
 
 <form action="editingProfile.do" method="post" >
-		<label for="firstName">First Name: </label> 
-		<input type="text" name="firstName" value="${user.firstName}"/> 
-		<br>
-		<label for="lastName">Last Name: </label>
-		<input type="text" name="lastName" value="${user.lastName}"/> 
-		<br> 
-		<label for="userName">Username: </label>
-		<input type="text" name="userName" value="${user.userName}"/> 
-		<br>
-		<label for="password">Password: </label> 
-		<input type="password" placeholder="Password" name="password" id="password" required>
-        <input type="password" placeholder="Confirm Password" id="confirm_password" value="${user.password}" required> 
-		<br>
+<div class="container">
+				<div class="row">
+							<div class="col-3">
+							</div>
+							<div class="col-2">
+									<label for="firstName">First Name: </label> 
+							</div>
+							<div class="col-sm">
+									<input class="form-control" type="text" name="firstName" value="${user.firstName}"/> 
+							</div>
+				</div>
+
+				<div class="row">
+				<div class="col-3">
+							</div>
+							<div class="col-2">
+									<label for="lastName">Last Name: </label>
+							</div>
+							<div class="col-sm">
+									<input class="form-control" type="text" name="lastName" value="${user.lastName}"/> 
+							</div>
+				</div>
+
+				<div class="row">
+				<div class="col-3">
+							</div>
+							<div class="col-2">
+									<label for="userName">Username: </label>
+							</div>
+							<div class="col-sm">
+									<input class="form-control" type="text" name="userName" value="${user.userName}"/> 
+							</div>
+				</div>
+
+				<div class="row">
+				<div class="col-3">
+							</div>
+							<div class="col-2">
+									<label for="password">New Password: </label> 
+							</div>
+							<div class="col-sm">
+									<input class="form-control" type="password" placeholder="New Password" name="password" id="password" required>
+							</div>
+				</div>
+
+				<div class="row">
+				<div class="col-3">
+							</div>
+							<div class="col-2">
+									<label for="password">Confirm Password: </label> 
+							</div>
+							<div class="col-sm">
+							        <input class="form-control" type="password" placeholder="Confirm  New  Password" id="confirm_password" <%-- value="${user.password}" --%> required> 
+							</div>
+				</div>
+
+				<div class="row">
+				<div class="col-3">
+							</div>
+							<div class="col-2">
+							</div>
+							<div class="col-sm">
 		
-		<input type="submit" value="Confirm Edit">
+									<input class="btn btn-success btn-lg btn-block" type="submit" value="Submit Changes">
+							</div>
+				</div>
+</div>
+									
+		
+		
 	</form>
 	
 		<br>

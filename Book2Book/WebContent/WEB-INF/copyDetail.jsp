@@ -15,6 +15,8 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
+<link rel="stylesheet" href="stylesheets/universal.css">
+
 <link rel="icon" href="media/favicon.ico">
 
 <title>Insert title here</title>
@@ -25,14 +27,28 @@
 
 <%@ include file="nav.jsp"%>
 <h2>Details on ${copy.book.title}</h2>
+<div class="container">
 <hr>
 <div class="container">
   <div class="row">
-    <div class="col-sm">
-<strong>Title:</strong> ${copy.book.title} <br>
-<img id="coverpics" alt="Book Cover Image"
-						src="${copy.book.imageUrl}" width="150" height="240">
+    <div class="col-2">
+
+
+											<c:choose>
+												<c:when test="${copy.book.imageUrl != null}">
+													<img id="detailcoverpics" alt="Book Cover Image"
+														src="${copy.book.imageUrl}">
+												</c:when>
+												<c:otherwise>
+													<img id="detailcoverpics" alt="Book Cover Image"
+														src="media/placeholder-book-cover-default.png">
+												</c:otherwise>
+											</c:choose>
+						
 						<br>
+						</div>
+						<div class="col-sm">
+<strong>Title:</strong> ${copy.book.title} <br>
 <strong>Author:</strong> ${copy.book.author.firstName} ${copy.book.author.lastName}<br>
 <strong>Description:</strong> ${copy.book.description }<br>
 <strong>Genre:</strong>
@@ -75,6 +91,10 @@ $(function() {
 });
 </script>
 </form:form>
+</div>
+</div>
+</div>
+</div>
 
 	<br>
 	<br>

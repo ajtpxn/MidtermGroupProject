@@ -13,7 +13,9 @@
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	crossorigin="anonymous">
 	
-	<link rel="icon" href="media/favicon.ico">
+<link rel="stylesheet" href="stylesheets/universal.css">
+
+<link rel="icon" href="media/favicon.ico">
 
 <title>Books Available to Borrow</title>
 </head>
@@ -22,14 +24,26 @@
 	<div class="container">
 		<%@ include file="nav.jsp"%>
 		<h2>Books Available to Borrow</h2>
-		<c:forEach items="${availCopies}" var="copy">
 			<hr>
+			
+			<div class="booksmargins">
+		<c:forEach items="${availCopies}" var="copy">
 
 			<div class="row">
-				<div class="col-9">
+				<div class="col-1">
+											<c:choose>
+												<c:when test="${copy.book.imageUrl != null}">
+													<img id="coverpics" alt="Book Cover Image"
+														src="${copy.book.imageUrl}">
+												</c:when>
+												<c:otherwise>
+													<img id="coverpics" alt="Book Cover Image"
+														src="media/placeholder-book-cover-default.png">
+												</c:otherwise>
+											</c:choose>
+				</div>
+				<div class="col-8">
 					<h4>${copy.book.title }</h4>
-					<img id="coverpics" alt="Book Cover Image"
-						src="${copy.book.imageUrl}" width="150" height="240">
 					by ${copy.book.author.firstName } ${copy.book.author.lastName } |
 					${copy.book.description }
 					
@@ -47,7 +61,9 @@
 				</div>
 			</div>
 
+			<hr>
 		</c:forEach>
+			</div>
 
 	 	<br>
 	<br>

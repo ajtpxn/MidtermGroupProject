@@ -59,15 +59,8 @@
 
 			</nav>
 
-			<div class="row">&nbsp;</div>
-			<div class="row">&nbsp;</div>
-			<div class="row">&nbsp;</div>
-			<div class="row">&nbsp;</div>
-			<div class="row">&nbsp;</div>
-			<div class="row">&nbsp;</div>
-			<div class="row">&nbsp;</div>
-			<div class="row">&nbsp;</div>
-
+			<br> <br> <br> <br> <br> <br> <br> <br> 
+			
 			<div class="text-center">
 
 				<img class="bookbanner" alt="B2B" src="media/Book2BookLogo.jpg">
@@ -77,23 +70,7 @@
 
 			</div>
 
-			<div class="row">&nbsp;</div>
-			<div class="row">&nbsp;</div>
-			<div class="row">&nbsp;</div>
-			<div class="row">&nbsp;</div>
-			<div class="row">&nbsp;</div>
-			<div class="row">&nbsp;</div>
-			<div class="row">&nbsp;</div>
-			<div class="row">&nbsp;</div>
-			<div class="row">&nbsp;</div>
-			<div class="row">&nbsp;</div>
-			<div class="row">&nbsp;</div>
-			<div class="row">&nbsp;</div>
-			<div class="row">&nbsp;</div>
-			<div class="row">&nbsp;</div>
-			<div class="row">&nbsp;</div>
-			<div class="row">&nbsp;</div>
-
+				<br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
 
 		</div>
 		<div class="booksmargins">
@@ -118,6 +95,7 @@
 							src="media/placeholder-book-cover-default.png">
 					</c:otherwise>
 				</c:choose>
+				<br>&nbsp;
 				</div>
 				<div class="col-sm">
 				<h4 class="bg-white">${copy.book.title }</h4>

@@ -22,11 +22,12 @@
 <h1>
 Edit
 </h1>
+<hr>
 <c:choose>
 <c:when test="${books != null}">
 <c:forEach items="${books}" var="book">
  
- <h3>Edit the book: ${book.title}</h3>
+ <h3> ${book.title}</h3>
  
 	<div class="container">
 				<div class="row">
@@ -50,39 +51,46 @@ Edit
 						  </div>
 			    </div>
 			    
-			    <div class="row">
-						    <div class="col-2">
-										 <label>Author First Name: </label> 
-						    </div>
-						  <div class="col-sm">
-		 								<input class="form-control"  type="text" name="author.firstName" value="${book.author.firstName}" />
-	    					</div>
-	    		</div>
-	    		
-	    		<div class="row">
-						    <div class="col-2">
-		  								<label>Author Last Name: </label> 
-		  		</div>
-						  <div class="col-sm">
-		  								<input class="form-control"  type="text" name="author.lastName" value="${book.author.lastName}" /> 
-						</div>
-	    		</div>
-				<div class="row">
-						    <div class="col-2">
-		   								 <label>Content Rating</label> 
-		 		</div>
-							<div class="col-sm">
-								    
-										  <select  class="form-control"  name="contentRating.id">
-												<option value="0"></option>
-												<option value="1">Kids</option>
-												<option value="2">Young Adult</option>
-												<option value="3">Adult</option>
-												<option value="4">Adult Plus</option>
-											</select> <input type="hidden" name="contentRating.id" >
-							</div>
-							<div class="col-2">
-											  <label>Genre</label>
+<div class="row">
+			<div class="col-6">
+						<div class="row">
+								    <div class="col-4">
+												 <label>Author First Name: </label> 
+								    </div>
+								  	<div class="col">
+				 								<input class="form-control"  type="text" name="author.firstName" value="${book.author.firstName}" />
+			    					</div>
+			 			</div>
+		    		
+		    		
+				    		<div class="row">
+									    <div class="col-4">
+					  								<label>Author Last Name: </label> 
+					  					</div>
+									  	<div class="col">
+					  								<input class="form-control"  type="text" name="author.lastName" value="${book.author.lastName}" /> 
+										</div>
+				    		</div>
+							<div class="row">
+									    <div class="col-4">
+					   								 <label>Content Rating: </label> 
+					 					</div>
+										<div class="col">
+											    
+													  <select  class="form-control"  name="contentRating.id">
+															<option value="0"></option>
+															<option value="1">Kids</option>
+															<option value="2">Young Adult</option>
+															<option value="3">Adult</option>
+															<option value="4">Adult Plus</option>
+														</select> <input type="hidden" name="contentRating.id" >
+										</div>
+					 		</div>
+			 </div>
+		 					
+							<div class="col-1">
+							<br><br>
+											  <label>Genre: </label>
 							
 		 					</div>
 		 					
@@ -116,7 +124,8 @@ Edit
 		  
 		 					
 		 					</div>
-	    		</div>
+</div>
+	    		
 	    		<div class="row">
 						    	<div class="col-2">
 						    	</div>
@@ -133,10 +142,10 @@ Edit
 		   						 </div>
 					  </div>
 					</div>
-	
+	<hr>
 	</c:forEach>
  </c:when>
- <c:otherwise>No Book Found</c:otherwise>
+ <c:otherwise>No Book Found <hr></c:otherwise>
  </c:choose>
  
  
